@@ -22,14 +22,67 @@ class LabTestSeeder extends Seeder
         $faker = Faker::create();
 
         // Get all IDs for foreign keys
-        $categoryIds = LabCategory::pluck('id')->toArray();
-        $subcategoryIds = LabSubcategory::pluck('id')->toArray();
-        $specimenIds = LabSpecimen::pluck('id')->toArray();
-        $groupIds = LabGroup::pluck('id')->toArray();
+        $categoryIds = LabCategory::pluck('id')->toArray() ?: [1];
+        $subcategoryIds = LabSubcategory::pluck('id')->toArray() ?: [1];
+        $specimenIds = LabSpecimen::pluck('id')->toArray() ?: [1];
+        $groupIds = LabGroup::pluck('id')->toArray() ?: [1];
 
-        for ($i = 1; $i <= 50; $i++) {
+        $testNames = [
+            'CBC Test',
+            'Thyroid Function Test',
+            'Liver Function Test',
+            'Kidney Function Test',
+            'Lipid Profile',
+            'Blood Sugar Test',
+            'Urine Routine Test',
+            'Electrolyte Test',
+            'Pulmonary Function Test',
+            'ECG Test',
+            'Eye Test',
+            'Brain MRI',
+            'Cardiac Enzyme Test',
+            'Dengue Test',
+            'Malaria Test',
+            'Vitamin D Test',
+            'Vitamin B12 Test',
+            'Iron Test',
+            'Ferritin Test',
+            'Uric Acid Test',
+            'ESR Test',
+            'RBC Count Test',
+            'PCV Test',
+            'MCH Test',
+            'MCHC Test',
+            'RDW Test',
+            'Neutrophils Test',
+            'Lymphocytes Test',
+            'Monocytes Test',
+            'Eosinophils Test',
+            'Basophils Test',
+            'Prothrombin Time Test',
+            'INR Test',
+            'aPTT Test',
+            'HIV 1 & 2 Test',
+            'HCV Antibody Test',
+            'HbA1c Test',
+            'Blood Group Test',
+            'Pregnancy Test',
+            'Stool Occult Blood Test',
+            'Amylase Test',
+            'Lipase Test',
+            'LDH Test',
+            'GGT Test',
+            'Phosphorus Test',
+            'Magnesium Test',
+            'Zinc Test',
+            'Copper Test',
+            'Insulin (Fasting) Test',
+            'Cortisol (Morning) Test',
+        ];
+
+        foreach ($testNames as $index => $name) {
             LabTest::create([
-                'testName' => $faker->word . ' Test ' . $i,
+                'testName' => $name,
                 'categoryId' => $faker->randomElement($categoryIds),
                 'subcategoryId' => $faker->randomElement($subcategoryIds),
                 'specimenId' => $faker->randomElement($specimenIds),

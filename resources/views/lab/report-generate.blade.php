@@ -48,8 +48,9 @@
             <div class="page-content">
                 <section class="row">
                     <div class="card mb-3 shadow-sm">
-                        <div class="card-header bg-primary text-white fw-semibold">
-                            Patient Information
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center fw-semibold">
+                            <span>Patient Information</span>
+                            <a href="{{route('print.patient.report', $reg)}}" target="_black" class="btn btn-light btn-sm"><i class="bi bi-printer"></i> Print </a>
                         </div>
                         <div class="card-body" id="invoice-content">
                             <div class="row g-3 my-2">
@@ -171,7 +172,7 @@
 
                     {{-- Test Reports --}}
                     <div class="card mb-3 shadow-sm">
-                        <div class="card-header bg-success text-white fw-semibold">
+                        <div class="card-header alert-success text-white fw-semibold">
                             Test Reports
                         </div>
                         <div class="card-body p-0">
@@ -184,29 +185,36 @@
                                             <th style="width: 30%;">Part of Test</th>
                                             <th style="width: 10%;">Result</th>
                                             <th style="width: 10%;">Unit</th>
-                                            <th style="width: 10%;">Reference Value</th>
-                                            <th style="width: 10%;">Reference Value of Hormone</th>
+                                            <th style="width: 10%;">Ref. Value</th>
+                                            <th style="width: 10%;">Ref. Value of Hormone</th>
+                                            <th style="width: 10%;">Remarks</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($testReports as $testId => $reports)
                                             {{-- Test Name Header --}}
                                             <tr class="table-primary">
-                                                <td colspan="6" class="fw-bold">
+                                                <td colspan="7" class="fw-bold">
                                                     {{ optional($reports->first()->test)->testName ?? 'Unknown Test' }}
                                                 </td>
                                             </tr>
 
                                             {{-- Test Parts --}}
                                             @foreach($reports as $report)
-                                            <tr data-bs-toggle="modal" data-bs-target="#modalReport{{$report->id}}">
-                                                <td class="text-center">{{ $loop->iteration }}</td>
-                                                <td>{{ $report->part_of_test }}</td>
-                                                <td class="text-center fw-semibold text-success">{{ $report->result ?? 'Pending' }}</td>
-                                                <td class="text-center">{{ $report->unit ?? '-' }}</td>
-                                                <td class="text-center text-muted">{{ $report->reference_value ?? '-' }}</td>
-                                                <td class="text-center text-muted">{{ $report->ref_value_of_hormone ?? '-' }}</td>
-                                            </tr>
+                                                @php                                                    
+                                                    $patientReport = $patientTestReport->where('test_id', $report->test_id)
+                                                                                    ->where('part_of_test', $report->part_of_test)
+                                                                                    ->first();
+                                                @endphp
+                                                <tr data-bs-toggle="modal" data-bs-target="#modalPatientReport{{ $patientReport->id ?? '' }}">
+                                                    <td class="text-center">{{ $loop->iteration }}</td>
+                                                    <td>{{ $patientReport->part_of_test }}</td>
+                                                    <td class="text-center fw-semibold text-success">{{ $patientReport->result ?? 'Pending' }}</td>
+                                                    <td class="text-center">{{ $patientReport->unit ?? '-' }}</td>
+                                                    <td class="text-center text-muted">{{ $patientReport->reference_value ?? '-' }}</td>
+                                                    <td class="text-center text-muted">{{ $patientReport->ref_value_of_hormone ?? '-' }}</td>
+                                                    <td class="text-center text-muted">{{ $patientReport->remarks ?? '-' }}</td>
+                                                </tr>
                                             @endforeach
                                         @endforeach
                                     </tbody>
@@ -220,58 +228,67 @@
                 </section>
             </div>
 
-            @foreach($testReports as $reports)
-                @foreach($reports as $detail)
-                <div class="modal fade" id="modalReport{{$detail->id}}" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                        <div class="modal-content">
+            
 
-                            <div class="modal-header">
-                                <h5 class="modal-title">{{ optional($detail->test)->testName ?? 'Unknown Test' }}</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
+            @foreach($patientTestReport as $report)
+            <div class="modal fade" id="modalPatientReport{{$report->id}}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
 
-                            <form action="#" method="POST">
-                                @csrf
-                                <div class="modal-body">
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label class="form-label fw-semibold">Part of Test</label>
-                                            <input type="text" name="part_of_test" class="form-control" value="{{ $detail->part_of_test }}">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label fw-semibold">Result</label>
-                                            <input type="text" name="result" class="form-control" value="{{ $detail->result }}">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label fw-semibold">Unit</label>
-                                            <input type="text" name="unit" class="form-control" value="{{ $detail->unit }}">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label fw-semibold">Reference Value</label>
-                                            <input type="text" name="reference_value" class="form-control" value="{{ $detail->reference_value }}">
-                                        </div>
-                                        <div class="col-md-12">
-                                            <label class="form-label fw-semibold">Reference Value of Hormone</label>
-                                            <input type="text" name="ref_value_of_hormone" class="form-control" value="{{ $detail->ref_value_of_hormone }}">
-                                        </div>
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                {{ $report->test->testName ?? 'Unknown Test' }}
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <form action="{{ route('patient.test.report.modify', $report->id) }}" method="POST">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Part of Test</label>
+                                        <input type="text" name="part_of_test" class="form-control"
+                                            value="{{ $report->part_of_test }}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Result</label>
+                                        <input type="text" name="result" class="form-control"
+                                            value="{{ $report->result }}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Unit</label>
+                                        <input type="text" name="unit" class="form-control"
+                                            value="{{ $report->unit }}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Reference Value</label>
+                                        <input type="text" name="reference_value" class="form-control"
+                                            value="{{ $report->reference_value }}">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="form-label fw-semibold">Reference Value of Hormone</label>
+                                        <input type="text" name="ref_value_of_hormone" class="form-control"
+                                            value="{{ $report->ref_value_of_hormone }}">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="form-label fw-semibold">Remarks</label>
+                                        <textarea name="remarks" class="form-control" rows="2">{{ $report->remarks }}</textarea>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="modal-footer bg-light py-2">
-                                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary btn-sm">Save Changes</button>
-                                </div>
-                            </form>
+                            <div class="modal-footer bg-light py-2">
+                                <button type="submit" class="btn btn-primary btn-sm">Save Changes</button>
+                                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </form>
 
-                        </div>
                     </div>
                 </div>
-                @endforeach
+            </div>
             @endforeach
 
-
-            @include('layouts.footer')
         </div>
     </div>    
     <!-- JS Files -->

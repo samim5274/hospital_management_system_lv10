@@ -75,6 +75,8 @@ Route::middleware(['admin'])->group(function () {
 
         Route::get('/reports', [App\Http\Controllers\Lab\LabController::class, 'reportTestView'])->name('test.lab.report');
         Route::get('/test/report/{reg}', [App\Http\Controllers\Lab\LabController::class, 'patientLabTest'])->name('lab.test.report');
+        Route::post('/patient/test/report/modify/{id}', [App\Http\Controllers\Lab\LabController::class, 'patientReport'])->name('patient.test.report.modify');
+        Route::get('/print/patient/report/{reg}', [App\Http\Controllers\Lab\LabController::class, 'printPatientReport'])->name('print.patient.report');
     });
 
     // // 🔹 Accounts
