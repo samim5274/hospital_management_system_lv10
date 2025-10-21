@@ -345,14 +345,6 @@
             toggleContractAmount();
         });
 
-        // window.onload = function () {
-        //     @if(session('success'))
-        //         const reg = "{{ session('reg') }}";
-        //         const printUrl = `{{ url('/specific-order-print') }}/${reg}`;
-        //         window.open(printUrl, '_blank');
-        //     @endif
-        // };
-
     </script>
 
 </body>

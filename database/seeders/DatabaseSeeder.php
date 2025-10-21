@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             DutyDoctorSeeder::class,
             DiseaseSeeder::class,
             TestReportDetailsSeeder::class,
+            ReagentSeeder::class,
         ]);
     }
 }

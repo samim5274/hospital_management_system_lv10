@@ -2,7 +2,7 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <title>Patient Admission Bill</title>
+    <title>Advance Payment Invoice</title>
     <style>
         @page { size: A4; margin: 20mm; }
 
@@ -31,8 +31,8 @@
         .invoice-header {
             text-align: center;
             margin-bottom: 15px;
-            border-bottom: 1px dashed #000;
-            padding-bottom: 8px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
         }
 
         /* Patient Info */
@@ -96,6 +96,11 @@
             margin-top: 20px;
             padding-top: 6px;
         }
+
+        .highlight {
+            background: #f3f3f3;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -106,18 +111,18 @@
     <div class="invoice-header">
         <h2>{{ $company->name ?? 'Hospital Name' }}</h2>
         <p>{{ $company->address ?? 'Address' }}</p>
-        <p>Phone: {{ $company->phone ?? '' }}</p>
-        <h4><strong>Patient Admission Bill</strong></h4>
+        <p>Phone: {{ $company->phone ?? '' }} | Email: {{ $company->email ?? '' }}</p>
+        <h4><strong>Advance Payment Invoice</strong></h4>
     </div>
 
     {{-- Patient Info --}}
     <table class="patient-info">
         <tr>
             <td><strong>Reg No:</strong> {{ $data->reg ?? '-' }}</td>
-            <td><strong>Billing Date:</strong> {{ \Carbon\Carbon::parse($data->billing_date ?? now())->format('d M Y') }}</td>
+            <td><strong>Date:</strong> {{ \Carbon\Carbon::parse($data->billing_date ?? now())->format('d M Y') }}</td>
         </tr>
         <tr>
-            <td><strong>Patient ID:</strong> {{ $data->patient->name ?? '-' }}</td>
+            <td><strong>Patient:</strong> {{ $data->patient->name ?? '-' }}</td>
             <td><strong>Prepared By:</strong> {{ $data->user->name ?? 'N/A' }}</td>
         </tr>
         <tr>
@@ -125,51 +130,54 @@
         </tr>
     </table>
 
-    {{-- Bill Breakdown --}}
+    {{-- Advance Payment Table --}}
+    @php
+        $totalCost = ($data->general_bed ?? 0) 
+                + ($data->cabin_fee ?? 0) 
+                + ($data->doctor_fee ?? 0) 
+                + ($data->service_charge ?? 0) 
+                + ($data->ot_medicine ?? 0) 
+                + ($data->oral_medicine ?? 0) 
+                + ($data->others ?? 0) 
+                + ($data->contract_amount ?? 0);
+
+        $payableAmount = $totalCost - ($data->discount ?? 0);
+        $remainingDue = $payableAmount - ($data->paid_amount ?? 0) - $data->advance_paid;
+    @endphp
+
     <table class="charges">
         <thead>
             <tr>
-                <th>Charge Description</th>
+                <th>Description</th>
                 <th style="width: 30%;">Amount (৳)</th>
             </tr>
         </thead>
         <tbody>
-            <tr><td>General Bed</td><td>{{ number_format($data->general_bed, 2) }}</td></tr>
-            <tr><td>Cabin Fee</td><td>{{ number_format($data->cabin_fee, 2) }}</td></tr>
-            <tr><td>Doctor Fee</td><td>{{ number_format($data->doctor_fee, 2) }}</td></tr>
-            <tr><td>Service Charge</td><td>{{ number_format($data->service_charge, 2) }}</td></tr>
-            <tr><td>OT Medicine</td><td>{{ number_format($data->ot_medicine, 2) }}</td></tr>
-            <tr><td>Oral Medicine</td><td>{{ number_format($data->oral_medicine, 2) }}</td></tr>
-            <tr><td>Others</td><td>{{ number_format($data->others, 2) }}</td></tr>
-            <tr><td>Contract Amount</td><td>{{ number_format($data->contract_amount, 2) }}</td></tr>
+            <tr><td>General Bed</td><td>{{ number_format($data->general_bed ?? 0, 2) }}</td></tr>
+            <tr><td>Cabin Fee</td><td>{{ number_format($data->cabin_fee ?? 0, 2) }}</td></tr>
+            <tr><td>Doctor Fee</td><td>{{ number_format($data->doctor_fee ?? 0, 2) }}</td></tr>
+            <tr><td>Service Charge</td><td>{{ number_format($data->service_charge ?? 0, 2) }}</td></tr>
+            <tr><td>OT Medicine</td><td>{{ number_format($data->ot_medicine ?? 0, 2) }}</td></tr>
+            <tr><td>Oral Medicine</td><td>{{ number_format($data->oral_medicine ?? 0, 2) }}</td></tr>
+            <tr><td>Others</td><td>{{ number_format($data->others ?? 0, 2) }}</td></tr>
+            <tr><td>Contract Amount</td><td>{{ number_format($data->contract_amount ?? 0, 2) }}</td></tr>
+
+            <tr class="highlight"><td><strong>Total Cost</strong></td><td><strong>৳{{ number_format($totalCost, 2) }}</strong></td></tr>
+            <tr><td>Discount</td><td>৳{{ number_format($data->discount ?? 0, 2) }}</td></tr>
+            <tr class="highlight"><td><strong>Payable Amount</strong></td><td><strong>৳{{ number_format($payableAmount, 2) }}</strong></td></tr>
+            <tr><td>Advance Paid</td><td>৳{{ number_format($data->advance_paid ?? 0, 2) }}</td></tr>
+            <tr class="highlight"><td><strong>Remaining Due</strong></td><td><strong>৳{{ number_format($remainingDue, 2) }}</strong></td></tr>
         </tbody>
     </table>
 
-    {{-- Totals --}}
-    @php
-        $totalCost = ($data->total_cost ?? 0) - ($data->contract_amount ?? 0);
-
-        $payableAmount = $totalCost - ($data->discount ?? 0) - ($data->advance_paid ?? 0);
-
-        $remainingDue = $payableAmount - ($data->paid_amount ?? 0);
-    @endphp
-    <table class="totals">
-        <tr><td><strong>Total Cost</strong></td><td><strong>৳{{ number_format($totalCost, 2) }}</strong></td></tr>
-        <tr><td>Discount</td><td>৳{{ number_format($data->discount, 2) }}</td></tr>
-        <tr><td>Advance Paid</td><td>৳{{ number_format($data->advance_paid, 2) }}</td></tr>
-        <tr><td><strong>Payable Amount</strong></td><td><strong>৳{{ number_format($payableAmount, 2) }}</strong></td></tr>
-        <tr><td>Paid Amount</td><td>৳{{ number_format($data->paid_amount, 2) }}</td></tr>
-        <tr><td><strong>Remaining Due</strong></td><td><strong>৳{{ number_format($remainingDue, 2) }}</strong></td></tr>
-    </table>
 
     {{-- Footer --}}
     <p class="note">
-        Developed by <strong>SAMIM HOSSAIN</strong><br>
-        +8801624209291
+        This invoice is system generated.<br>
+        Developed by <strong>SAMIM HOSSAIN</strong> | +8801624209291
     </p>
 </div>
 
-<!-- Optional Auto Print -->
 <script>
     window.onload = function() {
         window.print();

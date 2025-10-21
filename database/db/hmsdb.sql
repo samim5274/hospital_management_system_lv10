@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 21, 2025 at 08:45 AM
+-- Generation Time: Oct 21, 2025 at 12:37 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -76,6 +76,18 @@ CREATE TABLE `admission_bill_summaries` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `admission_bill_summaries`
+--
+
+INSERT INTO `admission_bill_summaries` (`id`, `patient_id`, `general_bed`, `cabin_fee`, `doctor_fee`, `service_charge`, `ot_medicine`, `oral_medicine`, `others`, `contract_amount`, `total_cost`, `discount`, `advance_paid`, `payable_amount`, `paid_amount`, `remaining_due`, `reg`, `billing_date`, `user_id`, `remarks`, `created_at`, `updated_at`) VALUES
+(1, 1, 1665.00, 1500.00, 1500.00, 1500.00, 1500.00, 1500.00, 1500.00, 15000.00, 25665.00, 1665.00, 5000.00, 19000.00, 4000.00, 15000.00, 'IND-2025102111', '2025-10-21', 1, 'Advance Pay date of 21-Oct-2025, Received by : SAMIM, Bill modified by SAMIM, Modify date : 21-Oct-2025. , Patient Discharge by SAMIM, Discharge date : 21-Oct-2025. ', '2025-10-21 06:51:57', '2025-10-21 06:53:00'),
+(2, 2, 1285.00, 1500.00, 1500.00, 1500.00, 1500.00, 1500.00, 1500.00, 0.00, 10285.00, 500.00, 0.00, 9785.00, 9000.00, 785.00, 'IND-2025102112', '2025-10-21', 1, 'Bill prepared by SAMIM, Prepared date : 21-Oct-2025', '2025-10-21 06:55:18', '2025-10-21 06:55:18'),
+(3, 3, 696.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 5000.00, 0.00, 0.00, 2500.00, 0.00, 0.00, 0.00, 'IND-2025102113', '2025-10-21', 1, 'Advance Pay date of 21-Oct-2025, Received by : SAMIM', '2025-10-21 07:00:43', '2025-10-21 07:00:43'),
+(4, 4, 898.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 50000.00, 0.00, 0.00, 20000.00, 0.00, 0.00, 0.00, 'IND-2025102114', '2025-10-21', 1, 'Advance Pay date of 21-Oct-2025, Received by : SAMIM', '2025-10-21 07:05:58', '2025-10-21 07:05:58'),
+(5, 5, 560.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 20000.00, 0.00, 0.00, 5000.00, 0.00, 0.00, 0.00, 'IND-2025102115', '2025-10-21', 1, 'Advance Pay date of 21-Oct-2025, Received by : SAMIM', '2025-10-21 07:07:38', '2025-10-21 07:07:38'),
+(6, 6, 715.00, 15000.00, 15000.00, 15000.00, 15000.00, 15000.00, 15000.00, 100000.00, 190715.00, 5000.00, 5000.00, 180715.00, 80000.00, 100715.00, 'IND-2025102116', '2025-10-21', 1, 'Advance Pay date of 21-Oct-2025, Received by : SAMIM, Bill modified by SAMIM, Modify date : 21-Oct-2025. , Bill modified by SAMIM, Modify date : 21-Oct-2025. , Bill modified by SAMIM, Modify date : 21-Oct-2025. , Bill modified by SAMIM, Modify date : 21-Oct-2025. , Bill modified by SAMIM, Modify date : 21-Oct-2025. ', '2025-10-21 07:08:28', '2025-10-21 07:21:18');
+
 -- --------------------------------------------------------
 
 --
@@ -113,6 +125,18 @@ CREATE TABLE `admission_patients` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `admission_patients`
+--
+
+INSERT INTO `admission_patients` (`id`, `reg`, `name`, `dob`, `gender`, `mobile`, `father_husband`, `guardian`, `address`, `religion`, `nid`, `contract_type`, `contract_amount`, `procedure_type`, `medicine_package`, `refer_id`, `treatment_under_id`, `duty_doctor_id`, `disease_id`, `duty_nurse`, `bed_booked_date`, `bed_id`, `bed_cost`, `user_id`, `status`, `remarks`, `created_at`, `updated_at`) VALUES
+(1, 'IND-2025102111', 'Shamim Hossain', '2001-12-31', 'Male', '01762164746', 'Jamsher Ali', 'Jamsher Ali', 'Kaliakair, Gazipur, Dhaka-1750', 'Islam', '568974312', 'Contract', 15000.00, 'Conservative', 'NonPackage', 15, 15, 20, 20, 'Mr. Sabrina Akter', '2025-10-21', 21, 1665.00, 1, 2, 'Patient discharged. Date of :21-Oct-2025', '2025-10-21 06:51:43', '2025-10-21 06:53:00'),
+(2, 'IND-2025102112', 'Farjana Hossain', '2001-12-31', 'Female', '01762164746', 'Jamsher Ali', 'Jamsher Ali', 'Kaliakair, Gazipur, Dhaka-1750', 'Islam', '568974312', 'NonContract', 0.00, 'Conservative', 'NonPackage', 15, 15, 20, 20, 'Mr. Sabrina Akter', '2025-10-21', 6, 1285.00, 1, 1, 'N/A', '2025-10-21 06:54:37', '2025-10-21 06:54:37'),
+(3, 'IND-2025102113', 'Rafic Hossain', '2001-12-31', 'Male', '01762164746', 'Jamsher Ali', 'Jamsher Ali', 'Kaliakair, Gazipur, Dhaka-1750', 'Islam', '568974312', 'Contract', 5000.00, 'Operative', 'Package', 15, 15, 20, 20, 'Mr. Sabrina Akter', '2025-10-21', 27, 696.00, 1, 1, 'N/A', '2025-10-21 07:00:15', '2025-10-21 07:00:15'),
+(4, 'IND-2025102114', 'Rahim', '2001-12-31', 'Male', '01762164746', 'Jamsher Ali', 'Jamsher Ali', 'Kaliakair, Gazipur, Dhaka-1750', 'Islam', '568974312', 'Contract', 50000.00, 'Operative', 'Package', 15, 15, 20, 20, 'Mr. Sabrina Akter', '2025-10-21', 23, 898.00, 1, 1, 'N/A', '2025-10-21 07:05:45', '2025-10-21 07:05:45'),
+(5, 'IND-2025102115', 'Emran', '2001-12-31', 'Male', '01762164746', 'Jamsher Ali', 'Jamsher Ali', 'Kaliakair, Gazipur, Dhaka-1750', 'Islam', '568974312', 'Contract', 20000.00, 'Operative', 'Package', 15, 15, 20, 20, 'Mr. Sabrina Akter', '2025-10-21', 32, 560.00, 1, 1, 'N/A', '2025-10-21 07:07:28', '2025-10-21 07:07:28'),
+(6, 'IND-2025102116', 'Moen', '2001-12-31', 'Male', '01762164746', 'Jamsher Ali', 'Jamsher Ali', 'Kaliakair, Gazipur, Dhaka-1750', 'Islam', '568974312', 'Contract', 100000.00, 'Operative', 'Package', 15, 15, 20, 20, 'Mr. Sabrina Akter', '2025-10-21', 33, 715.00, 1, 1, 'N/A', '2025-10-21 07:08:14', '2025-10-21 07:08:14');
+
 -- --------------------------------------------------------
 
 --
@@ -139,7 +163,7 @@ INSERT INTO `beds` (`id`, `bed_number`, `ward`, `status`, `price_per_day`, `crea
 (3, 'B003', 'Female Ward', 'available', 1550.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
 (4, 'B004', 'Female Ward', 'available', 1996.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
 (5, 'B005', 'Cabin', 'available', 1064.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
-(6, 'B006', 'Cabin', 'available', 1285.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
+(6, 'B006', 'Cabin', 'booked', 1285.00, '2025-10-21 05:29:48', '2025-10-21 06:54:37'),
 (7, 'B007', 'Female Ward', 'available', 1245.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
 (8, 'B008', 'Emergency', 'available', 1842.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
 (9, 'B009', 'Emergency', 'available', 1900.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
@@ -154,19 +178,19 @@ INSERT INTO `beds` (`id`, `bed_number`, `ward`, `status`, `price_per_day`, `crea
 (18, 'B018', 'ICU', 'available', 1956.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
 (19, 'B019', 'Female Ward', 'available', 1558.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
 (20, 'B020', 'ICU', 'available', 967.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
-(21, 'B021', 'Female Ward', 'available', 1665.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
+(21, 'B021', 'Female Ward', 'booked', 1665.00, '2025-10-21 05:29:48', '2025-10-21 06:51:43'),
 (22, 'B022', 'ICU', 'available', 1537.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
-(23, 'B023', 'Emergency', 'available', 898.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
+(23, 'B023', 'Emergency', 'booked', 898.00, '2025-10-21 05:29:48', '2025-10-21 07:05:45'),
 (24, 'B024', 'Male Ward', 'available', 1457.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
 (25, 'B025', 'Cabin', 'available', 1459.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
 (26, 'B026', 'Cabin', 'available', 1815.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
-(27, 'B027', 'Female Ward', 'available', 696.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
+(27, 'B027', 'Female Ward', 'booked', 696.00, '2025-10-21 05:29:48', '2025-10-21 07:00:15'),
 (28, 'B028', 'Male Ward', 'available', 1297.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
 (29, 'B029', 'Male Ward', 'available', 657.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
 (30, 'B030', 'Cabin', 'available', 1940.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
 (31, 'B031', 'Emergency', 'available', 1775.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
-(32, 'B032', 'Emergency', 'available', 560.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
-(33, 'B033', 'Cabin', 'available', 715.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
+(32, 'B032', 'Emergency', 'booked', 560.00, '2025-10-21 05:29:48', '2025-10-21 07:07:28'),
+(33, 'B033', 'Cabin', 'booked', 715.00, '2025-10-21 05:29:48', '2025-10-21 07:08:14'),
 (34, 'B034', 'Cabin', 'available', 1871.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
 (35, 'B035', 'Male Ward', 'available', 887.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
 (36, 'B036', 'Cabin', 'available', 1789.00, '2025-10-21 05:29:48', '2025-10-21 05:29:48'),
@@ -562,6 +586,30 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `generics`
+--
+
+CREATE TABLE `generics` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `generics`
+--
+
+INSERT INTO `generics` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Paracetamol', NULL, NULL),
+(2, 'Amoxicillin', NULL, NULL),
+(3, 'Ibuprofen', NULL, NULL),
+(4, 'Metformin', NULL, NULL),
+(5, 'Ciprofloxacin', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lab_categories`
 --
 
@@ -789,7 +837,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (22, '2025_10_18_113032_create_admission_patients_table', 1),
 (23, '2025_10_18_181954_create_admission_bill_summaries_table', 1),
 (24, '2025_10_20_153826_create_test_report_details_table', 1),
-(25, '2025_10_21_103401_create_patient_test_reports_table', 1);
+(25, '2025_10_21_103401_create_patient_test_reports_table', 1),
+(26, '2025_10_21_143623_create_units_table', 2),
+(27, '2025_10_21_143701_create_generics_table', 2),
+(28, '2025_10_21_143740_create_presentations_table', 2),
+(29, '2025_10_21_143850_create_reagents_table', 2);
 
 -- --------------------------------------------------------
 
@@ -927,6 +979,104 @@ CREATE TABLE `personal_access_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `presentations`
+--
+
+CREATE TABLE `presentations` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `presentations`
+--
+
+INSERT INTO `presentations` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Tablet', NULL, NULL),
+(2, 'Capsule', NULL, NULL),
+(3, 'Syrup', NULL, NULL),
+(4, 'Injection', NULL, NULL),
+(5, 'Powder', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reagents`
+--
+
+CREATE TABLE `reagents` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `unit_id` bigint(20) UNSIGNED NOT NULL,
+  `generic_id` bigint(20) UNSIGNED NOT NULL,
+  `presentation_id` bigint(20) UNSIGNED NOT NULL,
+  `purchase_price` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `min_qty` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `reagents`
+--
+
+INSERT INTO `reagents` (`id`, `name`, `unit_id`, `generic_id`, `presentation_id`, `purchase_price`, `min_qty`, `created_at`, `updated_at`) VALUES
+(1, 'Acetone', 1, 1, 1, 250.00, 50, '2025-10-21 08:55:20', '2025-10-21 10:02:11'),
+(2, 'Alcohol', 1, 1, 1, 254.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(3, 'Ammonia', 1, 1, 1, 478.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(4, 'Benzene', 1, 1, 1, 67.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(5, 'Calcium Chloride', 1, 1, 1, 229.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(6, 'Chloroform', 1, 1, 1, 494.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(7, 'Citric Acid', 1, 1, 1, 449.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(8, 'Copper Sulphate', 1, 1, 1, 101.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(9, 'Formaldehyde', 1, 1, 1, 483.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(10, 'Glucose', 1, 1, 1, 169.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(11, 'Glycerol', 1, 1, 1, 78.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(12, 'Hydrochloric Acid', 1, 1, 1, 160.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(13, 'Hydrogen Peroxide', 1, 1, 1, 342.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(14, 'Iodine', 1, 1, 1, 363.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(15, 'Iron Sulphate', 1, 1, 1, 312.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(16, 'Magnesium Sulphate', 1, 1, 1, 472.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(17, 'Methanol', 1, 1, 1, 483.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(18, 'Nitric Acid', 1, 1, 1, 481.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(19, 'Phenol', 1, 1, 1, 268.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(20, 'Potassium Chloride', 1, 1, 1, 91.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(21, 'Potassium Hydroxide', 1, 1, 1, 115.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(22, 'Sodium Bicarbonate', 1, 1, 1, 291.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(23, 'Sodium Carbonate', 1, 1, 1, 269.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(24, 'Sodium Chloride', 1, 1, 1, 168.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(25, 'Sodium Hydroxide', 1, 1, 1, 382.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(26, 'Sulfuric Acid', 1, 1, 1, 354.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(27, 'Toluene', 1, 1, 1, 69.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(28, 'Urea', 1, 1, 1, 154.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(29, 'Zinc Sulphate', 1, 1, 1, 175.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(30, 'Sodium Nitrate', 1, 1, 1, 332.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(31, 'Ammonium Chloride', 1, 1, 1, 138.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(32, 'Barium Sulphate', 1, 1, 1, 51.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(33, 'Ethyl Acetate', 1, 1, 1, 57.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(34, 'Formic Acid', 1, 1, 1, 330.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(35, 'Hydrazine', 1, 1, 1, 197.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(36, 'Lithium Carbonate', 1, 1, 1, 82.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(37, 'Magnesium Hydroxide', 1, 1, 1, 62.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(38, 'Manganese Sulphate', 1, 1, 1, 132.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(39, 'Nickel Sulphate', 1, 1, 1, 173.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(40, 'Phenolphthalein', 1, 1, 1, 207.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(41, 'Potassium Bromide', 1, 1, 1, 245.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(42, 'Silver Nitrate', 1, 1, 1, 78.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(43, 'Sodium Sulphate', 1, 1, 1, 210.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(44, 'Sulfur', 1, 1, 1, 211.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(45, 'Thymol', 1, 1, 1, 237.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(46, 'Triethanolamine', 1, 1, 1, 482.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(47, 'Xylene', 1, 1, 1, 217.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(48, 'Zinc Chloride', 1, 1, 1, 439.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(49, 'Aluminium Sulphate', 1, 1, 1, 340.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
+(50, 'Softner', 2, 3, 5, 1200.00, 50, '2025-10-21 09:55:57', '2025-10-21 09:55:57');
 
 -- --------------------------------------------------------
 
@@ -1104,6 +1254,31 @@ INSERT INTO `test_report_details` (`id`, `test_id`, `part_of_test`, `result`, `u
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `units`
+--
+
+CREATE TABLE `units` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `units`
+--
+
+INSERT INTO `units` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'mg', NULL, NULL),
+(2, 'ml', NULL, NULL),
+(3, 'g', NULL, NULL),
+(4, 'L', NULL, NULL),
+(5, 'tablet', NULL, NULL),
+(6, 'capsule', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -1196,6 +1371,13 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
+-- Indexes for table `generics`
+--
+ALTER TABLE `generics`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `generics_name_unique` (`name`);
+
+--
 -- Indexes for table `lab_categories`
 --
 ALTER TABLE `lab_categories`
@@ -1279,6 +1461,22 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `presentations`
+--
+ALTER TABLE `presentations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `presentations_name_unique` (`name`);
+
+--
+-- Indexes for table `reagents`
+--
+ALTER TABLE `reagents`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `reagents_unit_id_foreign` (`unit_id`),
+  ADD KEY `reagents_generic_id_foreign` (`generic_id`),
+  ADD KEY `reagents_presentation_id_foreign` (`presentation_id`);
+
+--
 -- Indexes for table `references`
 --
 ALTER TABLE `references`
@@ -1303,6 +1501,13 @@ ALTER TABLE `test_report_details`
   ADD KEY `test_report_details_test_id_foreign` (`test_id`);
 
 --
+-- Indexes for table `units`
+--
+ALTER TABLE `units`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `units_name_unique` (`name`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -1323,13 +1528,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `admission_bill_summaries`
 --
 ALTER TABLE `admission_bill_summaries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `admission_patients`
 --
 ALTER TABLE `admission_patients`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `beds`
@@ -1374,6 +1579,12 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `generics`
+--
+ALTER TABLE `generics`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `lab_categories`
 --
 ALTER TABLE `lab_categories`
@@ -1413,7 +1624,7 @@ ALTER TABLE `lab_tests`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `patient_test_reports`
@@ -1434,6 +1645,18 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `presentations`
+--
+ALTER TABLE `presentations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `reagents`
+--
+ALTER TABLE `reagents`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
 -- AUTO_INCREMENT for table `references`
 --
 ALTER TABLE `references`
@@ -1450,6 +1673,12 @@ ALTER TABLE `store_tests`
 --
 ALTER TABLE `test_report_details`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+
+--
+-- AUTO_INCREMENT for table `units`
+--
+ALTER TABLE `units`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1502,6 +1731,14 @@ ALTER TABLE `payment_details`
   ADD CONSTRAINT `payment_details_doctorid_foreign` FOREIGN KEY (`doctorId`) REFERENCES `doctors` (`id`),
   ADD CONSTRAINT `payment_details_referid_foreign` FOREIGN KEY (`referId`) REFERENCES `references` (`id`) ON DELETE SET NULL,
   ADD CONSTRAINT `payment_details_userid_foreign` FOREIGN KEY (`userId`) REFERENCES `admins` (`id`);
+
+--
+-- Constraints for table `reagents`
+--
+ALTER TABLE `reagents`
+  ADD CONSTRAINT `reagents_generic_id_foreign` FOREIGN KEY (`generic_id`) REFERENCES `generics` (`id`),
+  ADD CONSTRAINT `reagents_presentation_id_foreign` FOREIGN KEY (`presentation_id`) REFERENCES `presentations` (`id`),
+  ADD CONSTRAINT `reagents_unit_id_foreign` FOREIGN KEY (`unit_id`) REFERENCES `units` (`id`);
 
 --
 -- Constraints for table `store_tests`

@@ -44,6 +44,7 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/patient/bill-prepared/{id}', [App\Http\Controllers\Indoor\IndoorController::class, 'billPreparedView'])->name('indoor.patient.bill.prepared.view');
         Route::get('/advance/bill/pay', [App\Http\Controllers\Indoor\IndoorController::class, 'advanceBillPayView'])->name('indoor.advance.bill.pay.view');
         Route::get('/patient/advance/bill/pay/{id}', [App\Http\Controllers\Indoor\IndoorController::class, 'advanceBillPayPatient'])->name('indoor.advance.bill.pay.patient');
+        Route::get('/print-advance/bill/{reg}', [App\Http\Controllers\Indoor\IndoorController::class, 'printAdvancePayInvoice'])->name('print.advance.payment.invoice');
         Route::post('/advance/bill/pay/{id}', [App\Http\Controllers\Indoor\IndoorController::class, 'advanceBillPay'])->name('indoor.advance.bill.pay');
         Route::post('/bill/prepared/create/{id}', [App\Http\Controllers\Indoor\IndoorController::class, 'billCreate'])->name('bil.prepared');
         Route::post('/bill/prepared/modify/{id}', [App\Http\Controllers\Indoor\IndoorController::class, 'billModify'])->name('bil.modify');
@@ -77,6 +78,12 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/test/report/{reg}', [App\Http\Controllers\Lab\LabController::class, 'patientLabTest'])->name('lab.test.report');
         Route::post('/patient/test/report/modify/{id}', [App\Http\Controllers\Lab\LabController::class, 'patientReport'])->name('patient.test.report.modify');
         Route::get('/print/patient/report/{reg}', [App\Http\Controllers\Lab\LabController::class, 'printPatientReport'])->name('print.patient.report');
+
+        // lab reagent controller and reagent section
+        Route::get('/raw-materials', [App\Http\Controllers\Reagent\ReagentController::class, 'rawMatrerial'])->name('labs.row.matrerials');
+        Route::post('/create/new/regent', [App\Http\Controllers\Reagent\ReagentController::class, 'storeReagent'])->name('create.new.reagent');
+        Route::post('/modify/regent/{id}', [App\Http\Controllers\Reagent\ReagentController::class, 'updateReagent'])->name('modify.reagent');
+        Route::get('/setting', [App\Http\Controllers\Reagent\ReagentController::class, 'setting'])->name('lab.settings');
     });
 
     // // 🔹 Accounts

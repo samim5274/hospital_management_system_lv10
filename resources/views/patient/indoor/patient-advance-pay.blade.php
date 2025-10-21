@@ -212,13 +212,13 @@
 
     <script>
 
-        // window.onload = function () {
-        //     @if(session('success'))
-        //         const reg = "{{ session('reg') }}";
-        //         const printUrl = `{{ url('/indoors/print-admit/bill') }}/${reg}`;
-        //         window.open(printUrl, '_blank');
-        //     @endif
-        // };
+        window.onload = function () {
+            @if(session('success'))
+                const reg = "{{ session('reg') }}";
+                const printUrl = `{{ url('/indoors/print-advance/bill') }}/${reg}`;
+                window.open(printUrl, '_blank');
+            @endif
+        };
 
     </script>
 

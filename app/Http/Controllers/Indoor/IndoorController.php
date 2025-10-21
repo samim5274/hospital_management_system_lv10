@@ -32,7 +32,7 @@ class IndoorController extends Controller
         $doctors = Doctor::all();
         $dutyDoctors = DutyDoctor::all();
         $diseases = Disease::all();
-        $patients = AdmissionPatient::all();
+        $patients = AdmissionPatient::where('status', 1)->get();
         return view('patient.indoor.admit-patient', compact('beds','refer','doctors','dutyDoctors','diseases','patients'));
     }
 
@@ -420,6 +420,13 @@ class IndoorController extends Controller
         // dd($payBill, $patient);
         $payBill->save();
         return redirect()->back()->with('success', 'This patient bill modified successfully. Thank you!')->with('reg', $payBill->reg);
+    }
+
+    public function printAdvancePayInvoice($reg){
+        $patient = AdmissionPatient::where('reg', $reg)->first();
+        $data = AdmissionBillSummary::where('reg', $reg)->first();
+        $company = Company::first();
+        return view('patient.indoor.print.advance-payment-invoice', compact('patient', 'data', 'company'));
     }
 
     public function patientDisList(){
