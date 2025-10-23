@@ -33,4 +33,17 @@ class Reagent extends Model
     {
         return $this->belongsTo(Presentation::class);
     }
+
+    public function stock()
+    {
+        return $this->hasMany(Reagent::class);
+    }
+
+    public function tests()
+    {
+        return $this->belongsToMany(Test::class, 'reagent_test')
+                    ->withPivot('quantity_required')
+                    ->withTimestamps();
+    }
+
 }

@@ -63,7 +63,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
 
-                                                <form action="#" method="POST">
+                                                <form action="{{ route('reagent.create.unit') }}" method="POST">
                                                     @csrf
                                                     <div class="modal-body">
                                                         <div class="mb-3">
@@ -121,7 +121,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
 
-                                                <form action="#" method="POST">
+                                                <form action="{{ route('reagent.modify.unit', $val->id) }}" method="POST">
                                                     @csrf
                                                     <div class="modal-body">
                                                         <div class="mb-3">
@@ -160,7 +160,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
 
-                                                <form action="#" method="POST">
+                                                <form action="{{ route('reagent.create.generics') }}" method="POST">
                                                     @csrf
                                                     <div class="modal-body">
                                                         <div class="mb-3">
@@ -218,7 +218,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
 
-                                                <form action="#" method="POST">
+                                                <form action="{{ route('reagent.modify.generics', $val->id) }}" method="POST">
                                                     @csrf
                                                     <div class="modal-body">
                                                         <div class="mb-3">
@@ -257,7 +257,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
 
-                                                <form action="#" method="POST">
+                                                <form action="{{ route('reagent.create.presentation') }}" method="POST">
                                                     @csrf
                                                     <div class="modal-body">
                                                         <div class="mb-3">
@@ -316,7 +316,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
 
-                                                <form action="#" method="POST">
+                                                <form action="{{ route('reagent.modify.presentation', $val->id) }}" method="POST">
                                                     @csrf
                                                     <div class="modal-body">
                                                         <div class="mb-3">

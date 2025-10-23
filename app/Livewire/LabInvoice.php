@@ -44,7 +44,8 @@ class LabInvoice extends Component
 
     private function generateRegNum()
     {
-        $count = PaymentDetail::count() + 1;
+        $today = date('Y-m-d');
+        $count = PaymentDetail::where('date', $today)->count() + 1;
         return 'LAB' . date('Ymd') . $userId = Auth::id() ?? 1 . $count;
     }
 

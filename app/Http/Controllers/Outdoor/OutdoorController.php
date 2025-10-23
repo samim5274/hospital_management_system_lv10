@@ -69,12 +69,12 @@ class OutdoorController extends Controller
 
         $userId = Auth::guard('admin')->user()->id; // fallback if not using admin guard
         $today = date('Y-m-d');
-        $sl = PaymentDetail::where('date', $today)->count();
-        $invoice = 'LAB' . date('Ymd') . $userId . ($sl + 1);
+        $count = PaymentDetail::where('date', $today)->count() + 1;
+        $invoice = 'LAB' . date('Ymd') . $userId . $count;
+        // dd($userId, $today, $count, $invoice);
 
         // ---- Calculate totals ----
         $total = StoreTest::where('regNum', $invoice)->sum('testprice');
-        // dd($total);
         if ($total <= 0) {
             return redirect()->back()->with('error', 'Please add tests first before saving!');
         }

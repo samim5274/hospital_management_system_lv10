@@ -51,4 +51,15 @@ class LabTest extends Model
     {
         return $this->hasMany(TestReportDetail::class, 'test_id');
     }
+
+    public function reagents()
+    {
+        return $this->belongsToMany(Reagent::class, 'reagent_test')
+                    ->withPivot('quantity_required')
+                    ->withTimestamps();
+    }
+
+    public function reagentTest() {
+        return $this->hasMany(ReagentTest::class);
+    }
 }

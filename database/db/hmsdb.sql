@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 21, 2025 at 12:37 PM
+-- Generation Time: Oct 23, 2025 at 12:14 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -601,7 +601,7 @@ CREATE TABLE `generics` (
 --
 
 INSERT INTO `generics` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Paracetamol', NULL, NULL),
+(1, 'Paracetamol', NULL, '2025-10-22 22:57:39'),
 (2, 'Amoxicillin', NULL, NULL),
 (3, 'Ibuprofen', NULL, NULL),
 (4, 'Metformin', NULL, NULL),
@@ -838,10 +838,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (23, '2025_10_18_181954_create_admission_bill_summaries_table', 1),
 (24, '2025_10_20_153826_create_test_report_details_table', 1),
 (25, '2025_10_21_103401_create_patient_test_reports_table', 1),
-(26, '2025_10_21_143623_create_units_table', 2),
-(27, '2025_10_21_143701_create_generics_table', 2),
-(28, '2025_10_21_143740_create_presentations_table', 2),
-(29, '2025_10_21_143850_create_reagents_table', 2);
+(34, '2025_10_21_143623_create_units_table', 2),
+(35, '2025_10_21_143701_create_generics_table', 2),
+(36, '2025_10_21_143740_create_presentations_table', 2),
+(37, '2025_10_21_143850_create_reagents_table', 2),
+(38, '2025_10_23_114129_create_reagent_stocks_table', 2),
+(39, '2025_10_23_115839_create_reagent_test_table', 2);
 
 -- --------------------------------------------------------
 
@@ -921,7 +923,8 @@ INSERT INTO `patient_test_reports` (`id`, `reg`, `patient_id`, `test_id`, `part_
 (55, 'LAB2025102112', 2, 10, 'Heart Rate', '78', 'bpm', '60 - 100', NULL, NULL, '2025-10-21 05:35:00', '2025-10-21 05:35:00'),
 (56, 'LAB2025102112', 2, 10, 'QRS Duration', '85', 'ms', '70 - 110', NULL, NULL, '2025-10-21 05:35:00', '2025-10-21 05:35:00'),
 (57, 'LAB2025102112', 2, 11, 'Vision (Left)', '6/6', NULL, '6/6', NULL, NULL, '2025-10-21 05:35:00', '2025-10-21 05:35:00'),
-(58, 'LAB2025102112', 2, 11, 'Vision (Right)', '6/6', NULL, '6/6', NULL, NULL, '2025-10-21 05:35:00', '2025-10-21 05:35:00');
+(58, 'LAB2025102112', 2, 11, 'Vision (Right)', '6/6', NULL, '6/6', NULL, NULL, '2025-10-21 05:35:00', '2025-10-21 05:35:00'),
+(59, 'LAB2025102311', 3, 25, 'MCHC', '33', 'g/dL', '32 - 36', '35', 'Negative', '2025-10-23 06:12:58', '2025-10-23 06:13:18');
 
 -- --------------------------------------------------------
 
@@ -959,7 +962,8 @@ CREATE TABLE `payment_details` (
 
 INSERT INTO `payment_details` (`id`, `reg`, `date`, `name`, `dob`, `gender`, `phone`, `address`, `doctorId`, `referId`, `total`, `discount`, `payable`, `pay`, `duestatus`, `due`, `return`, `status`, `userId`, `created_at`, `updated_at`) VALUES
 (1, 'LAB2025102111', '2025-10-21', 'Shamim Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 13, 14, 10808, 2000, 8808, 8000, 1, 808, 0, 1, 1, '2025-10-21 05:30:35', '2025-10-21 05:30:35'),
-(2, 'LAB2025102112', '2025-10-21', 'Farjana Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 13, 12, 12945, 2000, 10945, 10000, 1, 945, 0, 1, 1, '2025-10-21 05:30:54', '2025-10-21 05:30:54');
+(2, 'LAB2025102112', '2025-10-21', 'Farjana Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 13, 12, 12945, 2000, 10945, 10000, 1, 945, 0, 1, 1, '2025-10-21 05:30:54', '2025-10-21 05:30:54'),
+(3, 'LAB2025102311', '2025-10-23', 'Shamim Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 14, 14, 650, 50, 600, 600, 0, 0, 0, 1, 1, '2025-10-23 06:12:41', '2025-10-23 06:12:41');
 
 -- --------------------------------------------------------
 
@@ -998,7 +1002,7 @@ CREATE TABLE `presentations` (
 --
 
 INSERT INTO `presentations` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Tablet', NULL, NULL),
+(1, 'Tablet', NULL, '2025-10-22 23:00:20'),
 (2, 'Capsule', NULL, NULL),
 (3, 'Syrup', NULL, NULL),
 (4, 'Injection', NULL, NULL),
@@ -1027,56 +1031,104 @@ CREATE TABLE `reagents` (
 --
 
 INSERT INTO `reagents` (`id`, `name`, `unit_id`, `generic_id`, `presentation_id`, `purchase_price`, `min_qty`, `created_at`, `updated_at`) VALUES
-(1, 'Acetone', 1, 1, 1, 250.00, 50, '2025-10-21 08:55:20', '2025-10-21 10:02:11'),
-(2, 'Alcohol', 1, 1, 1, 254.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(3, 'Ammonia', 1, 1, 1, 478.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(4, 'Benzene', 1, 1, 1, 67.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(5, 'Calcium Chloride', 1, 1, 1, 229.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(6, 'Chloroform', 1, 1, 1, 494.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(7, 'Citric Acid', 1, 1, 1, 449.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(8, 'Copper Sulphate', 1, 1, 1, 101.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(9, 'Formaldehyde', 1, 1, 1, 483.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(10, 'Glucose', 1, 1, 1, 169.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(11, 'Glycerol', 1, 1, 1, 78.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(12, 'Hydrochloric Acid', 1, 1, 1, 160.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(13, 'Hydrogen Peroxide', 1, 1, 1, 342.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(14, 'Iodine', 1, 1, 1, 363.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(15, 'Iron Sulphate', 1, 1, 1, 312.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(16, 'Magnesium Sulphate', 1, 1, 1, 472.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(17, 'Methanol', 1, 1, 1, 483.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(18, 'Nitric Acid', 1, 1, 1, 481.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(19, 'Phenol', 1, 1, 1, 268.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(20, 'Potassium Chloride', 1, 1, 1, 91.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(21, 'Potassium Hydroxide', 1, 1, 1, 115.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(22, 'Sodium Bicarbonate', 1, 1, 1, 291.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(23, 'Sodium Carbonate', 1, 1, 1, 269.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(24, 'Sodium Chloride', 1, 1, 1, 168.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(25, 'Sodium Hydroxide', 1, 1, 1, 382.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(26, 'Sulfuric Acid', 1, 1, 1, 354.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(27, 'Toluene', 1, 1, 1, 69.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(28, 'Urea', 1, 1, 1, 154.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(29, 'Zinc Sulphate', 1, 1, 1, 175.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(30, 'Sodium Nitrate', 1, 1, 1, 332.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(31, 'Ammonium Chloride', 1, 1, 1, 138.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(32, 'Barium Sulphate', 1, 1, 1, 51.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(33, 'Ethyl Acetate', 1, 1, 1, 57.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(34, 'Formic Acid', 1, 1, 1, 330.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(35, 'Hydrazine', 1, 1, 1, 197.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(36, 'Lithium Carbonate', 1, 1, 1, 82.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(37, 'Magnesium Hydroxide', 1, 1, 1, 62.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(38, 'Manganese Sulphate', 1, 1, 1, 132.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(39, 'Nickel Sulphate', 1, 1, 1, 173.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(40, 'Phenolphthalein', 1, 1, 1, 207.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(41, 'Potassium Bromide', 1, 1, 1, 245.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(42, 'Silver Nitrate', 1, 1, 1, 78.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(43, 'Sodium Sulphate', 1, 1, 1, 210.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(44, 'Sulfur', 1, 1, 1, 211.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(45, 'Thymol', 1, 1, 1, 237.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(46, 'Triethanolamine', 1, 1, 1, 482.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(47, 'Xylene', 1, 1, 1, 217.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(48, 'Zinc Chloride', 1, 1, 1, 439.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(49, 'Aluminium Sulphate', 1, 1, 1, 340.00, 50, '2025-10-21 08:55:20', '2025-10-21 08:55:20'),
-(50, 'Softner', 2, 3, 5, 1200.00, 50, '2025-10-21 09:55:57', '2025-10-21 09:55:57');
+(1, 'Acetone', 1, 1, 1, 87.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(2, 'Alcohol', 1, 1, 1, 82.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(3, 'Ammonia', 1, 1, 1, 246.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(4, 'Benzene', 1, 1, 1, 272.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(5, 'Calcium Chloride', 1, 1, 1, 365.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(6, 'Chloroform', 1, 1, 1, 74.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(7, 'Citric Acid', 1, 1, 1, 485.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(8, 'Copper Sulphate', 1, 1, 1, 76.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(9, 'Formaldehyde', 1, 1, 1, 468.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(10, 'Glucose', 1, 1, 1, 136.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(11, 'Glycerol', 1, 1, 1, 251.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(12, 'Hydrochloric Acid', 1, 1, 1, 482.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(13, 'Hydrogen Peroxide', 1, 1, 1, 476.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(14, 'Iodine', 1, 1, 1, 432.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(15, 'Iron Sulphate', 1, 1, 1, 275.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(16, 'Magnesium Sulphate', 1, 1, 1, 190.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(17, 'Methanol', 1, 1, 1, 292.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(18, 'Nitric Acid', 1, 1, 1, 119.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(19, 'Phenol', 1, 1, 1, 91.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(20, 'Potassium Chloride', 1, 1, 1, 396.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(21, 'Potassium Hydroxide', 1, 1, 1, 344.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(22, 'Sodium Bicarbonate', 1, 1, 1, 465.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(23, 'Sodium Carbonate', 1, 1, 1, 329.00, 50, '2025-10-23 09:07:52', '2025-10-23 09:07:52'),
+(24, 'Sodium Chloride', 1, 1, 1, 260.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(25, 'Sodium Hydroxide', 1, 1, 1, 54.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(26, 'Sulfuric Acid', 1, 1, 1, 456.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(27, 'Toluene', 1, 1, 1, 324.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(28, 'Urea', 1, 1, 1, 51.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(29, 'Zinc Sulphate', 1, 1, 1, 381.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(30, 'Sodium Nitrate', 1, 1, 1, 386.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(31, 'Ammonium Chloride', 1, 1, 1, 386.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(32, 'Barium Sulphate', 1, 1, 1, 468.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(33, 'Ethyl Acetate', 1, 1, 1, 51.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(34, 'Formic Acid', 1, 1, 1, 435.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(35, 'Hydrazine', 1, 1, 1, 343.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(36, 'Lithium Carbonate', 1, 1, 1, 332.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(37, 'Magnesium Hydroxide', 1, 1, 1, 457.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(38, 'Manganese Sulphate', 1, 1, 1, 360.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(39, 'Nickel Sulphate', 1, 1, 1, 346.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(40, 'Phenolphthalein', 1, 1, 1, 272.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(41, 'Potassium Bromide', 1, 1, 1, 353.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(42, 'Silver Nitrate', 1, 1, 1, 422.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(43, 'Sodium Sulphate', 1, 1, 1, 199.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(44, 'Sulfur', 1, 1, 1, 288.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(45, 'Thymol', 1, 1, 1, 359.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(46, 'Triethanolamine', 1, 1, 1, 350.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(47, 'Xylene', 1, 1, 1, 406.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(48, 'Zinc Chloride', 1, 1, 1, 95.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53'),
+(49, 'Aluminium Sulphate', 1, 1, 1, 414.00, 50, '2025-10-23 09:07:53', '2025-10-23 09:07:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reagent_stocks`
+--
+
+CREATE TABLE `reagent_stocks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `reagent_id` bigint(20) UNSIGNED NOT NULL,
+  `stock_in` int(11) NOT NULL DEFAULT 0,
+  `stock_out` int(11) NOT NULL DEFAULT 0,
+  `current_stock` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reagent_test`
+--
+
+CREATE TABLE `reagent_test` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `test_id` bigint(20) UNSIGNED NOT NULL,
+  `reagent_id` bigint(20) UNSIGNED NOT NULL,
+  `quantity_required` decimal(8,2) NOT NULL DEFAULT 0.00,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `reagent_test`
+--
+
+INSERT INTO `reagent_test` (`id`, `test_id`, `reagent_id`, `quantity_required`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 10.00, '2025-10-23 09:08:04', '2025-10-23 09:08:04'),
+(3, 1, 2, 10.00, '2025-10-23 09:08:15', '2025-10-23 09:08:15'),
+(4, 1, 3, 2.00, '2025-10-23 09:26:46', '2025-10-23 09:26:46'),
+(5, 2, 1, 1.30, '2025-10-23 09:36:54', '2025-10-23 09:36:54'),
+(6, 2, 3, 5.10, '2025-10-23 09:37:02', '2025-10-23 09:37:02'),
+(7, 3, 20, 3.00, '2025-10-23 09:41:59', '2025-10-23 09:41:59'),
+(8, 6, 19, 2.30, '2025-10-23 09:42:05', '2025-10-23 09:42:05'),
+(9, 6, 17, 1.30, '2025-10-23 09:42:12', '2025-10-23 09:42:12'),
+(10, 3, 15, 6.00, '2025-10-23 09:42:46', '2025-10-23 09:42:46'),
+(11, 8, 48, 1.20, '2025-10-23 09:43:08', '2025-10-23 09:43:08'),
+(12, 50, 19, 10.50, '2025-10-23 09:43:36', '2025-10-23 10:09:47'),
+(13, 6, 20, 6.30, '2025-10-23 10:11:00', '2025-10-23 10:11:00');
 
 -- --------------------------------------------------------
 
@@ -1154,7 +1206,8 @@ INSERT INTO `store_tests` (`id`, `regNum`, `testId`, `testprice`, `referprice`, 
 (8, 'LAB2025102112', 6, 3666.00, 4095.00, 2, 4, 2, 1, 'Room 9', 1, 0, '2025-10-21 05:30:40', '2025-10-21 05:30:40'),
 (9, 'LAB2025102112', 5, 1644.00, 2470.00, 2, 3, 4, 1, 'Room 3', 1, 0, '2025-10-21 05:30:40', '2025-10-21 05:30:40'),
 (10, 'LAB2025102112', 4, 2432.00, 2112.00, 2, 2, 1, 2, 'Room 5', 1, 0, '2025-10-21 05:30:41', '2025-10-21 05:30:41'),
-(11, 'LAB2025102112', 9, 4364.00, 1694.00, 1, 4, 4, 1, 'Room 3', 1, 0, '2025-10-21 05:30:41', '2025-10-21 05:30:41');
+(11, 'LAB2025102112', 9, 4364.00, 1694.00, 1, 4, 4, 1, 'Room 3', 1, 0, '2025-10-21 05:30:41', '2025-10-21 05:30:41'),
+(25, 'LAB2025102311', 1, 650.00, 3040.00, 4, 4, 4, 3, 'Room 2', 1, 0, '2025-10-23 06:12:11', '2025-10-23 06:12:11');
 
 -- --------------------------------------------------------
 
@@ -1272,7 +1325,7 @@ INSERT INTO `units` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 'mg', NULL, NULL),
 (2, 'ml', NULL, NULL),
 (3, 'g', NULL, NULL),
-(4, 'L', NULL, NULL),
+(4, 'L', NULL, '2025-10-22 22:52:17'),
 (5, 'tablet', NULL, NULL),
 (6, 'capsule', NULL, NULL);
 
@@ -1477,6 +1530,21 @@ ALTER TABLE `reagents`
   ADD KEY `reagents_presentation_id_foreign` (`presentation_id`);
 
 --
+-- Indexes for table `reagent_stocks`
+--
+ALTER TABLE `reagent_stocks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `reagent_stocks_reagent_id_foreign` (`reagent_id`);
+
+--
+-- Indexes for table `reagent_test`
+--
+ALTER TABLE `reagent_test`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `reagent_test_test_id_reagent_id_unique` (`test_id`,`reagent_id`),
+  ADD KEY `reagent_test_reagent_id_foreign` (`reagent_id`);
+
+--
 -- Indexes for table `references`
 --
 ALTER TABLE `references`
@@ -1624,19 +1692,19 @@ ALTER TABLE `lab_tests`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `patient_test_reports`
 --
 ALTER TABLE `patient_test_reports`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `payment_details`
 --
 ALTER TABLE `payment_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -1654,7 +1722,19 @@ ALTER TABLE `presentations`
 -- AUTO_INCREMENT for table `reagents`
 --
 ALTER TABLE `reagents`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT for table `reagent_stocks`
+--
+ALTER TABLE `reagent_stocks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `reagent_test`
+--
+ALTER TABLE `reagent_test`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `references`
@@ -1666,7 +1746,7 @@ ALTER TABLE `references`
 -- AUTO_INCREMENT for table `store_tests`
 --
 ALTER TABLE `store_tests`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `test_report_details`
@@ -1739,6 +1819,19 @@ ALTER TABLE `reagents`
   ADD CONSTRAINT `reagents_generic_id_foreign` FOREIGN KEY (`generic_id`) REFERENCES `generics` (`id`),
   ADD CONSTRAINT `reagents_presentation_id_foreign` FOREIGN KEY (`presentation_id`) REFERENCES `presentations` (`id`),
   ADD CONSTRAINT `reagents_unit_id_foreign` FOREIGN KEY (`unit_id`) REFERENCES `units` (`id`);
+
+--
+-- Constraints for table `reagent_stocks`
+--
+ALTER TABLE `reagent_stocks`
+  ADD CONSTRAINT `reagent_stocks_reagent_id_foreign` FOREIGN KEY (`reagent_id`) REFERENCES `reagents` (`id`);
+
+--
+-- Constraints for table `reagent_test`
+--
+ALTER TABLE `reagent_test`
+  ADD CONSTRAINT `reagent_test_reagent_id_foreign` FOREIGN KEY (`reagent_id`) REFERENCES `reagents` (`id`),
+  ADD CONSTRAINT `reagent_test_test_id_foreign` FOREIGN KEY (`test_id`) REFERENCES `lab_tests` (`id`);
 
 --
 -- Constraints for table `store_tests`
