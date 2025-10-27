@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('store_tests', function (Blueprint $table) {
             $table->id();
             $table->string('regNum');            // Patient registration number
+            $table->foreignId('userId')->constrained('admins')->onDelete('restrict'); // user who created the record
             $table->foreignId('testId')->constrained('lab_tests')->onDelete('restrict'); // Lab test
             $table->decimal('testprice', 8, 2);         // Actual test price
             $table->decimal('referprice', 8, 2);        // Reference price

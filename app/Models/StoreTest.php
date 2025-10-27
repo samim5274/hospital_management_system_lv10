@@ -11,6 +11,7 @@ class StoreTest extends Model
 
     protected $fillable = [
         'regNum',
+        'userId',
         'testId',
         'testprice',
         'referprice',
@@ -22,6 +23,11 @@ class StoreTest extends Model
         'status',
         'reportstatus',
     ];
+
+    public function user() 
+    { 
+        return $this->belongsTo(Admin::class, 'userId'); 
+    }
 
     public function test() 
     { 

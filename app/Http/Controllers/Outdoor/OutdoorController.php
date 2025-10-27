@@ -44,7 +44,7 @@ class OutdoorController extends Controller
 
         $userId = Auth::guard('admin')->user()->id; // fallback if not using admin guard
         $today = date('Y-m-d');
-        $sl = PaymentDetail::where('date', $today)->count();
+        $sl = PaymentDetail::where('date', $today)->where('userId', $userId)->count();
         $invoice = 'LAB' . date('Ymd') . $userId . ($sl + 1);
 
         $total = StoreTest::where('regNum', $invoice)->sum('testprice');
@@ -69,7 +69,7 @@ class OutdoorController extends Controller
 
         $userId = Auth::guard('admin')->user()->id; // fallback if not using admin guard
         $today = date('Y-m-d');
-        $count = PaymentDetail::where('date', $today)->count() + 1;
+        $count = PaymentDetail::where('date', $today)->where('userId', $userId)->count() + 1;
         $invoice = 'LAB' . date('Ymd') . $userId . $count;
         // dd($userId, $today, $count, $invoice);
 

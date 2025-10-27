@@ -45,8 +45,9 @@ class LabInvoice extends Component
     private function generateRegNum()
     {
         $today = date('Y-m-d');
-        $count = PaymentDetail::where('date', $today)->count() + 1;
-        return 'LAB' . date('Ymd') . $userId = Auth::id() ?? 1 . $count;
+        $userId = Auth::guard('admin')->user()->id ?? 1;
+        $count = PaymentDetail::where('date', $today)->where('userId', $userId)->count() + 1;
+        return 'LAB' . date('Ymd') . $userId . $count;
     }
 
     // Add test to cart
@@ -59,6 +60,7 @@ class LabInvoice extends Component
             // Insert into DB
             StoreTest::create([
                 'regNum'       => $this->regNum,
+                'userId'       => Auth::guard('admin')->user()->id ?? 1,
                 'testId'       => $test->id,
                 'testprice'    => $test->testPrice,
                 'referprice'   => $test->rprice,

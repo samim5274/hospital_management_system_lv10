@@ -26,6 +26,11 @@ class Admin extends Authenticatable
         'remember_token',
     ];
 
+    public function storeTest() 
+    { 
+        return $this->hasMany(StoreTest::class, 'userId'); 
+    }
+
     public function patient()
     {
         return $this->hasMany(AdmissionPatient::class, 'user_id');
