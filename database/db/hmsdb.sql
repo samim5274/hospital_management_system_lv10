@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 27, 2025 at 10:51 AM
+-- Generation Time: Oct 27, 2025 at 11:47 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,9 +45,8 @@ CREATE TABLE `admins` (
 INSERT INTO `admins` (`id`, `name`, `email`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'SAMIM', 'samim@gmail.com', '$2y$12$MCADF4zAqdJJ4EDlDG4MTuIivOTeDvdW2Tr7tACjjX1xFi3KtJCam', 'admin', 'HDUuEwQx6Xfz9j9MyGgKT7okpDPYK3jqx4XnhtCc9nStecFnsn0gmhC3v7tM', NULL, NULL),
 (2, 'Akib Hossain', 'akib@gmail.com', '$2y$12$XpSO9YALOs7vC.N5uXb.0OJyd5V2kBcnMpM/qUQvWDjF33mPFKsru', 'Admin', 'jSPfQ1rBQIGa5n2chjx2mtXfGWlwyl3Srsg5dd0wAxdUNgo6hlrPSyGGok20', '2025-10-26 00:00:59', '2025-10-26 00:00:59'),
-(3, 'Akib Hossain', 'akib2@gmail.com', '$2y$12$nk8MgzG7.Ggnnclyokz0v.V0uEFjK05mJbq75MfBQv0LnSuwMhRKO', 'Admin', NULL, '2025-10-26 00:14:41', '2025-10-26 00:14:41');
-
--- --------------------------------------------------------
+(3, 'Akib Hossain', 'akib2@gmail.com', '$2y$12$nk8MgzG7.Ggnnclyokz0v.V0uEFjK05mJbq75MfBQv0LnSuwMhRKO', 'Admin', NULL, '2025-10-26 00:14:41', '2025-10-26 00:14:41'),
+--------------------------------------------------------
 
 --
 -- Table structure for table `admission_bill_summaries`
@@ -814,7 +813,106 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (28, '2025_10_21_143740_create_presentations_table', 1),
 (29, '2025_10_21_143850_create_reagents_table', 1),
 (30, '2025_10_23_114129_create_reagent_stocks_table', 1),
-(31, '2025_10_23_115839_create_reagent_test_table', 1);
+(31, '2025_10_23_115839_create_reagent_test_table', 1),
+(32, '2016_06_01_000001_create_oauth_auth_codes_table', 2),
+(33, '2016_06_01_000002_create_oauth_access_tokens_table', 2),
+(34, '2016_06_01_000003_create_oauth_refresh_tokens_table', 2),
+(35, '2016_06_01_000004_create_oauth_clients_table', 2),
+(36, '2016_06_01_000005_create_oauth_personal_access_clients_table', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oauth_access_tokens`
+--
+
+CREATE TABLE `oauth_access_tokens` (
+  `id` varchar(100) NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `scopes` text DEFAULT NULL,
+  `revoked` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `expires_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oauth_auth_codes`
+--
+
+CREATE TABLE `oauth_auth_codes` (
+  `id` varchar(100) NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
+  `scopes` text DEFAULT NULL,
+  `revoked` tinyint(1) NOT NULL,
+  `expires_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oauth_clients`
+--
+
+CREATE TABLE `oauth_clients` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `secret` varchar(100) DEFAULT NULL,
+  `provider` varchar(255) DEFAULT NULL,
+  `redirect` text NOT NULL,
+  `personal_access_client` tinyint(1) NOT NULL,
+  `password_client` tinyint(1) NOT NULL,
+  `revoked` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `oauth_clients`
+--
+
+INSERT INTO `oauth_clients` (`id`, `user_id`, `name`, `secret`, `provider`, `redirect`, `personal_access_client`, `password_client`, `revoked`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'HMS Personal Access Client', 'JPArYJBeLprk0ATl3H1IviyywnFJZxFHEh31vfYv', NULL, 'http://localhost', 1, 0, 0, '2025-10-27 09:56:54', '2025-10-27 09:56:54'),
+(2, NULL, 'HMS Password Grant Client', 'Ui2ngRue3R66LZpKCfShamooCkNsWSJKPMFqkO0z', 'users', 'http://localhost', 0, 1, 0, '2025-10-27 09:56:54', '2025-10-27 09:56:54');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oauth_personal_access_clients`
+--
+
+CREATE TABLE `oauth_personal_access_clients` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `client_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `oauth_personal_access_clients`
+--
+
+INSERT INTO `oauth_personal_access_clients` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
+(1, 1, '2025-10-27 09:56:54', '2025-10-27 09:56:54');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `oauth_refresh_tokens`
+--
+
+CREATE TABLE `oauth_refresh_tokens` (
+  `id` varchar(100) NOT NULL,
+  `access_token_id` varchar(100) NOT NULL,
+  `revoked` tinyint(1) NOT NULL,
+  `expires_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1124,8 +1222,9 @@ INSERT INTO `store_tests` (`id`, `regNum`, `userId`, `testId`, `testprice`, `ref
 (33, 'LAB2025102711', 1, 1, 3485.00, 1953.00, 4, 1, 2, 3, 'Room 7', 1, 0, '2025-10-27 05:23:54', '2025-10-27 05:23:54'),
 (34, 'LAB2025102711', 1, 2, 4317.00, 3913.00, 1, 1, 2, 3, 'Room 9', 1, 0, '2025-10-27 05:23:58', '2025-10-27 05:23:58'),
 (35, 'LAB2025102711', 1, 3, 1127.00, 2975.00, 1, 1, 1, 2, 'Room 10', 1, 0, '2025-10-27 05:24:02', '2025-10-27 05:24:02'),
-(39, 'LAB2025102712', 1, 1, 3485.00, 1953.00, 4, 1, 2, 3, 'Room 7', 1, 0, '2025-10-27 06:25:54', '2025-10-27 06:25:54'),
-(40, 'LAB2025102712', 1, 2, 4317.00, 3913.00, 1, 1, 2, 3, 'Room 9', 1, 0, '2025-10-27 06:25:55', '2025-10-27 06:25:55');
+(43, 'LAB2025102712', 1, 3, 1127.00, 2975.00, 1, 1, 1, 2, 'Room 10', 1, 0, '2025-10-27 10:03:11', '2025-10-27 10:03:11'),
+(44, 'LAB2025102712', 1, 4, 2089.00, 4281.00, 2, 4, 1, 2, 'Room 1', 1, 0, '2025-10-27 10:03:11', '2025-10-27 10:03:11'),
+(45, 'LAB2025102712', 1, 1, 3485.00, 1953.00, 4, 1, 2, 3, 'Room 7', 1, 0, '2025-10-27 10:03:13', '2025-10-27 10:03:13');
 
 -- --------------------------------------------------------
 
@@ -1395,6 +1494,40 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `oauth_access_tokens`
+--
+ALTER TABLE `oauth_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `oauth_access_tokens_user_id_index` (`user_id`);
+
+--
+-- Indexes for table `oauth_auth_codes`
+--
+ALTER TABLE `oauth_auth_codes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `oauth_auth_codes_user_id_index` (`user_id`);
+
+--
+-- Indexes for table `oauth_clients`
+--
+ALTER TABLE `oauth_clients`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `oauth_clients_user_id_index` (`user_id`);
+
+--
+-- Indexes for table `oauth_personal_access_clients`
+--
+ALTER TABLE `oauth_personal_access_clients`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `oauth_refresh_tokens`
+--
+ALTER TABLE `oauth_refresh_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `oauth_refresh_tokens_access_token_id_index` (`access_token_id`);
+
+--
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
@@ -1509,7 +1642,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `admission_bill_summaries`
@@ -1611,7 +1744,19 @@ ALTER TABLE `lab_tests`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- AUTO_INCREMENT for table `oauth_clients`
+--
+ALTER TABLE `oauth_clients`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `oauth_personal_access_clients`
+--
+ALTER TABLE `oauth_personal_access_clients`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `patient_test_reports`
@@ -1665,7 +1810,7 @@ ALTER TABLE `references`
 -- AUTO_INCREMENT for table `store_tests`
 --
 ALTER TABLE `store_tests`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `test_report_details`
