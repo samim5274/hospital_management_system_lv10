@@ -53,4 +53,9 @@ class StoreTest extends Model
     { 
         return $this->belongsTo(LabGroup::class, 'groupId'); 
     }
+
+    public function patientTestReport()
+    {
+        return $this->hasMany(PatientTestReport::class, 'test_id');
+    }
 }

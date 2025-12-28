@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab - HMS</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/logo/main-logo.png') }}">
+    <title>Lab - {{ $company->name ?? 'HMS' }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -18,7 +19,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon">
 
 </head>
 
@@ -191,27 +191,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($testReports as $testId => $reports)
-                                            {{-- Test Name Header --}}
+                                        @foreach($testDetails as $test)
                                             <tr class="table-primary">
                                                 <td colspan="7" class="fw-bold">
-                                                    {{ optional($reports->first()->test)->testName ?? 'Unknown Test' }}
+                                                    {{ $test->test->testName ?? 'Unknown Test' }}
                                                 </td>
                                             </tr>
 
-                                            {{-- Test Parts --}}
-                                            @foreach($reports as $report)
-                                                @php                                                    
-                                                    $patientReport = $patientTestReport->where('test_id', $report->test_id)
-                                                                                    ->where('part_of_test', $report->part_of_test)
-                                                                                    ->first();
+                                            @foreach($testReports[$test->id] ?? [] as $report)
+                                                @php
+                                                    $patientReport = $patientTestReport
+                                                        ->where('test_id', $test->id)
+                                                        ->where('part_of_test', $report->part_of_test)
+                                                        ->first();
                                                 @endphp
-                                                <tr data-bs-toggle="modal" data-bs-target="#modalPatientReport{{ $patientReport->id ?? '' }}">
+
+                                                <tr data-bs-toggle="modal"
+                                                    data-bs-target="#modalPatientReport{{ $patientReport->id ?? '' }}">
                                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                                    <td>{{ $patientReport->part_of_test }}</td>
-                                                    <td class="text-center fw-semibold text-success">{{ $patientReport->result ?? 'Pending' }}</td>
-                                                    <td class="text-center">{{ $patientReport->unit ?? '-' }}</td>
-                                                    <td class="text-center text-muted">{{ $patientReport->reference_value ?? '-' }}</td>
+                                                    <td>{{ $report->part_of_test }}</td>
+                                                    <td class="text-center fw-semibold text-success">
+                                                        {{ $patientReport->result ?? 'Pending' }}
+                                                    </td>
+                                                    <td class="text-center">{{ $report->unit ?? '-' }}</td>
+                                                    <td class="text-center text-muted">{{ $report->reference_value ?? '-' }}</td>
                                                     <td class="text-center text-muted">{{ $patientReport->ref_value_of_hormone ?? '-' }}</td>
                                                     <td class="text-center text-muted">{{ $patientReport->remarks ?? '-' }}</td>
                                                 </tr>

@@ -25,7 +25,8 @@ Route::middleware(['admin'])->group(function () {
     });
 
     Route::get('/dashboard', function () {
-        return view('welcome');
+        $company = App\Models\Company::first();
+        return view('welcome', compact('company'));
     });
 
     // 🔹 Outdoor Management
@@ -36,6 +37,9 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/store', [OutdoorController::class, 'store'])->name('patients.store');
         Route::get('/print-invoice/{invoice}', [OutdoorController::class, 'printInvoice'])->name('patients.invoice.print');
         Route::get('/invoice/details/{invoice}', [OutdoorController::class, 'testDetails'])->name('patients.invoice.details'); 
+        Route::get('/cancel', [OutdoorController::class, 'cancelTestView'])->name('patients.test.cancel.view');
+        Route::post('/cancel/test/{id}', [OutdoorController::class, 'cancelTest'])->name('patients.test.cancel');
+        Route::get('/test-cancel/{reg}', [OutdoorController::class, 'cancelTestByReg'])->name('patients.test.cancel.by.reg');
     });
 
     // 🔹 Indoor Management
@@ -103,29 +107,29 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/modify/enrolled/reagent/test/{id}', [ReagentController::class, 'modifyEnrolledReagentTest'])->name('modify.enrolled.reagent.test');
     });
 
-    // // 🔹 Accounts
-    // Route::prefix('accounts')->group(function () {
-    //     Route::get('/invoices', [App\Http\Controllers\AccountController::class, 'invoices'])->name('accounts.invoices');
-    //     Route::get('/expenses', [App\Http\Controllers\AccountController::class, 'expenses'])->name('accounts.expenses');
-    //     Route::get('/payments', [App\Http\Controllers\AccountController::class, 'payments'])->name('accounts.payments');
-    //     Route::get('/report', [App\Http\Controllers\AccountController::class, 'report'])->name('accounts.report');
-    // });
+    // 🔹 Accounts
+    Route::prefix('accounts')->group(function () {
+        Route::get('/invoices', [App\Http\Controllers\AccountController::class, 'invoices'])->name('accounts.invoices');
+        Route::get('/expenses', [App\Http\Controllers\AccountController::class, 'expenses'])->name('accounts.expenses');
+        Route::get('/payments', [App\Http\Controllers\AccountController::class, 'payments'])->name('accounts.payments');
+        Route::get('/report', [App\Http\Controllers\AccountController::class, 'report'])->name('accounts.report');
+    });
 
 
-    // // 🔹 Staff Management
-    // Route::prefix('staff')->group(function () {
-    //     Route::get('/', [App\Http\Controllers\StaffController::class, 'index'])->name('staff.index');
-    //     Route::get('/roles', [App\Http\Controllers\StaffController::class, 'roles'])->name('staff.roles');
-    //     Route::get('/salary', [App\Http\Controllers\StaffController::class, 'salary'])->name('staff.salary');
-    // });
+    // 🔹 Staff Management
+    Route::prefix('staff')->group(function () {
+        Route::get('/', [App\Http\Controllers\StaffController::class, 'index'])->name('staff.index');
+        Route::get('/roles', [App\Http\Controllers\StaffController::class, 'roles'])->name('staff.roles');
+        Route::get('/salary', [App\Http\Controllers\StaffController::class, 'salary'])->name('staff.salary');
+    });
 
 
-    // // 🔹 Reports
-    // Route::prefix('reports')->group(function () {
-    //     Route::get('/daily', [App\Http\Controllers\ReportController::class, 'daily'])->name('reports.daily');
-    //     Route::get('/monthly', [App\Http\Controllers\ReportController::class, 'monthly'])->name('reports.monthly');
-    //     Route::get('/financial', [App\Http\Controllers\ReportController::class, 'financial'])->name('reports.financial');
-    // });
+    // 🔹 Reports
+    Route::prefix('reports')->group(function () {
+        Route::get('/daily', [App\Http\Controllers\ReportController::class, 'daily'])->name('reports.daily');
+        Route::get('/monthly', [App\Http\Controllers\ReportController::class, 'monthly'])->name('reports.monthly');
+        Route::get('/financial', [App\Http\Controllers\ReportController::class, 'financial'])->name('reports.financial');
+    });
 
 
 });

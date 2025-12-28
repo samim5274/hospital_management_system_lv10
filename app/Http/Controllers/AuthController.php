@@ -6,11 +6,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Admin;
+use App\Models\Company;
 
 class AuthController extends Controller
 {
     public function login(){
-        return view('auth.login-view');
+        $company = Company::first();
+        Auth::guard('admin')->logout();
+        session()->invalidate();
+        session()->regenerateToken();
+        return view('auth.login-view', compact('company'));
     }
 
     public function authenticate(Request $request){
@@ -23,6 +28,11 @@ class AuthController extends Controller
 
         if (Auth::guard('admin')->attempt($credentials, $remember)) {
             $request->session()->regenerate();
+            $admin = Auth::guard('admin')->user();
+            $admin->update([
+                'last_login_at' => now(),
+                'last_login_ip' => $request->ip(),
+            ]);
             return redirect()->intended('/dashboard');
         }
 

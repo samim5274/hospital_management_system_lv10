@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Details - HMS</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/logo/main-logo.png') }}">
+    <title>Patient Details - {{ $company->name ?? 'HMS' }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -18,7 +19,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon">
 
 </head>
 
@@ -51,11 +51,11 @@
                                             <th>Name</th>
                                             <th>Phone</th>
                                             <th>Date</th>
-                                            <th>Total</th>
+                                            <!-- <th>Total</th>
                                             <th>Discount</th>
                                             <th>Payable</th>
                                             <th>Received</th>
-                                            <th>Due</th>
+                                            <th>Due</th> -->
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -67,11 +67,11 @@
                                             <td><a href="{{url('/patients/invoice/details/'.$patient->reg)}}">{{ $patient->name ?? '-' }}</a></td>
                                             <td>0{{ $patient->phone ?? '-' }}</td>
                                             <td>{{ \Carbon\Carbon::parse($patient->date)->format('d-M-Y') }}</td>
-                                            <td>৳{{ number_format($patient->total, 2) }}/-</td>
+                                            <!-- <td>৳{{ number_format($patient->total, 2) }}/-</td>
                                             <td>৳{{ number_format($patient->discount, 2) }}/-</td>
                                             <td>৳{{ number_format($patient->payable, 2) }}/-</td>
                                             <td>৳{{ number_format($patient->pay, 2) }}/-</td>
-                                            <td>৳{{ number_format($patient->due, 2) }}/-</td>
+                                            <td>৳{{ number_format($patient->due, 2) }}/-</td> -->
                                             <td class="text-center"><a href="{{url('/patients/print-invoice/'.$patient->reg)}}" target="_blank"><i class="fa-solid fa-print"></i></a></td>
                                         </tr>                                        
                                         @empty
@@ -79,14 +79,14 @@
                                             <td colspan="10" class="text-center">No patients found for today.</td>
                                         </tr>
                                         @endforelse
-                                        <tr>
+                                        <!-- <tr>
                                             <td style="text-align: center;" colspan="5">Total :</td>
                                             <td>৳{{$total}}/-</td>
                                             <td>৳{{$discount}}/-</td>
                                             <td>৳{{$payable}}/-</td>
                                             <td>৳{{$pay}}/-</td>
                                             <td>৳{{$due}}/-</td>
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                 </table>
                                 <div class="mt-3">

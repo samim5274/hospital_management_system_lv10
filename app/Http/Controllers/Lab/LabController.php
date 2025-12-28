@@ -17,14 +17,16 @@ use App\Models\Company;
 class LabController extends Controller
 {
     public function index(){
+        $company = Company::first();
         $testDetails = LabTest::all();
-        return view('lab.test-details', compact('testDetails'));
+        return view('lab.test-details', compact('testDetails','company'));
     }
     
     public function reportView($id){
+        $company = Company::first();
         $testReportDetails = TestReportDetail::where('test_id', $id)->get();
         $labTest = LabTest::where('id', $id)->first();
-        return view('lab.test-report-view', compact('testReportDetails','labTest'));
+        return view('lab.test-report-view', compact('testReportDetails','labTest','company'));
     }
 
     public function reportEdit(Request $request, $id){
@@ -71,20 +73,21 @@ class LabController extends Controller
 
     public function reportTestView(){
         $date = Carbon::today();
+        $company = Company::first();
         $patients = PaymentDetail::where('date', $date)->paginate(20);
-        return view('lab.report-details', compact('patients'));
+        return view('lab.report-details', compact('patients', 'company'));
     }
 
     public function patientLabTest($reg){
+        $company = Company::first();  
         $patient = PaymentDetail::where('reg', $reg)->first();
         $testDetails = StoreTest::where('regNum', $reg)->get();
         $testIds = $testDetails->pluck('id');
         $testReports = TestReportDetail::whereIn('test_id', $testIds)->get()->groupBy('test_id');
 
-        $patientTestReport = PatientTestReport::where('reg', $reg)->get();
-        
-        if ($patientTestReport->isNotEmpty()) {            
-            return view('lab.report-generate', compact('patient', 'testDetails', 'testReports', 'patientTestReport', 'reg'));
+        $patientTestReport = PatientTestReport::with(['storeTest.test'])->where('reg', $reg)->get();
+        if ($patientTestReport->isNotEmpty()) {
+            return view('lab.report-generate', compact('patient', 'testDetails', 'testReports', 'patientTestReport', 'reg','company'));
         } else {            
             foreach ($testDetails as $test) {
                 $reports = $testReports[$test->id] ?? collect();
@@ -104,9 +107,8 @@ class LabController extends Controller
                 }
             }
 
-             $patientTestReport = PatientTestReport::where('reg', $reg)->get();
-            
-            return view('lab.report-generate', compact('patient', 'testDetails', 'testReports', 'patientTestReport', 'reg'));
+            $patientTestReport = PatientTestReport::with(['storeTest.test'])->where('reg', $reg)->get();            
+            return view('lab.report-generate', compact('patient', 'testDetails', 'testReports', 'patientTestReport', 'reg', 'company'));
         }
     }
 
@@ -139,7 +141,7 @@ class LabController extends Controller
         $patient = PaymentDetail::where('reg', $reg)->first();
         $testDetails = StoreTest::where('regNum', $reg)->get();
         $testIds = $testDetails->pluck('id');
-        $testReports = PatientTestReport::whereIn('test_id', $testIds)->get()->groupBy('test_id');
+        $testReports = PatientTestReport::with(['storeTest.test'])->whereIn('test_id', $testIds)->get()->groupBy('test_id');
         $company = Company::first();
 
         return view('lab.print.print-patient-test-report', compact('patient', 'testDetails', 'testReports', 'reg', 'company'));

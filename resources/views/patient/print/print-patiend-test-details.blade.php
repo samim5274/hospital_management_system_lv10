@@ -71,10 +71,10 @@
 
     {{-- Header --}}
     <div class="invoice-header">
-        <h2>{{ $company[0]->name ?? 'Hospital Name' }}</h2>
-        <p>{{ $company[0]->address ?? 'Address Here' }}</p>
-        <p>{{ $company[0]->phone ?? '' }}</p>
-        <h4><strong>Lab Test Invoice</strong></h4>
+        <h2>{{ $company->name ?? 'Hospital Name' }}</h2>
+        <p>{{ $company->address ?? 'Address Here' }}</p>
+        <p>{{ $company->phone ?? '' }}</p>
+        <h4><strong>Lab Test Invoice</strong>@if($patientData->status == 0) (Cancelled) @endif</h4>
     </div>
 
     {{-- Patient Info --}}
@@ -141,6 +141,7 @@
         <tr><td>Payable:</td><td>৳{{ number_format($patientData->payable ?? 0, 2) }}</td></tr>
         <tr><td><strong>Received:</strong></td><td><strong>৳{{ number_format($patientData->pay ?? 0, 2) }}</strong></td></tr>
         <tr><td>Due:</td><td>৳{{ number_format($patientData->due ?? 0, 2) }}</td></tr>
+        <tr><td><strong>Return:</strong></td><td><strong>৳{{ number_format($patientData->return ?? 0, 2) }}</strong></td></tr>
     </table>
 
     {{-- Footer --}}

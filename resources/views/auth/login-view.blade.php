@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - HMS</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/logo/main-logo.png') }}">
+    <title>Admin Login - {{ $company->name ?? 'HMS' }}</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -20,12 +21,12 @@
 
                         <!-- Logo -->
                         <div class="text-center mb-4">
-                            <img src="assets/images/logo/logo.png" alt="Logo" style="height: 60px;">
+                            <img src="{{ asset('assets/images/logo/main-logo.png') }}" alt="Logo" style="height: 100px;">
                         </div>
 
                         <!-- Title -->
-                        <h3 class="text-center fw-bold mb-2 text-primary">Admin Login</h3>
-                        <p class="text-center text-muted mb-4">Sign in with your credentials</p>
+                        <h3 class="text-center fw-bold mb-2 mb-4 text-primary">Admin Login</h3>
+                        <!-- <p class="text-center text-muted mb-4">Sign in with your credentials</p> -->
 
                         <!-- Login Form -->
                         <form action="{{ route('login.post') }}" method="POST">

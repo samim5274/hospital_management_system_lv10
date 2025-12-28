@@ -1,3 +1,5 @@
+INSERT INTO `companies` (`id`, `name`, `address`, `email`, `phone`, `website`, `created_at`, `updated_at`) VALUES (NULL, 'Bangladesh Diabetic & Diagnostic Care ltd.', 'Dholibita, Dhamrai, Dhaka', 'info@bddcl.info', '01700000000', 'www.bddcl.info', '2025-12-01 16:00:59', '2025-12-01 16:00:59');
+
 <!-- @foreach($testReports as $reports)
                 @foreach($reports as $detail)
                 <div class="modal fade" id="modalReport{{$detail->id}}" tabindex="-1" aria-hidden="true">

@@ -30,4 +30,9 @@ class PatientTestReport extends Model
     {
         return $this->belongsTo(TestReportDetail::class);
     }
+
+    public function storeTest()
+    {
+        return $this->belongsTo(StoreTest::class, 'test_id');
+    }
 }

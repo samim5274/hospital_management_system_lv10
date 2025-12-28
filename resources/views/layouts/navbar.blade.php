@@ -39,6 +39,7 @@
                     <ul class="submenu">
                         <li class="submenu-item {{ Request::is('patients') ? 'active' : '' }}"><a href="{{ url('/patients') }}">All Patients</a></li>
                         <li class="submenu-item {{ Request::is('patients/outdoor') ? 'active' : '' }}"><a href="{{ url('/patients/outdoor') }}">Outdoor Patients</a></li>
+                        <li class="submenu-item {{ Request::is('patients/cancel') ? 'active' : '' }}"><a href="{{ url('/patients/cancel') }}">Test Cancel</a></li>
                         <!-- <li class="submenu-item"><a href="#">Ticket</a></li> -->
                     </ul>
                 </li>
