@@ -3,7 +3,16 @@
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
                 <div class="logo">
-                    <a href="{{ url('/dashboard') }}"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                    <a href="{{ url('/dashboard') }}"
+                    class="d-flex align-items-center text-decoration-none">
+                        
+                        <img src="{{ asset('assets/images/logo/main-logo.png') }}"
+                            alt="BDDCL Logo"
+                            class="me-2"
+                            style="height:40px;">
+
+                        <span class="fw-bold fs-2 text-primary">BDDCL</span>
+                    </a>
                 </div>
                 <div class="toggler">
                     <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -30,7 +39,7 @@
                     <ul class="submenu">
                         <li class="submenu-item {{ Request::is('patients') ? 'active' : '' }}"><a href="{{ url('/patients') }}">All Patients</a></li>
                         <li class="submenu-item {{ Request::is('patients/outdoor') ? 'active' : '' }}"><a href="{{ url('/patients/outdoor') }}">Outdoor Patients</a></li>
-                        <li class="submenu-item"><a href="#">Ticket</a></li>
+                        <!-- <li class="submenu-item"><a href="#">Ticket</a></li> -->
                     </ul>
                 </li>
 

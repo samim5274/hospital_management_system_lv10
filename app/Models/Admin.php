@@ -19,6 +19,11 @@ class Admin extends Authenticatable
         'email',
         'password',
         'role', // admin, superadmin, staff
+        'otp',
+        'otp_expires_at',
+        'email_verified_at',
+        'last_login_at',
+        'last_login_ip',
     ];
 
     protected $hidden = [
