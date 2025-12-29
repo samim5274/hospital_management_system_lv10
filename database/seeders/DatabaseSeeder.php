@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
             PresentationSeeder::class,
             UnitSeeder::class,
             ReagentSeeder::class,
+            ExpenseCategorySeeder::class,
+            ExpenseSubcategorySeeder::class,
         ]);
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Indoor\IndoorController;
 use App\Http\Controllers\Setting\SettingController;
 use App\Http\Controllers\Lab\LabController;
 use App\Http\Controllers\Reagent\ReagentController;
+use App\Http\Controllers\Expenses\ExpensesController;
 
 Auth::routes();
 
@@ -109,10 +110,24 @@ Route::middleware(['admin'])->group(function () {
 
     // 🔹 Accounts
     Route::prefix('accounts')->group(function () {
-        Route::get('/invoices', [App\Http\Controllers\AccountController::class, 'invoices'])->name('accounts.invoices');
-        Route::get('/expenses', [App\Http\Controllers\AccountController::class, 'expenses'])->name('accounts.expenses');
-        Route::get('/payments', [App\Http\Controllers\AccountController::class, 'payments'])->name('accounts.payments');
-        Route::get('/report', [App\Http\Controllers\AccountController::class, 'report'])->name('accounts.report');
+        Route::get('/expenses', [ExpensesController::class, 'index'])->name('accounts.expenses');
+        Route::get('/get-ex-subcategories/{category_id}', [ExpensesController::class, 'getExSubcategories'])->name('accounts.get.ex.subcategories');
+        Route::post('/add/expenses', [ExpensesController::class, 'storeExpenses'])->name('add.expenses');
+        Route::get('/expenses/delete/{id}', [ExpensesController::class, 'deleteExpense'])->name('expenses.delete');
+        Route::post('/edit/expenses/{id}', [ExpensesController::class, 'editExpenses'])->name('edit.expenses');
+        Route::get('/expenses/print/{id}', [ExpensesController::class, 'printExpense'])->name('expenses.print');
+        Route::get('/expenses/view/{id}', [ExpensesController::class, 'viewExpenseDetail'])->name('expenses-detail-view');
+        Route::get('/expenses-settings', [ExpensesController::class, 'settings'])->name('expenses.settings');
+        Route::post('/store/category', [ExpensesController::class, 'storeCategory'])->name('store.category');
+        Route::post('/edit/category/{id}', [ExpensesController::class, 'editCategory'])->name('update.category');
+        Route::get('/expenses/delete-category/{id}', [ExpensesController::class, 'deleteCategory'])->name('expenses.delete-category');
+        Route::post('/store/subcategory', [ExpensesController::class, 'storeSubCategory'])->name('store.subcategory');
+        Route::post('/edit/subcategory/{id}', [ExpensesController::class, 'editSubCategory'])->name('update.subcategory');
+        Route::get('/delete/subcategory/{id}', [ExpensesController::class, 'deleteSubCategory'])->name('delete.subcategory');
+
+        Route::get('/invoices', [AccountController::class, 'invoices'])->name('accounts.invoices');
+        Route::get('/payments', [AccountController::class, 'payments'])->name('accounts.payments');
+        Route::get('/report', [AccountController::class, 'report'])->name('accounts.report');
     });
 
 

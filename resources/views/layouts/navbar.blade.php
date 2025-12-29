@@ -82,8 +82,8 @@
                         <span>Accounts</span>
                     </a>
                     <ul class="submenu">
-                        <li class="submenu-item {{ Request::is('accounts/invoices') ? 'active' : '' }}"><a href="{{ url('/accounts/invoices') }}">Invoices</a></li>
                         <li class="submenu-item {{ Request::is('accounts/expenses') ? 'active' : '' }}"><a href="{{ url('/accounts/expenses') }}">Expenses</a></li>
+                        <li class="submenu-item {{ Request::is('accounts/invoices') ? 'active' : '' }}"><a href="{{ url('/accounts/invoices') }}">Invoices</a></li>
                         <li class="submenu-item {{ Request::is('accounts/payments') ? 'active' : '' }}"><a href="{{ url('/accounts/payments') }}">Payments</a></li>
                         <li class="submenu-item {{ Request::is('accounts/report') ? 'active' : '' }}"><a href="{{ url('/accounts/report') }}">Account Reports</a></li>
                     </ul>

@@ -45,4 +45,9 @@ class Admin extends Authenticatable
     {
         return $this->hasMany(AdmissionBillSummary::class);
     }
+
+    public function expenses()
+    {
+        return $this->hasMany(ExpensesDetails::class, 'user_id', 'id');
+    }
 }
