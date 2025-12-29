@@ -13,6 +13,8 @@ use App\Models\PaymentDetail;
 use App\Models\StoreTest;
 use App\Models\PatientTestReport;
 use App\Models\Company;
+use App\Models\ReagentStock;
+use App\Models\Reagent;
 
 class LabController extends Controller
 {
@@ -102,11 +104,10 @@ class LabController extends Controller
                         'unit' => $report->unit,
                         'reference_value' => $report->reference_value,
                         'ref_value_of_hormone' => $report->ref_value_of_hormone,
-                        // 'remarks' => 'Report Created by: ' . Auth::guard('admin')->user()->name,
+                        'remarks' => 'Report Created by: ' . Auth::guard('admin')->user()->name,
                     ]);
                 }
             }
-
             $patientTestReport = PatientTestReport::with(['storeTest.test'])->where('reg', $reg)->get();            
             return view('lab.report-generate', compact('patient', 'testDetails', 'testReports', 'patientTestReport', 'reg', 'company'));
         }
