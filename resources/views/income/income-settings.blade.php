@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/logo/main-logo.png') }}">
-    <title>Expenses Details - {{ $company->name ?? 'HMS' }}</title>
+    <title>Income Details - {{ $company->name ?? 'HMS' }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -31,7 +31,7 @@
             </header>
             @include('layouts.message')
             <div class="page-heading">
-                <h3>Expenses Setting</h3>
+                <h3>Income Setting</h3>
             </div>
             <div class="page-content bg-white p-4 rounded">
                 <section class="row">
@@ -83,7 +83,7 @@
                                                     <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#editCategoryModal{{ $category->id }}">
                                                         <i class="bi bi-pencil-square"></i>
                                                     </button>
-                                                    <a href="{{ route('expenses.delete-category', $category->id) }}" class="d-inline">
+                                                    <a href="{{ route('income.delete-category', $category->id) }}" class="d-inline">
                                                         <button class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
                                                             <i class="bi bi-trash"></i>
                                                         </button>
@@ -126,7 +126,7 @@
                                                     <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#editSubCategoryModal{{ $sub->id }}">
                                                         <i class="bi bi-pencil-square"></i>
                                                     </button>
-                                                    <a href="{{ route('delete.subcategory', $sub->id) }}" class="d-inline">
+                                                    <a href="{{ route('income.delete.subcategory', $sub->id) }}" class="d-inline">
                                                         <button class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
                                                             <i class="bi bi-trash"></i>
                                                         </button>
@@ -153,7 +153,7 @@
                             <h5 class="modal-title text-white"><i class="bi bi-plus-circle fs-5 me-1"></i> Add Category</h5>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                         </div>
-                        <form action="{{ route('store.category') }}" method="POST">
+                        <form action="{{ route('income.store.category') }}" method="POST">
                             @csrf
                             <div class="modal-body">
                                 <label class="form-label fw-semibold">Category Name</label>
@@ -183,7 +183,7 @@
                         </div>
 
                         <!-- Modal Body -->
-                        <form action="{{ route('update.category', $category->id) }}" method="POST">
+                        <form action="{{ route('income.update.category', $category->id) }}" method="POST">
                             @csrf
                             <div class="modal-body">
                                 <label class="form-label fw-semibold">Category Name</label>
@@ -213,7 +213,7 @@
                             <h5 class="modal-title text-white"><i class="bi bi-plus-circle fs-5 me-1"></i> Add Sub-Category</h5>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                         </div>
-                        <form action="{{ route('store.subcategory') }}" method="POST">
+                        <form action="{{ route('income.store.subcategory') }}" method="POST">
                             @csrf
                             <div class="modal-body">
                                 <label class="form-label fw-semibold">Category</label>
@@ -251,7 +251,7 @@
                         </div>
 
                         <!-- Modal Body -->
-                        <form action="{{ route('update.subcategory', $sub->id) }}" method="POST">
+                        <form action="{{ route('income.update.subcategory', $sub->id) }}" method="POST">
                             @csrf
                             <div class="modal-body">
 

@@ -19,7 +19,7 @@ class ExpensesController extends Controller
         $company = Company::first();
         $excategories = ExpensesCategory::all();
         $exsubcategories = ExpensesSubCategory::all();
-        $expenses = ExpensesDetails::with(['category', 'subcategory', 'user'])->orderBy('id', 'desc')->get();
+        $expenses = ExpensesDetails::where('date', Carbon::now()->format('Y-m-d'))->with(['category', 'subcategory', 'user'])->orderBy('id', 'desc')->get();
         return view('expenses.expenses-details', compact('company', 'excategories', 'exsubcategories', 'expenses'));
     }
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\Setting\SettingController;
 use App\Http\Controllers\Lab\LabController;
 use App\Http\Controllers\Reagent\ReagentController;
 use App\Http\Controllers\Expenses\ExpensesController;
+use App\Http\Controllers\Income\IncomeController;
 
 Auth::routes();
 
@@ -125,7 +126,21 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/edit/subcategory/{id}', [ExpensesController::class, 'editSubCategory'])->name('update.subcategory');
         Route::get('/delete/subcategory/{id}', [ExpensesController::class, 'deleteSubCategory'])->name('delete.subcategory');
 
-        Route::get('/invoices', [AccountController::class, 'invoices'])->name('accounts.invoices');
+        Route::get('/incomes', [IncomeController::class, 'index'])->name('incomes');
+        Route::get('/get-in-subcategories/{category_id}', [IncomeController::class, 'getInSubcategories'])->name('get.in.subcategories');
+        Route::post('/add/income', [IncomeController::class, 'storeIncome'])->name('income.store');
+        Route::get('/incomes/delete/{id}', [IncomeController::class, 'deleteIncome'])->name('incomes.delete');
+        Route::post('/edit/income/{id}', [IncomeController::class, 'editIncome'])->name('incomes.update');
+        Route::get('/incomes/print/{id}', [IncomeController::class, 'printIncome'])->name('incomes.print');
+        Route::get('/incomes/view/{id}', [IncomeController::class, 'viewIncomeDetail'])->name('incomes-detail-view');
+        Route::get('/incomes-settings', [IncomeController::class, 'settings'])->name('income.settings');
+        Route::post('/store/category', [IncomeController::class, 'storeCategory'])->name('income.store.category');
+        Route::post('/edit/category/{id}', [IncomeController::class, 'editCategory'])->name('income.update.category');
+        Route::get('/income/delete-category/{id}', [IncomeController::class, 'deleteCategory'])->name('income.delete-category');
+        Route::post('/store/subcategory', [IncomeController::class, 'storeSubCategory'])->name('income.store.subcategory');
+        Route::post('/edit/subcategory/{id}', [IncomeController::class, 'editSubCategory'])->name('income.update.subcategory');
+        Route::get('/delete/subcategory/{id}', [IncomeController::class, 'deleteSubCategory'])->name('income.delete.subcategory');
+
         Route::get('/payments', [AccountController::class, 'payments'])->name('accounts.payments');
         Route::get('/report', [AccountController::class, 'report'])->name('accounts.report');
     });

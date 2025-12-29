@@ -50,4 +50,9 @@ class Admin extends Authenticatable
     {
         return $this->hasMany(ExpensesDetails::class, 'user_id', 'id');
     }
+
+    public function income()
+    {
+        return $this->hasMany(Income::class, 'user_id');
+    }
 }

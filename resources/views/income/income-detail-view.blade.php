@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/logo/main-logo.png') }}">
-    <title>Expenses Details - {{ $company->name ?? 'HMS' }}</title>
+    <title>Income Details - {{ $company->name ?? 'HMS' }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -55,7 +55,7 @@
                                 <a href="{{ url()->previous() }}" class="btn btn-outline-secondary" title="back">
                                     <i class="bi bi-arrow-90deg-left me-3"></i> Back
                                 </a>                              
-                                <a href="{{ route('expenses.print', $expense->id) }}" target="_blank" class="btn btn-outline-secondary" title="Print">
+                                <a href="{{ route('incomes.print', $income->id) }}" target="_blank" class="btn btn-outline-secondary" title="Print">
                                     <i class="bi bi-printer me-3"></i> Print
                                 </a>
                             </div>
@@ -65,14 +65,14 @@
                         <div class="card-body">
                             <div class="row mb-2">
                                 <div class="col-md-4 fw-semibold">Title:</div>
-                                <div class="col-md-8">{{ $expense->title }}</div>
+                                <div class="col-md-8">{{ $income->title }}</div>
                             </div>
 
                             <div class="row mb-2">
                                 <div class="col-md-4 fw-semibold">Date:</div>
                                 <div class="col-md-8">
                                     <span class="badge bg-light text-dark">
-                                        {{ \Carbon\Carbon::parse($expense->date)->format('d M Y') }}
+                                        {{ \Carbon\Carbon::parse($income->date)->format('d M Y') }}
                                     </span>
                                 </div>
                             </div>
@@ -80,21 +80,21 @@
                             <div class="row mb-2">
                                 <div class="col-md-4 fw-semibold">Category:</div>
                                 <div class="col-md-8">
-                                    <span class="badge bg-info text-white">{{ $expense->category->name ?? 'N/A' }}</span>
+                                    <span class="badge bg-info text-white">{{ $income->category->name ?? 'N/A' }}</span>
                                 </div>
                             </div>
 
                             <div class="row mb-2">
                                 <div class="col-md-4 fw-semibold">Sub-Category:</div>
                                 <div class="col-md-8">
-                                    <span class="badge bg-secondary text-white">{{ $expense->subcategory->name ?? 'N/A' }}</span>
+                                    <span class="badge bg-secondary text-white">{{ $income->subcategory->name ?? 'N/A' }}</span>
                                 </div>
                             </div>
 
                             <div class="row mb-2">
                                 <div class="col-md-4 fw-semibold">Amount:</div>
                                 <div class="col-md-8 fw-bold text-success h5">
-                                    ৳ {{ number_format($expense->amount, 2) }}
+                                    ৳ {{ number_format($income->amount, 2) }}
                                 </div>
                             </div>
 
@@ -102,15 +102,15 @@
                                 <div class="col-md-4 fw-semibold">Billing by:</div>
                                 <div class="col-md-8">
                                     <span class="badge bg-warning text-dark">
-                                        {{ $expense->user->name }}
+                                        {{ $income->user->name }}
                                     </span>
                                 </div>
                             </div>
 
-                            @if($expense->remark)
+                            @if($income->description)
                             <div class="row mb-2">
                                 <div class="col-md-4 fw-semibold">Remark:</div>
-                                <div class="col-md-8">{{ $expense->remark }}</div>
+                                <div class="col-md-8">{{ $income->description }}</div>
                             </div>
                             @endif
                         </div>

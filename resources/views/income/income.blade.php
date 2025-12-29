@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/logo/main-logo.png') }}">
-    <title>Expenses Details - {{ $company->name ?? 'HMS' }}</title>
+    <title>Income Details - {{ $company->name ?? 'HMS' }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -31,7 +31,7 @@
             </header>
             @include('layouts.message')
             <div class="page-heading">
-                <h3>Expenses Details</h3>
+                <h3>Incomes Details</h3>
             </div>
             <div class="page-content bg-white p-4 rounded">
                 <section class="row">                    
@@ -41,20 +41,20 @@
                         <div class="card-header bg-white d-flex justify-content-between align-items-center">
                             <h4 class="card-title mb-0 fw-semibold">
                                 <i class="bi bi-receipt-cutoff me-2 text-primary"></i>
-                                <span>Expenses List</span> 
+                                <span>Incomes List</span> 
                                 <span class="badge bg-light text-dark">
-                                    {{ $expenses->count() }} items
+                                    {{ $incomes->count() }} items
                                 </span> 
                                  <span class="fw-bold text-success ms-3">
-                                    Total: ৳ {{ number_format($expenses->sum('amount'), 2) }}/-
+                                    Total: ৳ {{ number_format($incomes->sum('amount'), 2) }}/-
                                 </span>
                                 <span class="text-muted"> taka only.</span>
                             </h4>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addExpenseModal">
-                                    <i class="bi bi-plus-circle"></i> Add Expense
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addIncomeModal">
+                                    <i class="bi bi-plus-circle"></i> Add Income
                                 </button>
-                                <a href="{{ route('expenses.settings') }}" class="btn btn-outline-primary">
+                                <a href="{{ route('income.settings') }}" class="btn btn-outline-primary">
                                     <i class="bi bi-gear"></i> Setting
                                 </a>
                             </div>                            
@@ -63,7 +63,7 @@
                         <!-- Card Body -->
                         <div class="card-body p-0">
                             <div class="mb-3">
-                                <input type="text" id="searchExpenses" class="form-control" placeholder="Search Expenses by Title or Date...">
+                                <input type="text" id="searchIncomes" class="form-control" placeholder="Search incomes by Title or Date...">
                             </div>
                             <div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
                                 <table class="table table-hover align-middle mb-0" id="expensesTable">                                    
@@ -77,27 +77,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse($expenses as $key => $expense)
+                                        @forelse($incomes as $key => $income)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>
                                                     <span class="badge bg-light text-dark">
-                                                        {{ \Carbon\Carbon::parse($expense->date)->format('d M Y') }}
+                                                        {{ \Carbon\Carbon::parse($income->date)->format('d M Y') }}
                                                     </span>
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('expenses-detail-view', $expense->id) }}">
-                                                        <div class="fw-semibold">{{ $expense->title }}</div>
-                                                        @if($expense->remark)
-                                                            <small class="text-muted">{{ $expense->remark }} - </small>
+                                                    <a href="{{ route('incomes-detail-view', $income->id) }}">
+                                                        <div class="fw-semibold">{{ $income->title }}</div>
+                                                        @if($income->description)
+                                                            <small class="text-muted">{{ $income->description }} - </small>
                                                         @endif
                                                         <span class="badge bg-light text-dark">
-                                                            {{ \Carbon\Carbon::parse($expense->date)->format('d M Y') }}
+                                                            {{ \Carbon\Carbon::parse($income->date)->format('d M Y') }}
                                                         </span>
                                                     </a>
                                                 </td>
                                                 <td class="text-end fw-bold text-success">
-                                                    ৳ {{ number_format($expense->amount, 2) }}
+                                                    ৳ {{ number_format($income->amount, 2) }}
                                                 </td>
                                                 <!-- Action -->
                                                 <td class="text-center">
@@ -105,15 +105,15 @@
                                                         <a href="javascript:void(0);" 
                                                         class="btn btn-outline-primary" 
                                                         data-bs-toggle="modal" 
-                                                        data-bs-target="#editExpenseModal{{ $expense->id }}">
+                                                        data-bs-target="#editIncomeModal{{ $income->id }}">
                                                             <i class="bi bi-pencil-square"></i>
                                                         </a>
-                                                        <a href="{{ route('expenses.delete', $expense->id) }}" 
+                                                        <a href="{{ route('incomes.delete', $income->id) }}" 
                                                         class="btn btn-outline-primary" 
-                                                        onclick="return confirm('Are you sure you want to delete this expense?');">
+                                                        onclick="return confirm('Are you sure you want to delete this income?');">
                                                             <i class="bi bi-trash text-danger"></i>
                                                         </a>
-                                                        <a href="{{ route('expenses.print', $expense->id) }}" 
+                                                        <a href="{{ route('incomes.print', $income->id) }}" 
                                                         target="_blank" 
                                                         class="btn btn-outline-primary">
                                                             <i class="bi bi-printer"></i>
@@ -125,7 +125,7 @@
                                             <tr>
                                                 <td colspan="7" class="text-center py-4 text-muted">
                                                     <i class="bi bi-folder-x fs-3 d-block"></i>
-                                                    No expenses found
+                                                    No incomes found
                                                 </td>
                                             </tr>
                                         @endforelse
@@ -141,21 +141,21 @@
         </div>
     </div>    
 
-<!-- Add Expense Modal -->
-<div class="modal fade" id="addExpenseModal" tabindex="-1" aria-labelledby="addExpenseModalLabel" aria-hidden="true">
+<!-- Add Income Modal -->
+<div class="modal fade" id="addIncomeModal" tabindex="-1" aria-labelledby="addIncomeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content shadow-lg border-0">
             
             <!-- Modal Header -->
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title text-white" id="addExpenseModalLabel">
-                    <i class="bi bi-cash-stack fs-4 me-2"></i> Add New Expense
+                <h5 class="modal-title text-white" id="addIncomeModalLabel">
+                    <i class="bi bi-cash-stack fs-4 me-2"></i> Add New Incomes
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
 
             <!-- Modal Body -->
-            <form action="{{ route('add.expenses') }}" method="POST">
+            <form action="{{ route('income.store') }}" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="row g-3">
@@ -164,7 +164,7 @@
                             <label class="form-label fw-semibold">Category</label>
                             <select name="category_id" id="category_id" class="form-select" required>
                                 <option value="">Select Category</option>
-                                @foreach($excategories as $category)
+                                @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
@@ -178,7 +178,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label fw-semibold">Expense Title</label>
+                            <label class="form-label fw-semibold">Income Title</label>
                             <input type="text" name="title" class="form-control" placeholder="e.g. Office Rent" required>
                         </div>
 
@@ -200,8 +200,8 @@
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">
                         Cancel
                     </button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-save me-1"></i> Save Expense
+                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to save this income?');">
+                        <i class="bi bi-save me-1"></i> Save Income
                     </button>
                 </div>
             </form>
@@ -210,24 +210,23 @@
     </div>
 </div>
 
-<!-- edit expenses -->
-@foreach($expenses as $expense)
-<div class="modal fade" id="editExpenseModal{{ $expense->id }}" tabindex="-1" aria-hidden="true">
+<!-- edit incomes -->
+@foreach($incomes as $income)
+<div class="modal fade" id="editIncomeModal{{ $income->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content shadow-lg border-0">
 
             <!-- Modal Header -->
             <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title text-white">
-                    <i class="bi bi-cash-stack fs-4 me-2"></i> Modify Expense
+                    <i class="bi bi-cash-stack fs-4 me-2"></i> Modify Income
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
 
             <!-- Modal Body -->
-            <form action="{{ route('edit.expenses', $expense->id) }}" method="POST">
+            <form action="{{ route('incomes.update', $income->id) }}" method="POST">
                 @csrf
-
                 <div class="modal-body">
                     <div class="row g-3">
 
@@ -236,12 +235,12 @@
                             <label class="form-label fw-semibold">Category</label>
                             <select name="category_id"
                                     class="form-select category-select"
-                                    data-expense-id="{{ $expense->id }}"
+                                    data-income-id="{{ $income->id }}"
                                     required>
                                 <option value="">Select Category</option>
-                                @foreach($excategories as $category)
+                                @foreach($categories as $category)
                                     <option value="{{ $category->id }}"
-                                        {{ $expense->category_id == $category->id ? 'selected' : '' }}>
+                                        {{ $income->category_id == $category->id ? 'selected' : '' }}>
                                         {{ $category->name }}
                                     </option>
                                 @endforeach
@@ -253,29 +252,27 @@
                             <label class="form-label fw-semibold">Sub Category</label>
                             <select name="sub_category_id"
                                     class="form-select subcategory-select"
-                                    id="subcategory_{{ $expense->id }}"
+                                    id="subcategory_{{ $income->id }}"
                                     required>
 
                                 <option value="">Select Sub Category</option>
-
-                                @foreach($exsubcategories->where('category_id', $expense->category_id) as $sub)
+                                @foreach($subcategories->where('category_id', $income->category_id) as $sub)
                                     <option value="{{ $sub->id }}"
-                                        {{ $expense->sub_category_id == $sub->id ? 'selected' : '' }}>
+                                        {{ $income->subcategory_id == $sub->id ? 'selected' : '' }}>
                                         {{ $sub->name }}
                                     </option>
                                 @endforeach
-
                             </select>
                         </div>
 
 
                         <!-- Title -->
                         <div class="col-md-6">
-                            <label class="form-label fw-semibold">Expense Title</label>
+                            <label class="form-label fw-semibold">Income Title</label>
                             <input type="text"
                                    name="title"
                                    class="form-control"
-                                   value="{{ $expense->title }}"
+                                   value="{{ $income->title }}"
                                    required>
                         </div>
 
@@ -285,7 +282,7 @@
                             <input type="number"
                                    name="amount"
                                    class="form-control"
-                                   value="{{ $expense->amount }}"
+                                   value="{{ $income->amount }}"
                                    step="0.01"
                                    required>
                         </div>
@@ -293,9 +290,7 @@
                         <!-- Remark -->
                         <div class="col-md-12">
                             <label class="form-label fw-semibold">Remark</label>
-                            <textarea name="remark"
-                                      rows="3"
-                                      class="form-control">{{ $expense->remark }}</textarea>
+                            <textarea name="remark" rows="3" class="form-control">{{ $income->description }}</textarea>
                         </div>
 
                     </div>
@@ -304,8 +299,8 @@
                 <!-- Modal Footer -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-save me-1"></i> Update Expense
+                    <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to update this income?');">
+                        <i class="bi bi-save me-1"></i> Update Income
                     </button>
                 </div>
             </form>
@@ -328,12 +323,12 @@
     <script>
         $(document).ready(function () {
 
-            // ADD EXPENSE MODAL
+            // ADD INCOME MODAL
             $('#category_id').on('change', function () {
                 loadSubcategories($(this).val(), '#subcategory_id');
             });
 
-            // EDIT EXPENSE MODAL (multiple)
+            // EDIT INCOME MODAL (multiple)
             $(document).on('change', '.category-select', function () {
                 let categoryId = $(this).val();
                 let expenseId  = $(this).data('expense-id');
@@ -346,7 +341,7 @@
 
                 if (categoryId) {
                     $.ajax({
-                        url: "{{ url('accounts/get-ex-subcategories') }}/" + categoryId,
+                        url: "{{ url('accounts/get-in-subcategories') }}/" + categoryId,
                         type: "GET",
                         dataType: "json",
                         success: function (data) {
@@ -371,7 +366,7 @@
         });
 
         // Search Functionality
-        const searchInput = document.getElementById('searchExpenses');
+        const searchInput = document.getElementById('searchIncomes');
         const table = document.getElementById('expensesTable').getElementsByTagName('tbody')[0];
 
         searchInput.addEventListener('keyup', function() {
@@ -390,7 +385,5 @@
         });
     </script>
 
-
-    
 </body>
 </html>

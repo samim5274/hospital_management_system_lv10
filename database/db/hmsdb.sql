@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 29, 2025 at 08:22 AM
+-- Generation Time: Dec 29, 2025 at 12:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -668,6 +668,95 @@ INSERT INTO `generics` (`id`, `name`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `incomes`
+--
+
+CREATE TABLE `incomes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `category_id` bigint(20) UNSIGNED NOT NULL,
+  `subcategory_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `date` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `incomes`
+--
+
+INSERT INTO `incomes` (`id`, `category_id`, `subcategory_id`, `user_id`, `title`, `description`, `amount`, `date`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, 1, 'Van', ' (Edited)', 1350.00, '2025-12-29', '2025-12-29 09:49:13', '2025-12-29 10:38:15'),
+(2, 3, 9, 1, 'Late fee', 'N/A (Edited)', 1100.00, '2025-12-29', '2025-12-29 10:33:58', '2025-12-29 10:37:15');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `income_categories`
+--
+
+CREATE TABLE `income_categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `income_categories`
+--
+
+INSERT INTO `income_categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Tuition Fee', '2025-12-29 09:21:19', '2025-12-29 09:21:19'),
+(2, 'Donation', '2025-12-29 09:21:19', '2025-12-29 09:21:19'),
+(3, 'Library Fee', '2025-12-29 09:21:19', '2025-12-29 09:21:19'),
+(4, 'Transport Fee', '2025-12-29 09:21:19', '2025-12-29 09:21:19'),
+(5, 'Examination Fee', '2025-12-29 09:21:20', '2025-12-29 09:21:20'),
+(6, 'xxx', '2025-12-29 10:54:55', '2025-12-29 10:58:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `income_sub_categories`
+--
+
+CREATE TABLE `income_sub_categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `category_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `income_sub_categories`
+--
+
+INSERT INTO `income_sub_categories` (`id`, `category_id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Grade 1-5', '2025-12-29 09:21:34', '2025-12-29 09:21:34'),
+(2, 1, 'Grade 6-10', '2025-12-29 09:21:34', '2025-12-29 09:21:34'),
+(3, 1, 'Grade 11-12', '2025-12-29 09:21:34', '2025-12-29 09:21:34'),
+(4, 1, 'Pre-School', '2025-12-29 09:21:34', '2025-12-29 09:21:34'),
+(5, 2, 'Alumni Donation', '2025-12-29 09:21:34', '2025-12-29 09:21:34'),
+(6, 2, 'Sponsor Donation', '2025-12-29 09:21:34', '2025-12-29 09:21:34'),
+(7, 2, 'General Donation', '2025-12-29 09:21:34', '2025-12-29 09:21:34'),
+(8, 3, 'Book Fee', '2025-12-29 09:21:34', '2025-12-29 09:21:34'),
+(9, 3, 'Late Fee', '2025-12-29 09:21:34', '2025-12-29 09:21:34'),
+(10, 3, 'Library Membership Fee', '2025-12-29 09:21:34', '2025-12-29 09:21:34'),
+(11, 4, 'Bus Fee', '2025-12-29 09:21:34', '2025-12-29 09:21:34'),
+(12, 4, 'Van Fee', '2025-12-29 09:21:34', '2025-12-29 09:21:34'),
+(13, 4, 'Driver Allowance', '2025-12-29 09:21:34', '2025-12-29 09:21:34'),
+(14, 5, 'Monthly Test', '2025-12-29 09:21:34', '2025-12-29 09:21:34'),
+(15, 5, 'Final Exam', '2025-12-29 09:21:34', '2025-12-29 09:21:34'),
+(16, 5, 'Practical Exam', '2025-12-29 09:21:34', '2025-12-29 09:21:34'),
+(17, 6, 'xxxxxxxxxxx', '2025-12-29 11:00:17', '2025-12-29 11:03:17');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lab_categories`
 --
 
@@ -909,7 +998,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (72, '2025_10_23_115839_create_reagent_test_table', 1),
 (73, '2025_12_29_105054_create_expenses_categories_table', 2),
 (74, '2025_12_29_105102_create_expenses_sub_categories_table', 2),
-(75, '2025_12_29_105112_create_expenses_details_table', 2);
+(75, '2025_12_29_105112_create_expenses_details_table', 2),
+(76, '2025_12_29_150117_create_income_categories_table', 3),
+(77, '2025_12_29_150138_create_income_sub_categories_table', 3),
+(78, '2025_12_29_150655_create_incomes_table', 3);
 
 -- --------------------------------------------------------
 
@@ -1593,6 +1685,29 @@ ALTER TABLE `generics`
   ADD UNIQUE KEY `generics_name_unique` (`name`);
 
 --
+-- Indexes for table `incomes`
+--
+ALTER TABLE `incomes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `incomes_category_id_foreign` (`category_id`),
+  ADD KEY `incomes_subcategory_id_foreign` (`subcategory_id`),
+  ADD KEY `incomes_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `income_categories`
+--
+ALTER TABLE `income_categories`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `income_categories_name_unique` (`name`);
+
+--
+-- Indexes for table `income_sub_categories`
+--
+ALTER TABLE `income_sub_categories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `income_sub_categories_category_id_foreign` (`category_id`);
+
+--
 -- Indexes for table `lab_categories`
 --
 ALTER TABLE `lab_categories`
@@ -1862,6 +1977,24 @@ ALTER TABLE `generics`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `incomes`
+--
+ALTER TABLE `incomes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `income_categories`
+--
+ALTER TABLE `income_categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `income_sub_categories`
+--
+ALTER TABLE `income_sub_categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
 -- AUTO_INCREMENT for table `lab_categories`
 --
 ALTER TABLE `lab_categories`
@@ -1901,7 +2034,7 @@ ALTER TABLE `lab_tests`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `oauth_clients`
@@ -2022,6 +2155,20 @@ ALTER TABLE `expenses_details`
 --
 ALTER TABLE `expenses_sub_categories`
   ADD CONSTRAINT `expenses_sub_categories_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `expenses_categories` (`id`);
+
+--
+-- Constraints for table `incomes`
+--
+ALTER TABLE `incomes`
+  ADD CONSTRAINT `incomes_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `income_categories` (`id`),
+  ADD CONSTRAINT `incomes_subcategory_id_foreign` FOREIGN KEY (`subcategory_id`) REFERENCES `income_sub_categories` (`id`),
+  ADD CONSTRAINT `incomes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `admins` (`id`);
+
+--
+-- Constraints for table `income_sub_categories`
+--
+ALTER TABLE `income_sub_categories`
+  ADD CONSTRAINT `income_sub_categories_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `income_categories` (`id`);
 
 --
 -- Constraints for table `lab_tests`
