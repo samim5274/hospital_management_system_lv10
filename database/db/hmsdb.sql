@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 29, 2025 at 12:16 PM
+-- Generation Time: Dec 30, 2025 at 01:27 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -48,7 +48,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `password`, `role`, `otp`, `otp_expires_at`, `email_verified_at`, `last_login_at`, `last_login_ip`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'SAMIM Hossain', 'samim@gmail.com', '$2y$12$MCADF4zAqdJJ4EDlDG4MTuIivOTeDvdW2Tr7tACjjX1xFi3KtJCam', 'admin', NULL, NULL, NULL, '2025-12-29 04:47:34', '127.0.0.1', 'HDUuEwQx6Xfz9j9MyGgKT7okpDPYK3jqx4XnhtCc9nStecFnsn0gmhC3v7tM', NULL, '2025-12-29 04:47:34'),
+(1, 'SAMIM Hossain', 'samim@gmail.com', '$2y$12$MCADF4zAqdJJ4EDlDG4MTuIivOTeDvdW2Tr7tACjjX1xFi3KtJCam', 'admin', NULL, NULL, NULL, '2025-12-30 06:41:01', '127.0.0.1', 'HDUuEwQx6Xfz9j9MyGgKT7okpDPYK3jqx4XnhtCc9nStecFnsn0gmhC3v7tM', NULL, '2025-12-30 06:41:01'),
 (2, 'Akib Hossain', 'akib@gmail.com', '$2y$12$XpSO9YALOs7vC.N5uXb.0OJyd5V2kBcnMpM/qUQvWDjF33mPFKsru', 'Admin', NULL, NULL, NULL, NULL, NULL, 'jSPfQ1rBQIGa5n2chjx2mtXfGWlwyl3Srsg5dd0wAxdUNgo6hlrPSyGGok20', '2025-10-25 12:00:59', '2025-10-25 12:00:59'),
 (3, 'Akib Hossain', 'akib2@gmail.com', '$2y$12$nk8MgzG7.Ggnnclyokz0v.V0uEFjK05mJbq75MfBQv0LnSuwMhRKO', 'Admin', NULL, NULL, NULL, NULL, NULL, NULL, '2025-10-25 12:14:41', '2025-10-25 12:14:41');
 
@@ -773,7 +773,7 @@ CREATE TABLE `lab_categories` (
 --
 
 INSERT INTO `lab_categories` (`id`, `catName`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'Hematology', 'Blood related tests', '2025-12-28 12:38:42', '2025-12-28 12:38:42'),
+(1, 'Hematology', 'Blood related tests', '2025-12-28 12:38:42', '2025-12-30 11:11:11'),
 (2, 'Biochemistry', 'Chemical analysis tests', '2025-12-28 12:38:42', '2025-12-28 12:38:42'),
 (3, 'Microbiology', 'Bacteria and virus tests', '2025-12-28 12:38:42', '2025-12-28 12:38:42'),
 (4, 'Immunology', 'Immune system tests', '2025-12-28 12:38:42', '2025-12-28 12:38:42');
@@ -941,7 +941,9 @@ INSERT INTO `lab_tests` (`id`, `testName`, `categoryId`, `subcategoryId`, `speci
 (47, 'Zinc Test', 3, 1, 3, 2, 3730.00, 342.00, 'Room 4', 'Quaerat sed est distinctio ad aut non.', 1, '2025-12-28 12:38:42', '2025-12-28 12:38:42'),
 (48, 'Copper Test', 3, 2, 4, 1, 1764.00, 1500.00, 'Room 6', 'Quibusdam adipisci aut pariatur ut.', 1, '2025-12-28 12:38:42', '2025-12-28 12:38:42'),
 (49, 'Insulin (Fasting) Test', 2, 2, 2, 3, 3701.00, 2430.00, 'Room 4', 'Ducimus et voluptas quaerat iure inventore illum error.', 1, '2025-12-28 12:38:42', '2025-12-28 12:38:42'),
-(50, 'Cortisol (Morning) Test', 4, 4, 4, 3, 1234.00, 1709.00, 'Room 2', 'Ut quisquam nihil facilis unde voluptatem sequi.', 1, '2025-12-28 12:38:42', '2025-12-28 12:38:42');
+(50, 'Cortisol (Morning) Test', 4, 4, 4, 3, 1234.00, 1709.00, 'Room 2', 'Ut quisquam nihil facilis unde voluptatem sequi.', 1, '2025-12-28 12:38:42', '2025-12-28 12:38:42'),
+(51, 'Urine C/S', 1, 1, 2, 2, 1000.00, 800.00, '102', 'N/A', 0, '2025-12-30 09:51:14', '2025-12-30 09:51:14'),
+(52, 'HbA1c', 1, 2, 3, 2, 1200.00, 1000.00, '101', 'N/A', 0, '2025-12-30 09:52:10', '2025-12-30 09:52:10');
 
 -- --------------------------------------------------------
 
@@ -1167,7 +1169,8 @@ INSERT INTO `patient_test_reports` (`id`, `reg`, `patient_id`, `test_id`, `part_
 (33, 'LAB2025122911', 3, 14, 'NS1 Antigen', 'Negative', NULL, 'Negative', NULL, NULL, '2025-12-29 04:48:20', '2025-12-29 04:48:20'),
 (34, 'LAB2025122911', 3, 14, 'IgM Antibody', 'Negative', NULL, 'Negative', NULL, NULL, '2025-12-29 04:48:20', '2025-12-29 04:48:20'),
 (35, 'LAB2025122911', 3, 15, 'Plasmodium Falciparum', 'Negative', NULL, 'Negative', NULL, NULL, '2025-12-29 04:48:20', '2025-12-29 04:48:20'),
-(36, 'LAB2025122911', 3, 15, 'Plasmodium Vivax', 'Negative', NULL, 'Negative', NULL, NULL, '2025-12-29 04:48:20', '2025-12-29 04:48:20');
+(36, 'LAB2025122911', 3, 15, 'Plasmodium Vivax', 'Negative', NULL, 'Negative', NULL, NULL, '2025-12-29 04:48:20', '2025-12-29 04:48:20'),
+(43, 'LAB2025122912', 4, 16, 'Vitamin D', '35', 'ng/mL', '30 - 100', NULL, 'Report Created by: SAMIM Hossain', '2025-12-29 12:40:33', '2025-12-29 12:40:33');
 
 -- --------------------------------------------------------
 
@@ -1206,7 +1209,8 @@ CREATE TABLE `payment_details` (
 INSERT INTO `payment_details` (`id`, `reg`, `date`, `name`, `dob`, `gender`, `phone`, `address`, `doctorId`, `referId`, `total`, `discount`, `payable`, `pay`, `duestatus`, `due`, `return`, `status`, `userId`, `created_at`, `updated_at`) VALUES
 (1, 'LAB2025122811', '2025-12-28', 'Shamim Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 8, 11, 11753, 0, 11753, 10000, 1, 1753, 0, 1, 1, '2025-12-28 12:39:21', '2025-12-28 12:39:21'),
 (2, 'LAB2025122812', '2025-12-28', 'Fahim Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 13, 11, 9288, 0, 9288, 9288, 0, 0, 0, 1, 1, '2025-12-28 12:45:35', '2025-12-28 12:45:35'),
-(3, 'LAB2025122911', '2025-12-29', 'Rakib Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 7, 11, 17099, 2099, 15000, 15000, 0, 0, 0, 1, 1, '2025-12-29 04:48:11', '2025-12-29 04:48:11');
+(3, 'LAB2025122911', '2025-12-29', 'Rakib Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 7, 11, 17099, 2099, 15000, 15000, 0, 0, 0, 1, 1, '2025-12-29 04:48:11', '2025-12-29 04:48:11'),
+(4, 'LAB2025122912', '2025-12-29', 'Shamim Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 1, 1, 1527, 0, 1527, 1500, 1, 27, 0, 1, 1, '2025-12-29 12:03:31', '2025-12-29 12:03:31');
 
 -- --------------------------------------------------------
 
@@ -1310,7 +1314,7 @@ INSERT INTO `reagents` (`id`, `name`, `unit_id`, `generic_id`, `presentation_id`
 (34, 'Formic Acid', 1, 1, 1, 450.00, 50, '2025-12-28 12:38:44', '2025-12-28 12:38:44'),
 (35, 'Hydrazine', 1, 1, 1, 126.00, 50, '2025-12-28 12:38:44', '2025-12-28 12:38:44'),
 (36, 'Lithium Carbonate', 1, 1, 1, 341.00, 50, '2025-12-28 12:38:44', '2025-12-28 12:38:44'),
-(37, 'Magnesium Hydroxide', 1, 1, 1, 317.00, 50, '2025-12-28 12:38:44', '2025-12-28 12:38:44'),
+(37, 'Magnesium Hydroxide', 1, 1, 1, 317.00, 49, '2025-12-28 12:38:44', '2025-12-29 12:30:09'),
 (38, 'Manganese Sulphate', 1, 1, 1, 463.00, 50, '2025-12-28 12:38:44', '2025-12-28 12:38:44'),
 (39, 'Nickel Sulphate', 1, 1, 1, 141.00, 50, '2025-12-28 12:38:44', '2025-12-28 12:38:44'),
 (40, 'Phenolphthalein', 1, 1, 1, 460.00, 50, '2025-12-28 12:38:44', '2025-12-28 12:38:44'),
@@ -1362,7 +1366,8 @@ CREATE TABLE `reagent_test` (
 INSERT INTO `reagent_test` (`id`, `test_id`, `reagent_id`, `quantity_required`, `created_at`, `updated_at`) VALUES
 (1, 1, 3, 10.00, '2025-12-29 04:49:08', '2025-12-29 04:49:08'),
 (2, 1, 13, 10.00, '2025-12-29 04:49:18', '2025-12-29 04:49:18'),
-(3, 2, 17, 10.00, '2025-12-29 04:49:26', '2025-12-29 04:49:26');
+(3, 2, 17, 10.00, '2025-12-29 04:49:26', '2025-12-29 04:49:26'),
+(4, 1, 18, 5.00, '2025-12-29 12:02:57', '2025-12-29 12:02:57');
 
 -- --------------------------------------------------------
 
@@ -1445,7 +1450,8 @@ INSERT INTO `store_tests` (`id`, `regNum`, `userId`, `testId`, `testprice`, `ref
 (12, 'LAB2025122911', 1, 4, 4933.00, 1407.00, 2, 2, 2, 2, 'Room 3', 1, 0, '2025-12-29 04:47:45', '2025-12-29 04:47:45'),
 (13, 'LAB2025122911', 1, 5, 2465.00, 1688.00, 3, 2, 2, 2, 'Room 5', 1, 0, '2025-12-29 04:47:46', '2025-12-29 04:47:46'),
 (14, 'LAB2025122911', 1, 6, 3384.00, 2324.00, 3, 3, 2, 3, 'Room 10', 1, 0, '2025-12-29 04:47:46', '2025-12-29 04:47:46'),
-(15, 'LAB2025122911', 1, 7, 3489.00, 1270.00, 3, 1, 1, 2, 'Room 9', 1, 0, '2025-12-29 04:47:47', '2025-12-29 04:47:47');
+(15, 'LAB2025122911', 1, 7, 3489.00, 1270.00, 3, 1, 1, 2, 'Room 9', 1, 0, '2025-12-29 04:47:47', '2025-12-29 04:47:47'),
+(16, 'LAB2025122912', 1, 1, 1527.00, 1372.00, 1, 1, 4, 3, 'Room 6', 1, 0, '2025-12-29 12:03:23', '2025-12-29 12:03:23');
 
 -- --------------------------------------------------------
 
@@ -1998,13 +2004,13 @@ ALTER TABLE `income_sub_categories`
 -- AUTO_INCREMENT for table `lab_categories`
 --
 ALTER TABLE `lab_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `lab_groups`
 --
 ALTER TABLE `lab_groups`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `lab_materials`
@@ -2016,19 +2022,19 @@ ALTER TABLE `lab_materials`
 -- AUTO_INCREMENT for table `lab_specimens`
 --
 ALTER TABLE `lab_specimens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `lab_subcategories`
 --
 ALTER TABLE `lab_subcategories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `lab_tests`
 --
 ALTER TABLE `lab_tests`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -2052,13 +2058,13 @@ ALTER TABLE `oauth_personal_access_clients`
 -- AUTO_INCREMENT for table `patient_test_reports`
 --
 ALTER TABLE `patient_test_reports`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `payment_details`
 --
 ALTER TABLE `payment_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -2082,13 +2088,13 @@ ALTER TABLE `reagents`
 -- AUTO_INCREMENT for table `reagent_stocks`
 --
 ALTER TABLE `reagent_stocks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `reagent_test`
 --
 ALTER TABLE `reagent_test`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `references`
@@ -2100,13 +2106,13 @@ ALTER TABLE `references`
 -- AUTO_INCREMENT for table `store_tests`
 --
 ALTER TABLE `store_tests`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `test_report_details`
 --
 ALTER TABLE `test_report_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `units`

@@ -83,9 +83,28 @@ Route::middleware(['admin'])->group(function () {
 
     Route::prefix('labs')->group(function(){
         Route::get('/', [LabController::class, 'index'])->name('lab.test.list');
+        Route::get('/get-subcategories/{categoryId}', [LabController::class, 'getSubcategories']);
+        Route::post('/test-store', [LabController::class, 'store'])->name('lab.test.store');
         Route::get('/test/report/generate/{id}', [LabController::class, 'reportView'])->name('test.report.generate.view');
         Route::post('/test/report/part/add/{id}', [LabController::class, 'addPart'])->name('test.report.part.add');
         Route::post('/test/report/edit/{id}', [LabController::class, 'reportEdit'])->name('test.report.edit');
+        Route::get('/test/delete/{id}', [LabController::class, 'deleteTest'])->name('test-delete');
+        Route::get('/delete/test/report/{id}', [LabController::class, 'deleteTestReport'])->name('delete.test.report');
+
+        Route::get('/setting-test', [LabController::class, 'setting'])->name('lab.test.setting');
+        Route::post('/create-category', [LabController::class, 'addCategory'])->name('create.lab.test.category');
+        Route::post('/edit-category/{id}', [LabController::class, 'editCategory'])->name('edit.lab.test.category');
+        Route::get('/delete-category/{id}', [LabController::class, 'deleteCategory'])->name('delete.lab.test.category');
+        Route::post('/create-sub-category', [LabController::class, 'addSubCategory'])->name('create.lab.test.sub.category');
+        Route::post('/edit-sub-category/{id}', [LabController::class, 'editSubCategory'])->name('edit.lab.test.sub.category');
+        Route::get('/delete-sub-category/{id}', [LabController::class, 'deleteSubCategory'])->name('delete.lab.test.sub.category');
+        Route::post('/create-group', [LabController::class, 'addGroup'])->name('create.lab.test.group');
+        Route::post('/edit-group/{id}', [LabController::class, 'editGroup'])->name('edit.lab.test.group');
+        Route::get('/delete-group/{id}', [LabController::class, 'deleteGroup'])->name('delete.lab.test.group');
+        
+        Route::post('/create-specimen', [LabController::class, 'addSpecimen'])->name('create.lab.test.specimen');
+        Route::post('/edit-specimen/{id}', [LabController::class, 'editSpecimen'])->name('edit.lab.test.specimen');
+        Route::get('/delete-specimen/{id}', [LabController::class, 'deleteSpecimen'])->name('delete.lab.test.specimen');
 
         Route::get('/reports', [LabController::class, 'reportTestView'])->name('test.lab.report');
         Route::get('/test/report/{reg}', [LabController::class, 'patientLabTest'])->name('lab.test.report');

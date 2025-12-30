@@ -151,6 +151,9 @@
                                             <button type="submit" class="btn btn-primary btn-sm">
                                                 Save Changes
                                             </button>
+                                            <a href="{{ route('delete.test.report', $detail->id) }}" type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure? do you want to delete this part?')">
+                                                Delete
+                                            </a>
                                         </div>
                                     </form>
                                 </div>

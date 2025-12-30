@@ -66,7 +66,7 @@
                         <span>Laboratory</span>
                     </a>
                     <ul class="submenu">
-                        <li class="submenu-item {{ Request::is('labs/') ? 'active' : '' }}"><a href="{{ route('lab.test.list') }}">Test List</a></li>
+                        <li class="submenu-item {{ Request::is('labs/') ? 'active' : '' }}"><a href="{{ route('lab.test.list') }}">Lab Test Details</a></li>
                         <li class="submenu-item {{ Request::is('labs/reports') ? 'active' : '' }}"><a href="{{ route('test.lab.report') }}">Lab Reports</a></li>
                         <li class="submenu-item {{ Request::is('labs/raw-materials') ? 'active' : '' }}"><a href="{{ url('/labs/raw-materials') }}">Raw Materials</a></li>
                         <li class="submenu-item {{ Request::is('labs/stock') ? 'active' : '' }}"><a href="{{ url('/labs/stock') }}">Chemical Stock</a></li>

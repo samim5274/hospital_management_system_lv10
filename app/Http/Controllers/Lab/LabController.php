@@ -15,13 +15,57 @@ use App\Models\PatientTestReport;
 use App\Models\Company;
 use App\Models\ReagentStock;
 use App\Models\Reagent;
+use App\Models\LabCategory;
+use App\Models\LabSubcategory;
+use App\Models\LabSpecimen;
+use App\Models\LabGroup;
 
 class LabController extends Controller
 {
     public function index(){
         $company = Company::first();
         $testDetails = LabTest::all();
-        return view('lab.test-details', compact('testDetails','company'));
+        $categories = LabCategory::all();
+        $subcategories = LabSubcategory::with('category')->get();
+        $specimens = LabSpecimen::all();
+        $groups = LabGroup::all();
+        return view('lab.test-details', compact('testDetails','company','categories', 'subcategories', 'groups','specimens'));
+    }
+
+    public function getSubcategories($categoryId)
+    {
+        $subcategories = LabSubcategory::where('catId', $categoryId)->get();
+        return response()->json($subcategories);
+    }
+
+    public function store(Request $request){
+        $request->validate([
+            'testName'        => 'required|string|max:255',
+            'category_id'     => 'required|exists:lab_categories,id',
+            'subcategory_id'  => 'required|exists:lab_subcategories,id',
+            'specimenId'      => 'nullable|exists:lab_specimens,id',
+            'groupId'         => 'nullable|exists:lab_groups,id',
+            'testPrice'       => 'required|numeric|min:0',
+            'rprice'          => 'nullable|numeric|min:0',
+            'room'            => 'nullable|string|max:100',
+            'testDescription' => 'nullable|string',
+            'status'          => 'required',
+        ]);
+
+        $labTest = new LabTest();
+        $labTest->testName        = $request->testName;
+        $labTest->categoryId      = $request->category_id;
+        $labTest->subcategoryId   = $request->subcategory_id;
+        $labTest->specimenId      = $request->specimenId;
+        $labTest->groupId         = $request->groupId;
+        $labTest->testPrice       = $request->testPrice;
+        $labTest->rprice          = $request->rprice;
+        $labTest->room            = $request->room;
+        $labTest->testDescription = $request->testDescription;
+        $labTest->status          = $request->status;
+        $labTest->save();
+
+        return redirect()->back()->with('success', 'Lab test created successfully!');
     }
     
     public function reportView($id){
@@ -147,4 +191,203 @@ class LabController extends Controller
 
         return view('lab.print.print-patient-test-report', compact('patient', 'testDetails', 'testReports', 'reg', 'company'));
     }
+
+    public function deleteTest($id){
+        try{
+            $data = LabTest::findOrFail($id);
+            $data->delete();
+            return redirect()->back()->with('success', 'Test DELETED successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while deleting the test.');
+        }
+    }
+
+    public function deleteTestReport($id){
+        try{
+            $data = TestReportDetail::findOrFail($id);
+            $data->delete();
+            return redirect()->back()->with('success', 'Test report item DELETED successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while deleting the item.');
+        }
+    }
+
+    public function setting(){
+        $company = Company::first();
+        $categories = LabCategory::all();
+        $subcategories = LabSubcategory::with('category')->get();
+        $groups = LabGroup::all();
+        $specimens = LabSpecimen::all();
+        return view('lab.setting', compact('company','categories', 'subcategories', 'groups','specimens'));
+    }
+
+    public function addCategory(Request $request){
+        $request->validate([
+            'name'        => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+        ]);
+
+        try{
+            $data = new LabCategory();
+            $data->catName = $request->name;
+            $data->description = $request->description ?? 'N/A';
+            $data->save();
+            return redirect()->back()->with('success', 'Lab test category created successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while creating the item.');
+        }
+    }
+
+    public function editCategory(Request $request, $id){
+        $request->validate([
+            'name'        => 'required|string|max:255',
+        ]);
+
+        try{
+            $data = LabCategory::findOrFail($id);
+            $data->catName = $request->name;
+            $data->description = $request->description ?? 'N/A';
+            $data->save();
+            return redirect()->back()->with('success', 'Lab test category updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while updating the item.');
+        }
+    }
+
+    public function deleteCategory($id){
+        try{
+            $data = LabCategory::findOrFail($id);
+            $data->delete();
+            return redirect()->back()->with('success', 'Lab test category deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while deleting the item.');
+        }
+    }
+
+    public function addSubCategory(Request $request){
+        $request->validate([
+            'category_id' => 'required|exists:lab_categories,id',
+            'name'        => 'required|string|max:255',
+            'description' => 'nullable|string|max:500',
+        ]);
+
+        try {
+            $subCategory = new LabSubCategory();
+            $subCategory->catId = $request->category_id;
+            $subCategory->subCatName = $request->name;
+            $subCategory->description = $request->description;
+            $subCategory->save();
+            return redirect()->back()->with('success', 'Sub-category created successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while creating sub-category.');
+        }
+    }
+
+    public function editSubCategory(Request $request, $id){
+        $request->validate([
+            'category_id' => 'required|exists:lab_categories,id',
+            'name'        => 'required|string|max:255',
+            'description' => 'nullable|string|max:500',
+        ]);
+
+        try {
+            $subCategory = LabSubCategory::FindOrFail($id);
+            $subCategory->catId = $request->category_id;
+            $subCategory->subCatName = $request->name;
+            $subCategory->description = $request->description;
+            $subCategory->save();
+            return redirect()->back()->with('success', 'Sub-category updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while creating sub-category.');
+        }
+    }
+
+    public function deleteSubCategory($id){
+        try{
+            $data = LabSubCategory::findOrFail($id);
+            $data->delete();
+            return redirect()->back()->with('success', 'Lab test sub-category deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while deleting the item.');
+        }
+    }
+
+    public function addGroup(Request $request){
+        $request->validate([
+            'name'        => 'required|string|max:255',
+            'description' => 'nullable|string|max:500',
+        ]);
+
+        try{
+            $data = new LabGroup();
+            $data->name = $request->name;
+            $data->description = $request->description ?? 'N/A';
+            $data->save();
+            return redirect()->back()->with('success', 'Lab test category created successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while creating the item.');
+        }
+    }
+
+    public function editGroup(Request $request, $id){
+        $request->validate([
+            'name'        => 'required|string|max:255',
+            'description' => 'nullable|string|max:500',
+        ]);
+
+        try{
+            $data = LabGroup::findOrFail($id);
+            $data->name = $request->name;
+            $data->description = $request->description ?? 'N/A';
+            $data->save();
+            return redirect()->back()->with('success', 'Lab test category updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while updating the item.');
+        }
+    }
+
+    public function deleteGroup($id){
+        try{
+            $data = LabGroup::findOrFail($id);
+            $data->delete();
+            return redirect()->back()->with('success', 'Lab test group deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred while deleting the item.');
+        }
+    }
+
+    public function addSpecimen(Request $request){
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:500',
+        ]);
+
+        LabSpecimen::create([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->back()->with('success', 'Lab Specimen created successfully.');
+    }
+
+    public function editSpecimen(Request $request, $id){
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:500',
+        ]);
+
+        $specimen = LabSpecimen::findOrFail($id);
+        $specimen->update([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->back()->with('success', 'Lab Specimen updated successfully.');
+    }
+
+    public function deleteSpecimen($id){
+        LabSpecimen::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Lab Specimen deleted successfully.');
+    }
+
 }
