@@ -20,6 +20,14 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'store'])->name('register.post');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/forget-password', [AuthController::class, 'forgetPassView'])->name('forget.password.view');
+Route::post('/find-forget-account', [AuthController::class, 'findAccount'])->name('find-account');
+Route::get('/otp-confirm', [AuthController::class, 'otpConfirm'])->name('otp.form');
+Route::post('/otp-verify', [AuthController::class, 'verifyOTP'])->name('verify.otp');
+Route::get('/create-new-password', [AuthController::class, 'newPassword'])->name('new.password.form');
+Route::post('/update-password', [AuthController::class, 'updatePass'])->name('update-password');
+
+
 Route::middleware(['admin'])->group(function () {
 
     Route::get('/', function () {
@@ -100,8 +108,7 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/delete-sub-category/{id}', [LabController::class, 'deleteSubCategory'])->name('delete.lab.test.sub.category');
         Route::post('/create-group', [LabController::class, 'addGroup'])->name('create.lab.test.group');
         Route::post('/edit-group/{id}', [LabController::class, 'editGroup'])->name('edit.lab.test.group');
-        Route::get('/delete-group/{id}', [LabController::class, 'deleteGroup'])->name('delete.lab.test.group');
-        
+        Route::get('/delete-group/{id}', [LabController::class, 'deleteGroup'])->name('delete.lab.test.group');        
         Route::post('/create-specimen', [LabController::class, 'addSpecimen'])->name('create.lab.test.specimen');
         Route::post('/edit-specimen/{id}', [LabController::class, 'editSpecimen'])->name('edit.lab.test.specimen');
         Route::get('/delete-specimen/{id}', [LabController::class, 'deleteSpecimen'])->name('delete.lab.test.specimen');

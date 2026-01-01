@@ -49,3 +49,14 @@ INSERT INTO `companies` (`id`, `name`, `address`, `email`, `phone`, `website`, `
                 </div>
                 @endforeach
             @endforeach -->
+
+
+
+
+smtp
+smtp.gmail.com
+465
+valobashi.tumake9999@gmail.com
+owotlxycxfkawcyt
+tls
+valobashi.tumake9999@gmail.com

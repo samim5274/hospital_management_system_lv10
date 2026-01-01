@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-5 col-md-7 col-12">
-
+                @include('layouts.message')
                 <div class="card shadow-sm rounded-4">
                     <div class="card-body p-5">
 
@@ -60,7 +60,7 @@
                         <!-- Footer Links -->
                         <div class="text-center mt-4">
                             <p class="mb-1">Don't have an account? <a href="#" class="text-primary fw-bold">Sign Up</a></p>
-                            <p><a href="#" class="text-primary fw-bold">Forgot password?</a></p>
+                            <p><a href="{{ route('forget.password.view') }}" class="text-primary fw-bold">Forgot password?</a></p>
                         </div>
 
                     </div>
