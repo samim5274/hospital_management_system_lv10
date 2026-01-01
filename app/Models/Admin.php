@@ -55,4 +55,9 @@ class Admin extends Authenticatable
     {
         return $this->hasMany(Income::class, 'user_id');
     }
+
+    public function transection()
+    {
+        return $this->hasMany(BankTransectionDetail::class, 'user_id');
+    }
 }

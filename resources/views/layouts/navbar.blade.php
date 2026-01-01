@@ -84,8 +84,9 @@
                     <ul class="submenu">
                         <li class="submenu-item {{ Request::is('accounts/expenses') ? 'active' : '' }}"><a href="{{ url('/accounts/expenses') }}">Expenses</a></li>
                         <li class="submenu-item {{ Request::is('accounts/incomes') ? 'active' : '' }}"><a href="{{ url('/accounts/incomes') }}">Incomes</a></li>
-                        <li class="submenu-item {{ Request::is('accounts/payments') ? 'active' : '' }}"><a href="{{ url('/accounts/payments') }}">Payments</a></li>
-                        <li class="submenu-item {{ Request::is('accounts/report') ? 'active' : '' }}"><a href="{{ url('/accounts/report') }}">Account Reports</a></li>
+                        <li class="submenu-item {{ Request::is('accounts/banks') ? 'active' : '' }}"><a href="{{ url('/accounts/banks') }}">Bank Details</a></li>
+                        <li class="submenu-item {{ Request::is('accounts/transection') ? 'active' : '' }}"><a href="{{ url('/accounts/transection') }}">Transection</a></li>
+                        <li class="submenu-item {{ Request::is('accounts/summary') ? 'active' : '' }}"><a href="{{ url('/accounts/summary') }}">Summary</a></li>
                     </ul>
                 </li>
 

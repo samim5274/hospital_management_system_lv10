@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             ExpenseSubcategorySeeder::class,
             IncomeCategorySeeder::class,
             IncomeSubCategorySeeder::class,
+            BankAccountSeeder::class,
         ]);
     }
 }

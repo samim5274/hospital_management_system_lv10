@@ -10,6 +10,7 @@ use App\Http\Controllers\Lab\LabController;
 use App\Http\Controllers\Reagent\ReagentController;
 use App\Http\Controllers\Expenses\ExpensesController;
 use App\Http\Controllers\Income\IncomeController;
+use App\Http\Controllers\Bank\BankController;
 
 Auth::routes();
 
@@ -167,7 +168,20 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/edit/subcategory/{id}', [IncomeController::class, 'editSubCategory'])->name('income.update.subcategory');
         Route::get('/delete/subcategory/{id}', [IncomeController::class, 'deleteSubCategory'])->name('income.delete.subcategory');
 
-        Route::get('/payments', [AccountController::class, 'payments'])->name('accounts.payments');
+        Route::get('/banks', [BankController::class, 'index'])->name('accounts.banks.details');
+        Route::post('/bank-store', [BankController::class, 'bankStore'])->name('accounts.store.bank');
+        Route::get('/delete-bank/{id}', [BankController::class, 'deleteBank'])->name('delete.bank');
+        Route::post('/edit-bank/{id}', [BankController::class, 'editBank'])->name('edit.bank');
+
+        Route::get('/transection', [BankController::class, 'transection'])->name('money-diposit-withdraw-view');
+        Route::post('/diposit-store', [BankController::class, 'storeDiposit'])->name('bank.deposit.store');
+        Route::post('/withdraw-store', [BankController::class, 'storeWithdraw'])->name('bank.withdraw.store');
+        Route::get('/print-transection/{id}', [BankController::class, 'printTransection'])->name('print.transection');
+        Route::get('/print-total-transection', [BankController::class, 'printTotalTransection'])->name('print-total-transection');
+        Route::get('/summary', [BankController::class, 'summary'])->name('total.transection.seummary');
+        Route::get('/bank-transection/{id}', [BankController::class, 'bankTransection'])->name('bank-transection');
+        Route::get('/print-bank-total-transection/{id}', [BankController::class, 'printBankTotalTransection'])->name('print-bank-total-transection');
+
         Route::get('/report', [AccountController::class, 'report'])->name('accounts.report');
     });
 

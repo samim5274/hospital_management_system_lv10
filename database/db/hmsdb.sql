@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 30, 2025 at 01:27 PM
+-- Generation Time: Jan 01, 2026 at 10:36 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -48,7 +48,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `password`, `role`, `otp`, `otp_expires_at`, `email_verified_at`, `last_login_at`, `last_login_ip`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'SAMIM Hossain', 'samim@gmail.com', '$2y$12$MCADF4zAqdJJ4EDlDG4MTuIivOTeDvdW2Tr7tACjjX1xFi3KtJCam', 'admin', NULL, NULL, NULL, '2025-12-30 06:41:01', '127.0.0.1', 'HDUuEwQx6Xfz9j9MyGgKT7okpDPYK3jqx4XnhtCc9nStecFnsn0gmhC3v7tM', NULL, '2025-12-30 06:41:01'),
+(1, 'SAMIM Hossain', 'samim@gmail.com', '$2y$12$XpSO9YALOs7vC.N5uXb.0OJyd5V2kBcnMpM/qUQvWDjF33mPFKsru', 'admin', '508373', '2026-01-01 05:50:42', NULL, '2026-01-01 05:49:11', '127.0.0.1', 'kHlmLoGsoEq429eFVdcDRf1pdMe5IcEv1g8TkRuU7BPW6M7hvn0w0gENizI4', NULL, '2026-01-01 05:49:11'),
 (2, 'Akib Hossain', 'akib@gmail.com', '$2y$12$XpSO9YALOs7vC.N5uXb.0OJyd5V2kBcnMpM/qUQvWDjF33mPFKsru', 'Admin', NULL, NULL, NULL, NULL, NULL, 'jSPfQ1rBQIGa5n2chjx2mtXfGWlwyl3Srsg5dd0wAxdUNgo6hlrPSyGGok20', '2025-10-25 12:00:59', '2025-10-25 12:00:59'),
 (3, 'Akib Hossain', 'akib2@gmail.com', '$2y$12$nk8MgzG7.Ggnnclyokz0v.V0uEFjK05mJbq75MfBQv0LnSuwMhRKO', 'Admin', NULL, NULL, NULL, NULL, NULL, NULL, '2025-10-25 12:14:41', '2025-10-25 12:14:41');
 
@@ -119,6 +119,67 @@ CREATE TABLE `admission_patients` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bank_details`
+--
+
+CREATE TABLE `bank_details` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `bank_name` varchar(255) NOT NULL,
+  `branch_name` varchar(255) DEFAULT NULL,
+  `account_name` varchar(255) NOT NULL,
+  `account_number` varchar(255) NOT NULL,
+  `routing_number` varchar(255) DEFAULT NULL,
+  `remarks` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `bank_details`
+--
+
+INSERT INTO `bank_details` (`id`, `bank_name`, `branch_name`, `account_name`, `account_number`, `routing_number`, `remarks`, `created_at`, `updated_at`) VALUES
+(1, 'Dutch-Bangla Bank Ltd', 'Dhanmondi Branch', 'Samim Hossain', '12345678901', '090261234', 'Primary business account', NULL, NULL),
+(2, 'BRAC Bank Ltd', 'Gulshan Branch', 'Samim Hossain', '98765432109', '060123456', 'Savings account', NULL, NULL),
+(3, 'Islami Bank Bangladesh Ltd', 'Mirpur Branch', 'Samim Hossain', '45678912300', '125678900', 'N/A', NULL, '2026-01-01 06:22:35');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bank_transection_details`
+--
+
+CREATE TABLE `bank_transection_details` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `bank_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `amount` decimal(15,2) NOT NULL,
+  `date` date NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `remarks` text NOT NULL DEFAULT 'N/A',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `bank_transection_details`
+--
+
+INSERT INTO `bank_transection_details` (`id`, `bank_id`, `user_id`, `amount`, `date`, `status`, `remarks`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 15000.00, '2026-01-01', 'deposit', 'N/A', '2026-01-01 06:43:07', '2026-01-01 06:43:07'),
+(2, 2, 1, 10000.00, '2026-01-01', 'deposit', 'Deposit', '2026-01-01 06:43:15', '2026-01-01 06:43:15'),
+(3, 3, 1, 12000.00, '2026-01-01', 'deposit', ' (Deposit)', '2026-01-01 06:43:45', '2026-01-01 06:43:45'),
+(4, 1, 1, 10000.00, '2026-01-01', 'withdraw', ' (Withdraw)', '2026-01-01 06:51:47', '2026-01-01 06:51:47'),
+(5, 2, 1, 5000.00, '2026-01-01', 'withdraw', ' (Withdraw)', '2026-01-01 06:52:28', '2026-01-01 06:52:28'),
+(6, 3, 1, 7000.00, '2026-01-01', 'withdraw', ' (Withdraw)', '2026-01-01 06:52:36', '2026-01-01 06:52:36'),
+(7, 1, 1, 4500.00, '2026-01-01', 'withdraw', ' (Withdraw)', '2026-01-01 06:56:44', '2026-01-01 06:56:44'),
+(8, 1, 1, 500.00, '2026-01-01', 'withdraw', ' (Withdraw)', '2026-01-01 06:56:52', '2026-01-01 06:56:52'),
+(9, 1, 1, 100000.00, '2026-01-01', 'deposit', ' (Deposit)', '2026-01-01 06:57:07', '2026-01-01 06:57:07'),
+(10, 1, 1, 50000.00, '2026-01-01', 'withdraw', ' (Withdraw)', '2026-01-01 06:58:30', '2026-01-01 06:58:30');
 
 -- --------------------------------------------------------
 
@@ -585,7 +646,8 @@ CREATE TABLE `expenses_details` (
 
 INSERT INTO `expenses_details` (`id`, `category_id`, `sub_category_id`, `user_id`, `title`, `date`, `amount`, `remark`, `created_at`, `updated_at`) VALUES
 (4, 1, 2, 1, 'Mumin December Salary', '2025-12-29', 15000.00, 'N/A', '2025-12-29 06:51:27', '2025-12-29 06:51:27'),
-(5, 2, 5, 1, 'December 25 Water bill', '2025-12-29', 560.00, 'N/A', '2025-12-29 06:52:14', '2025-12-29 06:52:14');
+(5, 2, 5, 1, 'December 25 Water bill', '2025-12-29', 560.00, 'N/A', '2025-12-29 06:52:14', '2025-12-29 06:52:14'),
+(6, 1, 1, 1, 'Shamim', '2026-01-01', 1500.00, 'N/A', '2026-01-01 04:39:38', '2026-01-01 04:39:38');
 
 -- --------------------------------------------------------
 
@@ -1003,7 +1065,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (75, '2025_12_29_105112_create_expenses_details_table', 2),
 (76, '2025_12_29_150117_create_income_categories_table', 3),
 (77, '2025_12_29_150138_create_income_sub_categories_table', 3),
-(78, '2025_12_29_150655_create_incomes_table', 3);
+(78, '2025_12_29_150655_create_incomes_table', 3),
+(79, '2026_01_01_114435_create_bank_details_table', 4),
+(80, '2026_01_01_114446_create_bank_transection_details_table', 4);
 
 -- --------------------------------------------------------
 
@@ -1622,6 +1686,21 @@ ALTER TABLE `admission_patients`
   ADD KEY `admission_patients_user_id_foreign` (`user_id`);
 
 --
+-- Indexes for table `bank_details`
+--
+ALTER TABLE `bank_details`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `bank_details_account_number_unique` (`account_number`);
+
+--
+-- Indexes for table `bank_transection_details`
+--
+ALTER TABLE `bank_transection_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `bank_transection_details_bank_id_foreign` (`bank_id`),
+  ADD KEY `bank_transection_details_user_id_foreign` (`user_id`);
+
+--
 -- Indexes for table `beds`
 --
 ALTER TABLE `beds`
@@ -1923,6 +2002,18 @@ ALTER TABLE `admission_patients`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `bank_details`
+--
+ALTER TABLE `bank_details`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `bank_transection_details`
+--
+ALTER TABLE `bank_transection_details`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `beds`
 --
 ALTER TABLE `beds`
@@ -1962,7 +2053,7 @@ ALTER TABLE `expenses_categories`
 -- AUTO_INCREMENT for table `expenses_details`
 --
 ALTER TABLE `expenses_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `expenses_sub_categories`
@@ -2040,7 +2131,7 @@ ALTER TABLE `lab_tests`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `oauth_clients`
@@ -2147,6 +2238,13 @@ ALTER TABLE `admission_patients`
   ADD CONSTRAINT `admission_patients_refer_id_foreign` FOREIGN KEY (`refer_id`) REFERENCES `references` (`id`),
   ADD CONSTRAINT `admission_patients_treatment_under_id_foreign` FOREIGN KEY (`treatment_under_id`) REFERENCES `doctors` (`id`),
   ADD CONSTRAINT `admission_patients_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `admins` (`id`);
+
+--
+-- Constraints for table `bank_transection_details`
+--
+ALTER TABLE `bank_transection_details`
+  ADD CONSTRAINT `bank_transection_details_bank_id_foreign` FOREIGN KEY (`bank_id`) REFERENCES `bank_details` (`id`),
+  ADD CONSTRAINT `bank_transection_details_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `admins` (`id`);
 
 --
 -- Constraints for table `expenses_details`
