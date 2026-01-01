@@ -83,10 +83,17 @@
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item {{ Request::is('accounts/expenses') ? 'active' : '' }}"><a href="{{ url('/accounts/expenses') }}">Expenses</a></li>
+                        <li class="submenu-item {{ Request::is('accounts/expenses/report') ? 'active' : '' }}"><a href="{{ url('/accounts/expenses/report') }}">Expenses Report's</a></li>
+                        <hr>
+
                         <li class="submenu-item {{ Request::is('accounts/incomes') ? 'active' : '' }}"><a href="{{ url('/accounts/incomes') }}">Incomes</a></li>
+                        <li class="submenu-item {{ Request::is('accounts/incomes/report') ? 'active' : '' }}"><a href="{{ url('/accounts/incomes/report') }}">Incomes Report's</a></li>
+                        <hr>
+
                         <li class="submenu-item {{ Request::is('accounts/banks') ? 'active' : '' }}"><a href="{{ url('/accounts/banks') }}">Bank Details</a></li>
                         <li class="submenu-item {{ Request::is('accounts/transection') ? 'active' : '' }}"><a href="{{ url('/accounts/transection') }}">Transection</a></li>
-                        <li class="submenu-item {{ Request::is('accounts/summary') ? 'active' : '' }}"><a href="{{ url('/accounts/summary') }}">Summary</a></li>
+                        <li class="submenu-item {{ Request::is('accounts/summary') ? 'active' : '' }}"><a href="{{ url('/accounts/summary') }}">Summary</a></li>                        
+                        <li class="submenu-item {{ Request::is('accounts/banks/report') ? 'active' : '' }}"><a href="{{ url('/accounts/banks/report') }}">Bank Report's</a></li>
                     </ul>
                 </li>
 

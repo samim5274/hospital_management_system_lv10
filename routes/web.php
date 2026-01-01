@@ -11,6 +11,7 @@ use App\Http\Controllers\Reagent\ReagentController;
 use App\Http\Controllers\Expenses\ExpensesController;
 use App\Http\Controllers\Income\IncomeController;
 use App\Http\Controllers\Bank\BankController;
+use App\Http\Controllers\Account\AccountReportController;
 
 Auth::routes();
 
@@ -172,7 +173,6 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/bank-store', [BankController::class, 'bankStore'])->name('accounts.store.bank');
         Route::get('/delete-bank/{id}', [BankController::class, 'deleteBank'])->name('delete.bank');
         Route::post('/edit-bank/{id}', [BankController::class, 'editBank'])->name('edit.bank');
-
         Route::get('/transection', [BankController::class, 'transection'])->name('money-diposit-withdraw-view');
         Route::post('/diposit-store', [BankController::class, 'storeDiposit'])->name('bank.deposit.store');
         Route::post('/withdraw-store', [BankController::class, 'storeWithdraw'])->name('bank.withdraw.store');
@@ -182,7 +182,11 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/bank-transection/{id}', [BankController::class, 'bankTransection'])->name('bank-transection');
         Route::get('/print-bank-total-transection/{id}', [BankController::class, 'printBankTotalTransection'])->name('print-bank-total-transection');
 
-        Route::get('/report', [AccountController::class, 'report'])->name('accounts.report');
+        Route::get('/expenses/report', [AccountReportController::class, 'expensesReport'])->name('accounts.expenses.report');
+        Route::get('/expenses/data/filter', [AccountReportController::class, 'expensesDataFilter'])->name('expenses.data.filter');
+        Route::get('/incomes/report', [AccountReportController::class, 'incomeReport'])->name('accounts.income.report');
+        Route::get('/income/data/filter', [AccountReportController::class, 'incomeDataFilter'])->name('income.data.filter');
+        Route::get('/bank/report', [AccountReportController::class, 'bankReport'])->name('accounts.bank.report');
     });
 
 
