@@ -31,19 +31,6 @@ class AccountReportController extends Controller
         $exSubCategories = ExpensesSubCategory::with('category')->get();
         $exDetails = ExpensesDetails::with(['category','subcategory','user'])->where('date', $date)->get();
 
-        // Income section
-        // $inCategories = IncomeCategory::all();
-        // $inSubCategories = IncomeSubCategory::with('category')->get();
-        // $inDetails = Income::with(['category','subcategory','user'])->where('date', $date)->get();
-
-        // // Banking section
-        // $banks = BankDetail::all();
-        // $transections = BankTransectionDetail::with(['bank','user'])->where('date', $date)->get();
-
-        // $totalDepositAll  = $transections->where('status', 'deposit')->sum('amount');
-        // $totalWithdrawAll = $transections->where('status', 'withdraw')->sum('amount');
-        // $totalBalanceAll  = $totalDepositAll - $totalWithdrawAll;
-
         return view('expenses.report.expenses-report', compact(
             'company',
             'exCategories',
@@ -119,54 +106,153 @@ class AccountReportController extends Controller
     }
 
     public function incomeDataFilter(Request $request){
-        // $company = Company::first();
+        $company = Company::first();
 
-        // $inCategories = IncomeCategory::all(); // categories for dropdown
+        $startDate = $request->start_date;
+        $endDate = $request->end_date;
 
-        // // Start query
-        // $query = Income::with(['category', 'subcategory', 'user']);
+        // Dropdown category list
+        $inCategories = IncomeCategory::all();
 
-        // // Filter by date range
-        // if ($request->start_date && $request->end_date) {
-        //     $query->whereBetween('date', [$request->start_date, $request->end_date]);
-        // } elseif ($request->start_date) {
-        //     $query->where('date', '>=', $request->start_date);
-        // } elseif ($request->end_date) {
-        //     $query->where('date', '<=', $request->end_date);
-        // }
+        // Base query
+        $query = Income::with(['category', 'subcategory', 'user']);
 
-        // // Filter by category
-        // if ($request->category_id) {
-        //     $query->where('category_id', $request->category_id);
-        // }
+        // ================= Date Filter =================
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $query->whereBetween('date', [$startDate, $endDate]);
+        } elseif ($request->filled('start_date')) {
+            $query->whereDate('date', '>=', $startDate);
+        } elseif ($request->filled('end_date')) {
+            $query->whereDate('date', '<=', $endDate);
+        }
 
-        // // Filter by subcategory
-        // if ($request->sub_category_id) {
-        //     $query->where('sub_category_id', $request->sub_category_id);
-        // }
+        // ================= Category Filter =================
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
 
-        // $inDetails = $query->orderBy('date', 'desc')->get();
+        // ================= Sub Category Filter =================
+        if ($request->filled('subcategory_id')) {
+            $query->where('subcategory_id', $request->subcategory_id);
+        }
 
-        // $totalAmount = $inDetails->sum('amount');
+        // ================= User Filter (optional) =================
+        if ($request->filled('user_id')) {
+            $query->where('user_id', $request->user_id);
+        }
 
-        // // If print requested
-        // if ($request->print) {
-        //     return view('income.print.income-report', compact(
-        //         'company',
-        //         'inCategories',
-        //         'inDetails',
-        //         'totalAmount',
-        //         'request' // pass request to show date/category filter in print
-        //     ));
-        // }
+        // ================= Fetch Data =================
+        $inDetails = $query->orderBy('date', 'desc')->get();
 
-        // // Otherwise, normal view
-        // return view('income.report.income-report', compact(
-        //     'company',
-        //     'inCategories',
-        //     'inDetails',
-        //     'totalAmount',
-        //     'request'
-        // ));
+        // ================= Total Amount =================
+        $totalAmount = $inDetails->sum('amount');
+
+        // ================= Print View =================
+        if ($request->filled('print')) {
+            return view('income.print.print-income-report', compact(
+                'company',
+                'inCategories',
+                'inDetails',
+                'totalAmount',
+                'request',
+                'startDate',
+                'endDate',
+            ));
+        }
+
+        // ================= Normal View =================
+        return view('income.report.income-report', compact(
+            'company',
+            'inCategories',
+            'inDetails',
+            'totalAmount',
+            'request'
+        ));
+    }
+
+    public function bankReport(){
+        $date = Carbon::now()->format('Y-m-d');
+        $company = Company::first();
+
+        // Banking section
+        $banks = BankDetail::all();
+        $transactions = BankTransectionDetail::with(['bank','user'])->where('date', $date)->get();
+
+        $totalDepositAll  = $transactions->where('status', 'deposit')->sum('amount');
+        $totalWithdrawAll = $transactions->where('status', 'withdraw')->sum('amount');
+        $totalBalanceAll  = $totalDepositAll - $totalWithdrawAll;
+
+        return view('bank.report.bank-report', compact('company','banks','transactions','totalDepositAll','totalWithdrawAll','totalBalanceAll'));
+    }
+
+    public function bankDataFilter(Request $request){
+        $company = Company::first();
+
+        $startDate = $request->start_date;
+        $endDate = $request->end_date;
+
+        // Bank list for dropdown
+        $banks = BankDetail::all();
+
+        // Base query
+        $query = BankTransectionDetail::with(['bank', 'user']);
+
+        // ================= Date Filter =================
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $query->whereBetween('date', [$startDate, $endDate]);
+        } elseif ($request->filled('start_date')) {
+            $query->whereDate('date', '>=', $startDate);
+        } elseif ($request->filled('end_date')) {
+            $query->whereDate('date', '<=', $endDate);
+        }
+
+        // ================= Bank Filter =================
+        if ($request->filled('bank_id')) {
+            $query->where('bank_id', $request->bank_id);
+        }
+
+        // ================= Status Filter =================
+        if ($request->filled('status')) {
+            $query->where('status', $request->status); // deposit / withdraw
+        }
+
+        // ================= User Filter (Optional) =================
+        if ($request->filled('user_id')) {
+            $query->where('user_id', $request->user_id);
+        }
+
+        // ================= Get Data =================
+        $transactions = $query->orderBy('date', 'desc')->get();
+
+        // ================= Total Amount =================
+        $totalDepositAll  = $transactions->where('status', 'deposit')->sum('amount');
+        $totalWithdrawAll = $transactions->where('status', 'withdraw')->sum('amount');
+        $totalBalanceAll  = $totalDepositAll - $totalWithdrawAll;
+
+        // ================= Print View =================
+        if ($request->filled('print')) {
+            return view('bank.print.print-bank-report', compact(
+                'company',
+                'banks',
+                'transactions',
+                'request',
+                'totalDepositAll',
+                'totalWithdrawAll',
+                'totalBalanceAll',
+                'startDate',
+                'endDate',
+            ));
+        }
+
+        // ================= Normal View =================
+        return view('bank.report.bank-report', compact(
+            'company',
+            'banks',
+            'transactions',
+            'request',
+            'totalDepositAll',
+            'totalWithdrawAll',
+            'totalBalanceAll'
+        ));
     }
 }

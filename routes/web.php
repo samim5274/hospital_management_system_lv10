@@ -186,7 +186,8 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/expenses/data/filter', [AccountReportController::class, 'expensesDataFilter'])->name('expenses.data.filter');
         Route::get('/incomes/report', [AccountReportController::class, 'incomeReport'])->name('accounts.income.report');
         Route::get('/income/data/filter', [AccountReportController::class, 'incomeDataFilter'])->name('income.data.filter');
-        Route::get('/bank/report', [AccountReportController::class, 'bankReport'])->name('accounts.bank.report');
+        Route::get('/banks/report', [AccountReportController::class, 'bankReport'])->name('accounts.bank.report');
+        Route::get('/bank/transection/filter', [AccountReportController::class, 'bankDataFilter'])->name('bank.transaction.filter');
     });
 
 
