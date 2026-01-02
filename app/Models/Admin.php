@@ -60,4 +60,9 @@ class Admin extends Authenticatable
     {
         return $this->hasMany(BankTransectionDetail::class, 'user_id');
     }
+
+    public function ticket()
+    {
+        return $this->hasMany(TicketSale::class, 'user_id');
+    }
 }

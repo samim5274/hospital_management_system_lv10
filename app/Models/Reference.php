@@ -21,4 +21,9 @@ class Reference extends Model
     {
         return $this->hasMany(AdmissionPatient::class, 'refer_id');
     }
+
+    public function ticket()
+    {
+        return $this->hasMany(TicketSale::class, 'refer_id');
+    }
 }

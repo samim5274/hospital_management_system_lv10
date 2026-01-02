@@ -52,6 +52,10 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/cancel', [OutdoorController::class, 'cancelTestView'])->name('patients.test.cancel.view');
         Route::post('/cancel/test/{id}', [OutdoorController::class, 'cancelTest'])->name('patients.test.cancel');
         Route::get('/test-cancel/{reg}', [OutdoorController::class, 'cancelTestByReg'])->name('patients.test.cancel.by.reg');
+
+        // ticket sale route
+        Route::get('/ticket-sale', [OutdoorController::class, 'ticketSale'])->name('patients.ticket.sale');
+        Route::post('/ticket-sale-store', [OutdoorController::class, 'ticketSaleStore'])->name('ticket.sale.store');
     });
 
     // 🔹 Indoor Management
@@ -182,12 +186,15 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/bank-transection/{id}', [BankController::class, 'bankTransection'])->name('bank-transection');
         Route::get('/print-bank-total-transection/{id}', [BankController::class, 'printBankTotalTransection'])->name('print-bank-total-transection');
 
+        // Report Route of Account
         Route::get('/expenses/report', [AccountReportController::class, 'expensesReport'])->name('accounts.expenses.report');
         Route::get('/expenses/data/filter', [AccountReportController::class, 'expensesDataFilter'])->name('expenses.data.filter');
         Route::get('/incomes/report', [AccountReportController::class, 'incomeReport'])->name('accounts.income.report');
         Route::get('/income/data/filter', [AccountReportController::class, 'incomeDataFilter'])->name('income.data.filter');
         Route::get('/banks/report', [AccountReportController::class, 'bankReport'])->name('accounts.bank.report');
         Route::get('/bank/transection/filter', [AccountReportController::class, 'bankDataFilter'])->name('bank.transaction.filter');
+        // Total transection report
+        Route::get('/total-transaction', [AccountReportController::class, 'totalTransaction'])->name('account.total.transaction');
     });
 
 

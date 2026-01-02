@@ -255,4 +255,9 @@ class AccountReportController extends Controller
             'totalBalanceAll'
         ));
     }
+
+    public function totalTransaction(){
+        $company = Company::first();
+        return view('accounts.total-transaction', compact('company'));
+    }
 }

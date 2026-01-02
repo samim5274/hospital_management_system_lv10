@@ -25,13 +25,13 @@ return new class extends Migration
             $table->foreignId('doctorId')->constrained('doctors')->onDelete('restrict');   // Doctor
             $table->foreignId('referId')->nullable()->constrained('references')->onDelete('set null'); // Reference
 
-            $table->integer('total')->default(0);         // Total amount
-            $table->integer('discount')->default(0);      // Discount
-            $table->integer('payable')->default(0);       // Payable after discount
-            $table->integer('pay')->default(0);           // Paid amount
-            $table->integer('duestatus')->default(0);     // 0 = no due, 1 = due
-            $table->integer('due')->default(0);           // Due amount
-            $table->integer('return')->default(0);        // Return amount if paid excess
+            $table->decimal('total', 12, 2)->default(0);         // Total amount
+            $table->decimal('discount', 12, 2)->default(0);      // Discount
+            $table->decimal('payable', 12, 2)->default(0);       // Payable after discount
+            $table->decimal('pay', 12, 2)->default(0);           // Paid amount
+            $table->integer('duestatus')->default(0);            // 0 = no due, 1 = due
+            $table->decimal('due', 12, 2)->default(0);           // Due amount
+            $table->decimal('return', 12, 2)->default(0);        // Return amount if paid excess
 
             $table->boolean('status')->default(1);        // Active/Inactive
             $table->foreignId('userId')->constrained('admins')->onDelete('restrict'); 

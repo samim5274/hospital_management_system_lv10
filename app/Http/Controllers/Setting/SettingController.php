@@ -92,6 +92,7 @@ class SettingController extends Controller
         $doctor->specialization = $request->input('specialization', '');
         $doctor->phone = $request->input('phone', '');
         $doctor->email = $request->input('email', '');
+        $doctor->fees = $request->input('fee', '');
         $doctor->save();
 
         return redirect()->back()->with('success', 'Doctor added successfully!');
@@ -117,6 +118,7 @@ class SettingController extends Controller
         $doctor->specialization = $request->input('specialization', '');
         $doctor->phone = $request->input('phone', '');
         $doctor->email = $request->input('email', '');
+        $doctor->fees = $request->input('fee', '');
         $doctor->update();
 
         return redirect()->back()->with('primary', 'Doctor modified successfully!');

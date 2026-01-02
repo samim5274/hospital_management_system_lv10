@@ -40,7 +40,7 @@
                         <li class="submenu-item {{ Request::is('patients') ? 'active' : '' }}"><a href="{{ url('/patients') }}">All Patients</a></li>
                         <li class="submenu-item {{ Request::is('patients/outdoor') ? 'active' : '' }}"><a href="{{ url('/patients/outdoor') }}">Outdoor Patients</a></li>
                         <li class="submenu-item {{ Request::is('patients/cancel') ? 'active' : '' }}"><a href="{{ url('/patients/cancel') }}">Test Cancel</a></li>
-                        <!-- <li class="submenu-item"><a href="#">Ticket</a></li> -->
+                        <li class="submenu-item {{ Request::is('patients/ticket-sale') ? 'active' : '' }}"><a href="{{ url('/patients/ticket-sale') }}">Ticket</a></li>
                     </ul>
                 </li>
 
@@ -94,6 +94,8 @@
                         <li class="submenu-item {{ Request::is('accounts/transection') ? 'active' : '' }}"><a href="{{ url('/accounts/transection') }}">Transection</a></li>
                         <li class="submenu-item {{ Request::is('accounts/summary') ? 'active' : '' }}"><a href="{{ url('/accounts/summary') }}">Summary</a></li>                        
                         <li class="submenu-item {{ Request::is('accounts/banks/report') ? 'active' : '' }}"><a href="{{ url('/accounts/banks/report') }}">Bank Report's</a></li>
+                        <hr>
+                        <li class="submenu-item {{ Request::is('accounts/total-transaction') ? 'active' : '' }}"><a href="{{ url('/accounts/total-transaction') }}">Total Transection</a></li>
                     </ul>
                 </li>
 

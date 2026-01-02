@@ -243,6 +243,10 @@
                                                             <label class="form-label">Email</label>
                                                             <input type="email" name="email" class="form-control">
                                                         </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Fee</label>
+                                                            <input type="number" name="fee" min="0" class="form-control">
+                                                        </div>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -326,6 +330,10 @@
                                                             <div class="mb-3">
                                                                 <label class="form-label">Email</label>
                                                                 <input type="email" name="email" class="form-control" value="{{ $doctor->email }}">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Fee</label>
+                                                                <input type="number" name="fee" min="0" class="form-control" value="{{ $doctor->fees }}">
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">

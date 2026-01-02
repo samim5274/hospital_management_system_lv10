@@ -9,10 +9,15 @@ class Doctor extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','specialization','phone','email'];
+    protected $fillable = ['name','specialization','phone','email','fees'];
 
     public function patient()
     {
         return $this->hasMany(AdmissionPatient::class, 'treatment_under_id');
+    }
+
+    public function ticket()
+    {
+        return $this->hasMany(TicketSale::class, 'doctor_id');
     }
 }

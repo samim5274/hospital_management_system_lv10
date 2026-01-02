@@ -171,4 +171,15 @@ class OutdoorController extends Controller
 
         return redirect()->route('patients.test.cancel.view')->with('success', 'Test cancelled successfully for REG: ' . $reg);
     }
+
+    public function ticketSale(){
+        $company = Company::first();
+        $doctors = Doctor::all();
+        $refers = Reference::all();
+        return view('patient.outdoor.ticket-sale', compact('company','doctors','refers'));
+    }
+
+    public function ticketSaleStore(Request $request){
+        dd($request->all());
+    }
 }

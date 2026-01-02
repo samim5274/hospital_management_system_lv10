@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-    @livewireStyles
+
 </head>
 
 <body>
@@ -32,17 +32,13 @@
             </header>
             @include('layouts.message')
             <div class="page-heading">
-                <h3>Outdoor Details</h3>
+                <h3>Ticket Sale Details</h3>
             </div>
             <div class="page-content bg-white p-4 rounded">
                 <section class="row">
-                    <!-- Livewire Component for Test Selection / Cart -->
-                    <div class="col-12 mb-4">
-                        @livewire('lab-invoice')
-                    </div>
-
+                    
                     <div class="col-12">
-                        <form action="{{ route('patients.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('ticket.sale.store') }}" method="POST">
                             @csrf
                             <div class="row g-3">
                                 <div class="col-md-6">
@@ -93,8 +89,8 @@
                                     <label for="doctor" class="form-label">Doctor</label>
                                     <select name="cbxDoctor" required class="form-select" id="doctor">
                                         <option selected disabled>--Select Doctor--</option>
-                                        @foreach($doctor as $val)
-                                            <option value="{{$val->id}}">{{$val->name}}</option>
+                                        @foreach($doctors as $val)
+                                            <option value="{{$val->id}}"><strong>{{$val->name}}</strong> - {{$val->specialization}} - {{$val->fees}}/-</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -102,7 +98,7 @@
                                     <label for="refer" class="form-label">Reference</label>
                                     <select name="cbxRefer" class="form-select" id="refer">
                                         <option selected disabled>--Select Reference--</option>
-                                        @foreach($refer as $val)
+                                        @foreach($refers as $val)
                                             <option value="{{$val->id}}">{{$val->name}}</option>
                                         @endforeach
                                     </select>
@@ -111,26 +107,18 @@
 
                             <div class="card bg-light mt-4 p-3">
                                 <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label display-6 text-info">
-                                            Actual: <span id="liveTotal">00</span>/-
-                                        </label>
-                                        <input type="hidden" id="hiddenTotal" name="txtTotal" value="0">
-                                        <p id="result" class="display-6 text-success mt-2">Amount: 00/-</p>
-                                    </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <label for="num3" class="form-label">Discount</label>
-                                        <input type="number" placeholder="Discount" min="0" onkeyup="sumNumbers()" id="num3" name="txtDiscount" class="form-control" value="0" required>
+                                        <input type="number" placeholder="Discount" min="0" id="num3" name="txtDiscount" class="form-control" value="0" required>
 
                                         <label for="num2" class="form-label mt-3">Received</label>
-                                        <input type="number" placeholder="Received Amount" min="0" onkeyup="sumNumbers()" id="num2" name="txtReceived" class="form-control" required>
+                                        <input type="number" placeholder="Received Amount" min="0" id="num2" name="txtReceived" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
 
-
                             <div class="mt-3">
-                                <button class="btn btn-success w-100" id="btnSave" disabled>Save</button>
+                                <button class="btn btn-success w-100" id="btnSave" onclick="return confirm('Are you sure you want to sale this ticket for this patient?')">Save</button>
                             </div>
                         </form>
                     </div>
@@ -146,20 +134,7 @@
     <script src="{{ asset('assets/vendors/apexcharts/apexcharts.js') }}"></script>
     <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
-    <script>
-        window.onload = function () {
-            const searchInput = document.getElementById('search');
-            if (searchInput) {
-                searchInput.focus();
-            }
-            @if(session('success'))
-                const invoice = "{{ session('invoice') }}";
-                const printUrl = `{{ url('/patients/print-invoice') }}/${invoice}`;
-                window.open(printUrl, '_blank');
-            @endif
-        };
-    </script>
-    @livewireScripts
+    
 </body>
 
 </html>

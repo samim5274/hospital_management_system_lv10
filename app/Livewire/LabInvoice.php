@@ -27,7 +27,7 @@ class LabInvoice extends Component
 
     public function loadCart()
     {
-        $this->cart = StoreTest::where('regNum', $this->regNum)
+        $this->cart = StoreTest::where('regNum', $this->regNum)->orderBy('id', 'desc')
                         ->get()
                         ->mapWithKeys(function($item) {
                             return [
