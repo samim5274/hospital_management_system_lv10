@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 02, 2026 at 07:28 AM
+-- Generation Time: Jan 03, 2026 at 07:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1031,7 +1031,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (120, '2025_12_29_150138_create_income_sub_categories_table', 2),
 (121, '2025_12_29_150655_create_incomes_table', 2),
 (122, '2026_01_01_114435_create_bank_details_table', 2),
-(123, '2026_01_01_114446_create_bank_transection_details_table', 2);
+(123, '2026_01_01_114446_create_bank_transection_details_table', 2),
+(125, '2026_01_02_121227_create_ticket_sales_table', 3);
 
 -- --------------------------------------------------------
 
@@ -1494,6 +1495,46 @@ INSERT INTO `test_report_details` (`id`, `test_id`, `part_of_test`, `result`, `u
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ticket_sales`
+--
+
+CREATE TABLE `ticket_sales` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `reg` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `dob` varchar(255) DEFAULT NULL,
+  `gender` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `doctor_id` bigint(20) UNSIGNED NOT NULL,
+  `refer_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `total` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `discount` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `payable` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `pay` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `duestatus` int(11) NOT NULL DEFAULT 0,
+  `due` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `return` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ticket_sales`
+--
+
+INSERT INTO `ticket_sales` (`id`, `reg`, `date`, `name`, `dob`, `gender`, `phone`, `address`, `doctor_id`, `refer_id`, `total`, `discount`, `payable`, `pay`, `duestatus`, `due`, `return`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'IYAILUGX7UGS', '2026-01-03', 'Shamim Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 19, 26, 1000.00, 0.00, 1000.00, 1000.00, 1, 0.00, 0.00, 1, 1, '2026-01-03 04:51:40', '2026-01-03 04:51:40'),
+(2, 'GXTUVZWYKMXZ', '2026-01-03', 'Fahim Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 17, 25, 800.00, 0.00, 800.00, 1000.00, 1, 0.00, 200.00, 1, 1, '2026-01-03 04:52:07', '2026-01-03 04:52:07'),
+(3, '6KFGBBTWS58M', '2026-01-03', 'Sojib Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 25, 20, 1500.00, 100.00, 1400.00, 2000.00, 1, 0.00, 600.00, 1, 1, '2026-01-03 05:23:35', '2026-01-03 05:23:35'),
+(4, 'J7VJ0T67JTG9', '2026-01-03', 'Sabbir Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 28, 30, 500.00, 0.00, 500.00, 200.00, 0, 300.00, 0.00, 1, 1, '2026-01-03 06:02:38', '2026-01-03 06:02:38');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `units`
 --
 
@@ -1845,6 +1886,16 @@ ALTER TABLE `test_report_details`
   ADD KEY `test_report_details_test_id_foreign` (`test_id`);
 
 --
+-- Indexes for table `ticket_sales`
+--
+ALTER TABLE `ticket_sales`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `ticket_sales_reg_unique` (`reg`),
+  ADD KEY `ticket_sales_doctor_id_foreign` (`doctor_id`),
+  ADD KEY `ticket_sales_refer_id_foreign` (`refer_id`),
+  ADD KEY `ticket_sales_user_id_foreign` (`user_id`);
+
+--
 -- Indexes for table `units`
 --
 ALTER TABLE `units`
@@ -2010,7 +2061,7 @@ ALTER TABLE `lab_tests`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT for table `oauth_clients`
@@ -2082,7 +2133,13 @@ ALTER TABLE `store_tests`
 -- AUTO_INCREMENT for table `test_report_details`
 --
 ALTER TABLE `test_report_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+
+--
+-- AUTO_INCREMENT for table `ticket_sales`
+--
+ALTER TABLE `ticket_sales`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `units`
@@ -2214,6 +2271,14 @@ ALTER TABLE `store_tests`
 --
 ALTER TABLE `test_report_details`
   ADD CONSTRAINT `test_report_details_test_id_foreign` FOREIGN KEY (`test_id`) REFERENCES `lab_tests` (`id`);
+
+--
+-- Constraints for table `ticket_sales`
+--
+ALTER TABLE `ticket_sales`
+  ADD CONSTRAINT `ticket_sales_doctor_id_foreign` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`id`),
+  ADD CONSTRAINT `ticket_sales_refer_id_foreign` FOREIGN KEY (`refer_id`) REFERENCES `references` (`id`),
+  ADD CONSTRAINT `ticket_sales_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `admins` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -14,32 +14,32 @@ return new class extends Migration
         Schema::create('ticket_sales', function (Blueprint $table) {
             $table->id();
 
-            $table->string('reg')->unique()->comment('Registration number (sequential)');
-            $table->date('date')->comment('Invoice date');
+            $table->string('reg')->unique();
+            $table->date('date');
 
             // Patient details
-            $table->string('name')->comment('Patient name');
-            $table->string('dob')->nullable()->comment('Date of birth');
-            $table->string('gender')->nullable()->comment('Gender');
-            $table->string('phone')->nullable()->comment('Phone number (+880 etc)');
-            $table->text('address')->nullable()->comment('Address');
+            $table->string('name');
+            $table->string('dob')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('phone')->nullable();
+            $table->text('address')->nullable();
 
             // Relations
-            $table->foreignId('doctor_id')->constrained('doctors')->onDelete('restrict')->comment('Doctor');
-            $table->foreignId('refer_id')->nullable()->constrained('references')->onDelete('restrict')->comment('Reference');
+            $table->foreignId('doctor_id')->constrained('doctors')->onDelete('restrict');
+            $table->foreignId('refer_id')->nullable()->constrained('references')->onDelete('restrict');
 
             // Payment details
-            $table->decimal('total', 12, 2)->default(0)->comment('Total amount');
-            $table->decimal('discount', 12, 2)->default(0)->comment('Discount');
-            $table->decimal('payable', 12, 2)->default(0)->comment('Payable after discount');
-            $table->decimal('pay', 12, 2)->default(0)->comment('Paid amount');
-            $table->integer('duestatus')->default(0)->comment('0 = no due, 1 = due');
-            $table->decimal('due', 12, 2)->default(0)->comment('Due amount');
-            $table->decimal('return', 12, 2)->default(0)->comment('Return amount if paid excess');
+            $table->decimal('total', 12, 2)->default(0);
+            $table->decimal('discount', 12, 2)->default(0);
+            $table->decimal('payable', 12, 2)->default(0);
+            $table->decimal('pay', 12, 2)->default(0);
+            $table->integer('duestatus')->default(0);
+            $table->decimal('due', 12, 2)->default(0);
+            $table->decimal('return', 12, 2)->default(0);
 
-            $table->boolean('status')->default(1)->comment('Active/Inactive');
+            $table->boolean('status')->default(1); // 1 = Active & 0 = Inactive
 
-            $table->foreignId('user_id')->constrained('admins')->onDelete('restrict')->comment('Created by user');
+            $table->foreignId('user_id')->constrained('admins')->onDelete('restrict');
 
             $table->timestamps();
         });

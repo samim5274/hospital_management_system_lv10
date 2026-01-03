@@ -78,7 +78,7 @@
                                     <label for="phone" class="form-label">Phone</label>
                                     <div class="input-group">
                                         <span class="input-group-text">+880</span>
-                                        <input type="number" class="form-control" placeholder="Phone" value="1762164746" name="txtPhone" id="phone">
+                                        <input type="number" class="form-control" min="0" placeholder="Phone" value="1762164746" name="txtPhone" id="phone">
                                     </div>
                                 </div>
                             </div>

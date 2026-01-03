@@ -12,6 +12,7 @@ use App\Http\Controllers\Expenses\ExpensesController;
 use App\Http\Controllers\Income\IncomeController;
 use App\Http\Controllers\Bank\BankController;
 use App\Http\Controllers\Account\AccountReportController;
+use App\Http\Controllers\Ticket\TicketController;
 
 Auth::routes();
 
@@ -54,8 +55,10 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/test-cancel/{reg}', [OutdoorController::class, 'cancelTestByReg'])->name('patients.test.cancel.by.reg');
 
         // ticket sale route
-        Route::get('/ticket-sale', [OutdoorController::class, 'ticketSale'])->name('patients.ticket.sale');
-        Route::post('/ticket-sale-store', [OutdoorController::class, 'ticketSaleStore'])->name('ticket.sale.store');
+        Route::get('/ticket-sale', [TicketController::class, 'ticketSale'])->name('patients.ticket.sale');
+        Route::post('/ticket-sale-store', [TicketController::class, 'ticketSaleStore'])->name('ticket.sale.store');
+        Route::get('/print-ticket/{reg}', [TicketController::class, 'printTicket'])->name('print.ticket');
+        Route::get('/print-ricket-payment-invoice/{reg}', [TicketController::class, 'printPaymentInvoice'])->name('print.ticket.payment.invoice');
     });
 
     // 🔹 Indoor Management

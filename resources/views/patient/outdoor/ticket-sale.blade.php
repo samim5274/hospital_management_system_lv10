@@ -37,7 +37,7 @@
             <div class="page-content bg-white p-4 rounded">
                 <section class="row">
                     
-                    <div class="col-12">
+                    <div class="col-md-9">
                         <form action="{{ route('ticket.sale.store') }}" method="POST">
                             @csrf
                             <div class="row g-3">
@@ -74,7 +74,7 @@
                                     <label for="phone" class="form-label">Phone</label>
                                     <div class="input-group">
                                         <span class="input-group-text">+880</span>
-                                        <input type="number" class="form-control" placeholder="Phone" value="1762164746" name="txtPhone" id="phone">
+                                        <input type="number" class="form-control" min="0" placeholder="Phone" value="1762164746" name="txtPhone" id="phone">
                                     </div>
                                 </div>
                             </div>
@@ -122,6 +122,36 @@
                             </div>
                         </form>
                     </div>
+                    <div class="col-md-3">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-header bg-primary text-white d-flex align-items-center">
+                                <i class="bi bi-heart-pulse me-2"></i>
+                                <h6 class="mb-0 text-white">Patient List</h6>
+                            </div>
+
+                            <div class="card-body p-2" style="max-height: 300px; overflow-y: auto;">
+                                @forelse($patients as $patient)
+                                    <div class="d-flex justify-content-between align-items-center px-2 py-1 border-bottom">
+                                        <span class="fw-semibold text-dark">
+                                            {{ $patient->name }} 
+                                            <span><a href="{{ route('print.ticket.payment.invoice', $patient->reg) }}" target="_blank">৳</a></span>
+                                        </span>
+
+                                        <a href="{{ route('print.ticket', $patient->reg) }}" target="_blank">
+                                            <span class="badge bg-light text-dark">
+                                                <i class="bi bi-printer"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                @empty
+                                    <p class="text-muted text-center mb-0 py-3">
+                                        No patients found
+                                    </p>
+                                @endforelse
+                            </div>
+                        </div>
+                    </div>
+
                 </section>
             </div>
 
@@ -134,6 +164,16 @@
     <script src="{{ asset('assets/vendors/apexcharts/apexcharts.js') }}"></script>
     <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
+
+    <script>
+        // window.onload = function () {            
+        //     @if(session('success'))
+        //         const invoice = "{{ session('invoice') }}";
+        //         const printUrl = `{{ url('/patients/print-invoice') }}/${invoice}`;
+        //         window.open(printUrl, '_blank');
+        //     @endif
+        // };
+    </script>
     
 </body>
 

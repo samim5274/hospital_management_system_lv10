@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Outdoor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 
 use App\Models\LabTest;
@@ -17,6 +18,7 @@ use App\Models\Bed;
 use App\Models\DutyDoctor;
 use App\Models\Disease;
 use App\Models\Patient;
+use App\Models\TicketSale;
 
 class OutdoorController extends Controller
 {
@@ -172,14 +174,5 @@ class OutdoorController extends Controller
         return redirect()->route('patients.test.cancel.view')->with('success', 'Test cancelled successfully for REG: ' . $reg);
     }
 
-    public function ticketSale(){
-        $company = Company::first();
-        $doctors = Doctor::all();
-        $refers = Reference::all();
-        return view('patient.outdoor.ticket-sale', compact('company','doctors','refers'));
-    }
-
-    public function ticketSaleStore(Request $request){
-        dd($request->all());
-    }
+    
 }
