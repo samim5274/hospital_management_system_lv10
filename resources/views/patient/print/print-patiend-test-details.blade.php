@@ -147,7 +147,7 @@
     {{-- Footer --}}
     <p class="note">
         Developed by <strong>SAMIM HOSSAIN</strong><br>
-        +8801624209291
+        +880 1533-021557
     </p>
 
 </div>

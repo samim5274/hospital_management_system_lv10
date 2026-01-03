@@ -9,6 +9,10 @@ use Illuminate\Support\Carbon;
 use Auth;
 use App\Models\Company;
 
+use App\Models\AdmissionBillSummary;
+use App\Models\PaymentDetail;
+use App\Models\TicketSale;
+
 use App\Models\ExpensesCategory;
 use App\Models\ExpensesSubCategory;
 use App\Models\ExpensesDetails;
@@ -258,6 +262,173 @@ class AccountReportController extends Controller
 
     public function totalTransaction(){
         $company = Company::first();
-        return view('accounts.total-transaction', compact('company'));
+        $date = Carbon::now()->format('Y-m-d');
+
+        // outdoor
+        $outdoorDetails = PaymentDetail::where('date', $date)->get();
+        $totalTestSale = $outdoorDetails->sum('total');
+        $totalTestDiscount = $outdoorDetails->sum('discount');
+        $totalTestPayable = $outdoorDetails->sum('payable');
+        $totalTestPay = $outdoorDetails->sum('pay');
+        $totalTestDue = $outdoorDetails->sum('due');
+        $totalReturn = $outdoorDetails->where('status', '0')->sum('return');
+        $totalDueCollection = 0;
+
+        // ticket sate
+        $ticketSaleData = TicketSale::where('date', $date)->get();
+        $totalTicketAmount = $ticketSaleData->sum('total');
+        $totalTicketDiscount = $ticketSaleData->sum('discount');
+        $totalTicketPayable = $ticketSaleData->sum('payable');
+        $totalTicketPay = $ticketSaleData->sum('pay');
+        $totalTicketDue = $ticketSaleData->sum('due');
+        $totalTicketReturn = $ticketSaleData->sum('return');
+
+        // expenses & extra income
+        $totalExpenses = ExpensesDetails::where('date', $date)->sum('amount');
+        $totalIncome = Income::where('date', $date)->sum('amount');
+
+        // banking transection
+        $bankTransection = BankTransectionDetail::where('date', $date)->get();
+        $totalBankDiposit = $bankTransection->where('status', 'deposit')->sum('amount');
+        $totalBankWithdraw = $bankTransection->where('status', 'withdraw')->sum('amount');
+        $totalBankBalance = $totalBankDiposit - $totalBankWithdraw;
+
+        // indoor transection
+        $indoorTransection = AdmissionBillSummary::where('billing_date', $date)->get();
+        $totalIndoorCost = $indoorTransection->sum('total_cost');
+        $totalIndoorContract = $indoorTransection->sum('contract_amount');
+        $totalIndoorDiscount = $indoorTransection->sum('discount');
+        $totalIndoorAdvance = $indoorTransection->sum('advance_paid');
+        $totalIndoorPayable = $indoorTransection->sum('payable_amount');
+        $totalIndoorPaid = $indoorTransection->sum('paid_amount');
+        $totalIndoorDue = $indoorTransection->sum('remaining_due');
+
+        $totalHandCash = ($totalTestPay + $totalTicketPay + $totalIndoorPaid + $totalIncome + $totalBankWithdraw) - ($totalBankDiposit + $totalExpenses);
+
+        return view('accounts.total-transaction', compact(
+            'company',
+            'totalHandCash',
+            
+            // outdoor
+            'totalTestSale',
+            'totalTestDiscount',
+            'totalTestPayable',
+            'totalTestPay',
+            'totalTestDue',
+            'totalReturn',
+            'totalDueCollection',
+
+            // ticket
+            'totalTicketAmount',
+            'totalTicketDiscount',
+            'totalTicketPayable',
+            'totalTicketPay',
+            'totalTicketDue',
+            'totalTicketReturn',
+
+            // expenses & income
+            'totalExpenses',
+            'totalIncome',
+
+            // banking
+            'totalBankDiposit',
+            'totalBankWithdraw',
+            'totalBankBalance',
+
+            // indoor
+            'totalIndoorCost',
+            'totalIndoorContract',
+            'totalIndoorDiscount',
+            'totalIndoorAdvance',
+            'totalIndoorPayable',
+            'totalIndoorPaid',
+            'totalIndoorDue'
+        ));
+    }
+
+    public function printTotalTrasaction(){
+        $company = Company::first();
+        $date = Carbon::now()->format('Y-m-d');
+
+        // outdoor
+        $outdoorDetails = PaymentDetail::where('date', $date)->get();
+        $totalTestSale = $outdoorDetails->sum('total');
+        $totalTestDiscount = $outdoorDetails->sum('discount');
+        $totalTestPayable = $outdoorDetails->sum('payable');
+        $totalTestPay = $outdoorDetails->sum('pay');
+        $totalTestDue = $outdoorDetails->sum('due');
+        $totalReturn = $outdoorDetails->where('status', '0')->sum('return');
+        $totalDueCollection = 0;
+
+        // ticket sate
+        $ticketSaleData = TicketSale::where('date', $date)->get();
+        $totalTicketAmount = $ticketSaleData->sum('total');
+        $totalTicketDiscount = $ticketSaleData->sum('discount');
+        $totalTicketPayable = $ticketSaleData->sum('payable');
+        $totalTicketPay = $ticketSaleData->sum('pay');
+        $totalTicketDue = $ticketSaleData->sum('due');
+        $totalTicketReturn = $ticketSaleData->sum('return');
+
+        // expenses & extra income
+        $totalExpenses = ExpensesDetails::where('date', $date)->sum('amount');
+        $totalIncome = Income::where('date', $date)->sum('amount');
+
+        // banking transection
+        $bankTransection = BankTransectionDetail::where('date', $date)->get();
+        $totalBankDiposit = $bankTransection->where('status', 'deposit')->sum('amount');
+        $totalBankWithdraw = $bankTransection->where('status', 'withdraw')->sum('amount');
+        $totalBankBalance = $totalBankDiposit - $totalBankWithdraw;
+
+        // indoor transection
+        $indoorTransection = AdmissionBillSummary::where('billing_date', $date)->get();
+        $totalIndoorCost = $indoorTransection->sum('total_cost');
+        $totalIndoorContract = $indoorTransection->sum('contract_amount');
+        $totalIndoorDiscount = $indoorTransection->sum('discount');
+        $totalIndoorAdvance = $indoorTransection->sum('advance_paid');
+        $totalIndoorPayable = $indoorTransection->sum('payable_amount');
+        $totalIndoorPaid = $indoorTransection->sum('paid_amount');
+        $totalIndoorDue = $indoorTransection->sum('remaining_due');
+
+        $totalHandCash = ($totalTestPay + $totalTicketPay + $totalIndoorPaid + $totalIncome + $totalBankWithdraw) - ($totalBankDiposit + $totalExpenses);
+
+        return view('accounts.print-total-transaction', compact(
+            'company',
+            'totalHandCash',
+            
+            // outdoor
+            'totalTestSale',
+            'totalTestDiscount',
+            'totalTestPayable',
+            'totalTestPay',
+            'totalTestDue',
+            'totalReturn',
+            'totalDueCollection',
+
+            // ticket
+            'totalTicketAmount',
+            'totalTicketDiscount',
+            'totalTicketPayable',
+            'totalTicketPay',
+            'totalTicketDue',
+            'totalTicketReturn',
+
+            // expenses & income
+            'totalExpenses',
+            'totalIncome',
+
+            // banking
+            'totalBankDiposit',
+            'totalBankWithdraw',
+            'totalBankBalance',
+
+            // indoor
+            'totalIndoorCost',
+            'totalIndoorContract',
+            'totalIndoorDiscount',
+            'totalIndoorAdvance',
+            'totalIndoorPayable',
+            'totalIndoorPaid',
+            'totalIndoorDue'
+        ));
     }
 }

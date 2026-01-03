@@ -198,6 +198,7 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/bank/transection/filter', [AccountReportController::class, 'bankDataFilter'])->name('bank.transaction.filter');
         // Total transection report
         Route::get('/total-transaction', [AccountReportController::class, 'totalTransaction'])->name('account.total.transaction');
+        Route::get('/print-total-transection', [AccountReportController::class, 'printTotalTrasaction'])->name('print.total.tramsection');
     });
 
 
