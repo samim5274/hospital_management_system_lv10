@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Carbon;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Outdoor\OutdoorController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Indoor\IndoorController;
 use App\Http\Controllers\Setting\SettingController;
 use App\Http\Controllers\Lab\LabController;
@@ -37,10 +39,7 @@ Route::middleware(['admin'])->group(function () {
         return redirect('/dashboard');
     });
 
-    Route::get('/dashboard', function () {
-        $company = App\Models\Company::first();
-        return view('welcome', compact('company'));
-    });
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 
     // 🔹 Outdoor Management
     Route::prefix('patients')->group(function () {
@@ -198,7 +197,7 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/bank/transection/filter', [AccountReportController::class, 'bankDataFilter'])->name('bank.transaction.filter');
         // Total transection report
         Route::get('/total-transaction', [AccountReportController::class, 'totalTransaction'])->name('account.total.transaction');
-        Route::get('/print-total-transection', [AccountReportController::class, 'printTotalTrasaction'])->name('print.total.tramsection');
+        Route::get('/print-total-transection-summary', [AccountReportController::class, 'printTotalTrasaction'])->name('print.total.tramsaction.summary');
     });
 
 

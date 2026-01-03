@@ -37,7 +37,7 @@
 
                 <div class="">
                     <div class="d-flex justify-content-end mb-3">
-                        <a href="{{ route('print.total.tramsection') }}" target="_blank" class="btn btn-light btn-lg shadow-lg">
+                        <a href="{{ route('print.total.tramsaction.summary') }}" target="_blank" class="btn btn-light btn-lg shadow-lg">
                             <i class="bi bi-printer me-2"></i> Print
                         </a>
                     </div>
@@ -211,10 +211,6 @@
 
                     </div>
                 </div>
-
-                <!-- Bootstrap Icons -->
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
 
             </div>
 

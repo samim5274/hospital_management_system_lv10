@@ -1,48 +1,68 @@
-var optionsProfileVisit = {
-	annotations: {
-		position: 'back'
-	},
-	dataLabels: {
-		enabled:false
-	},
-	chart: {
-		type: 'bar',
-		height: 300
-	},
-	fill: {
-		opacity:1
-	},
-	plotOptions: {
-	},
-	series: [{
-		name: 'sales',
-		data: [9,20,30,20,10,20,30,20,10,20,30,20]
-	}],
-	colors: '#435ebe',
-	xaxis: {
-		categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul", "Aug","Sep","Oct","Nov","Dec"],
-	},
-}
-let optionsVisitorsProfile  = {
-	series: [70, 30],
-	labels: ['Male', 'Female'],
-	colors: ['#435ebe','#55c6e8'],
-	chart: {
-		type: 'donut',
-		width: '100%',
-		height:'350px'
-	},
-	legend: {
-		position: 'bottom'
-	},
-	plotOptions: {
-		pie: {
-			donut: {
-				size: '30%'
-			}
-		}
-	}
-}
+document.addEventListener("DOMContentLoaded", function() {
+    var chartEl = document.getElementById('chart-visitors-profile');
+    var maleVisitors = parseInt(chartEl.dataset.male) || 0;
+    var femaleVisitors = parseInt(chartEl.dataset.female) || 0;
+
+    let optionsVisitorsProfile = {
+        series: [maleVisitors, femaleVisitors],
+        labels: ['Male', 'Female'],
+        colors: ['#435ebe','#55c6e8'],
+        chart: { type: 'donut', width: '100%', height:'350px' },
+        legend: { position: 'bottom' },
+        plotOptions: {
+            pie: {
+                donut: { size: '30%' }
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            formatter: function (val, opts) {
+                return opts.w.globals.labels[opts.seriesIndex] + ": " + val.toFixed(2) +"%";
+            }
+        }
+    };
+
+    var chartVisitorsProfile = new ApexCharts(chartEl, optionsVisitorsProfile);
+    chartVisitorsProfile.render();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	// Controller
+    var el = document.getElementById('chart-profile-visit');
+    var monthlySales = JSON.parse(el.dataset.sales);
+
+    var optionsProfileVisit = {
+        chart: { type: 'bar', height: 300 },
+        series: [{ name: 'Sales', data: monthlySales }],
+        xaxis: { categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"] },
+        colors: '#435ebe',
+        tooltip: {
+            y: {
+                formatter: function(val) { return '৳ ' + val.toLocaleString(); }
+            }
+        }
+    };
+
+    var chartProfileVisit = new ApexCharts(document.querySelector("#chart-profile-visit"), optionsProfileVisit);
+    chartProfileVisit.render();
+
+
+
+
+
+
+
 
 var optionsEurope = {
 	series: [{
@@ -101,10 +121,6 @@ let optionsIndonesia = {
 	colors: ['#dc3545'],
 }
 
-
-
-var chartProfileVisit = new ApexCharts(document.querySelector("#chart-profile-visit"), optionsProfileVisit);
-var chartVisitorsProfile = new ApexCharts(document.getElementById('chart-visitors-profile'), optionsVisitorsProfile)
 var chartEurope = new ApexCharts(document.querySelector("#chart-europe"), optionsEurope);
 var chartAmerica = new ApexCharts(document.querySelector("#chart-america"), optionsAmerica);
 var chartIndonesia = new ApexCharts(document.querySelector("#chart-indonesia"), optionsIndonesia);
@@ -112,5 +128,4 @@ var chartIndonesia = new ApexCharts(document.querySelector("#chart-indonesia"), 
 chartIndonesia.render();
 chartAmerica.render();
 chartEurope.render();
-chartProfileVisit.render();
-chartVisitorsProfile.render()
+});
