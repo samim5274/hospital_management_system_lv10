@@ -16,7 +16,43 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('role')->default('admin'); // superadmin, admin, staff
+            $table->string('role')->default('staff'); // superadmin, admin, manager, staff
+
+            $table->text('address1')->nullable();
+            $table->text('address2')->nullable();
+
+            $table->date('dob')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('blood_group')->nullable();
+            $table->string('religion')->nullable();
+            $table->string('nationality')->nullable();
+            $table->string('national_id')->nullable();
+            $table->string('contact_number', 20)->nullable();
+
+            $table->string('father_name')->nullable();
+            $table->string('father_profession')->nullable();
+            $table->string('father_contact', 20)->nullable();
+            $table->string('father_email')->nullable();
+            $table->string('father_nid')->nullable();
+
+            $table->string('mother_name')->nullable();
+            $table->string('mother_profession')->nullable();
+            $table->string('mother_contact', 20)->nullable();
+            $table->string('mother_email')->nullable();
+            $table->string('mother_nid')->nullable();
+
+            $table->string('guardian_name')->nullable();
+            $table->string('guardian_contact', 20)->nullable();
+            $table->string('guardian_email')->nullable();
+            $table->string('guardian_nid')->nullable();
+            $table->string('guardian_relationship')->nullable();
+
+            $table->string('photo')->nullable();
+            $table->string('father_photo')->nullable();
+            $table->string('mother_photo')->nullable();
+
+            $table->integer('status')->default(1);
+            $table->string('remark')->nullable();
 
             $table->string('otp')->nullable();
             $table->timestamp('otp_expires_at')->nullable();

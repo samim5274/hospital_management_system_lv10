@@ -217,7 +217,7 @@
                 <div class="card-body py-4 px-5">
                     <div class="d-flex align-items-center">
                         <div class="avatar avatar-xl">
-                            <img src="assets/images/faces/4.jpg" alt="Face 1">
+                            <img src="{{ Auth::guard('admin')->user()->photo ? asset('img/staff/' . Auth::guard('admin')->user()->photo) : asset('img/default.png') }}" alt="Face 1">
                         </div>
                         <div class="ms-3 name">
                             <h5 class="font-bold">{{ Auth::guard('admin')->user()->name }}</h5>

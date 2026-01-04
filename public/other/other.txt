@@ -181,3 +181,13 @@ chartAmerica.render();
 chartEurope.render();
 chartProfileVisit.render();
 chartVisitorsProfile.render()
+
+
+
+
+// smart pagination
+@if($staffs->hasPages())
+	<div class="card-footer">
+		{{ $staffs->links('pagination::bootstrap-5') }}
+	</div>
+@endif

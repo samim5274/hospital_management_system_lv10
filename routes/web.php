@@ -15,6 +15,7 @@ use App\Http\Controllers\Income\IncomeController;
 use App\Http\Controllers\Bank\BankController;
 use App\Http\Controllers\Account\AccountReportController;
 use App\Http\Controllers\Ticket\TicketController;
+use App\Http\Controllers\Staff\StaffController;
 
 Auth::routes();
 
@@ -203,17 +204,19 @@ Route::middleware(['admin'])->group(function () {
 
     // 🔹 Staff Management
     Route::prefix('staff')->group(function () {
-        Route::get('/', [App\Http\Controllers\StaffController::class, 'index'])->name('staff.index');
-        Route::get('/roles', [App\Http\Controllers\StaffController::class, 'roles'])->name('staff.roles');
-        Route::get('/salary', [App\Http\Controllers\StaffController::class, 'salary'])->name('staff.salary');
+        Route::get('/', [StaffController::class, 'index'])->name('staff.index');
+        Route::post('/create-staff', [StaffController::class, 'store'])->name('create.staff');
+        Route::get('/staff-details/{id}', [StaffController::class, 'view'])->name('staff.details.view');
+        // Route::get('/roles', [StaffController::class, 'roles'])->name('staff.roles');
+        // Route::get('/salary', [StaffController::class, 'salary'])->name('staff.salary');
     });
 
 
     // 🔹 Reports
     Route::prefix('reports')->group(function () {
-        Route::get('/daily', [App\Http\Controllers\ReportController::class, 'daily'])->name('reports.daily');
-        Route::get('/monthly', [App\Http\Controllers\ReportController::class, 'monthly'])->name('reports.monthly');
-        Route::get('/financial', [App\Http\Controllers\ReportController::class, 'financial'])->name('reports.financial');
+        Route::get('/daily', [ReportController::class, 'daily'])->name('reports.daily');
+        Route::get('/monthly', [ReportController::class, 'monthly'])->name('reports.monthly');
+        Route::get('/financial', [ReportController::class, 'financial'])->name('reports.financial');
     });
 
 

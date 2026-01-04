@@ -32,19 +32,13 @@
                         <form action="{{ route('login.post') }}" method="POST">
                             @csrf
                             <div class="mb-3 position-relative">
-                                <input type="text" name="email"  class="form-control form-control-lg rounded-3 ps-5" placeholder="Username" value="samim@gmail.com">
+                                <input type="text" name="email"  class="form-control form-control-lg rounded-3 ps-5" placeholder="Username" value="sabbir@example.com">
                                 <i class="bi bi-person position-absolute top-50 translate-middle-y ms-3 text-muted"></i>
-                                @error('email')
-                                    <span class="invalid-feedback">{{ $message }}</span>
-                                @enderror
                             </div>
 
                             <div class="mb-3 position-relative">
-                                <input type="password" name="password" class="form-control form-control-lg rounded-3 ps-5" placeholder="Password" value="123456789">
+                                <input type="password" name="password" class="form-control form-control-lg rounded-3 ps-5" placeholder="Password" value="password">
                                 <i class="bi bi-shield-lock position-absolute top-50 translate-middle-y ms-3 text-muted"></i>
-                                @error('password')
-                                    <span class="invalid-feedback">{{ $message }}</span>
-                                @enderror
                             </div>
 
                             <div class="form-check mb-4">
@@ -59,7 +53,7 @@
 
                         <!-- Footer Links -->
                         <div class="text-center mt-4">
-                            <p class="mb-1">Don't have an account? <a href="#" class="text-primary fw-bold">Sign Up</a></p>
+                            <!-- <p class="mb-1">Don't have an account? <a href="#" class="text-primary fw-bold">Sign Up</a></p> -->
                             <p><a href="{{ route('forget.password.view') }}" class="text-primary fw-bold">Forgot password?</a></p>
                         </div>
 

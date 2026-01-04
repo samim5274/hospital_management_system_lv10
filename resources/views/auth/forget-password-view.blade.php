@@ -32,7 +32,7 @@
                         <form action="{{ route('find-account') }}" method="POST">
                             @csrf
                             <div class="mb-3 position-relative">
-                                <input type="text" name="email"  class="form-control form-control-lg rounded-3 ps-5" placeholder="Enter your email..." value="valobashi.tumake9999@gmail.com">
+                                <input type="text" name="email"  class="form-control form-control-lg rounded-3 ps-5" placeholder="Enter your email...">
                                 <i class="bi bi-person position-absolute top-50 translate-middle-y ms-3 text-muted"></i>
                             </div>
 

@@ -19,16 +19,65 @@ class Admin extends Authenticatable
         'email',
         'password',
         'role', // admin, superadmin, staff
+
+        'address1',
+        'address2',
+
+        'dob',
+        'gender',
+        'blood_group',
+
+        'religion',
+        'nationality',
+        'national_id',
+        'contact_number',
+
+        'father_name',
+        'father_profession',
+        'father_contact',
+        'father_email',
+        'father_nid',
+
+        'mother_name',
+        'mother_profession',
+        'mother_contact',
+        'mother_email',
+        'mother_nid',
+
+        'guardian_name',
+        'guardian_contact',
+        'guardian_email',
+        'guardian_nid',
+        'guardian_relationship',
+
+        'photo',
+        'father_photo',
+        'mother_photo', 
+        
+        'status',
+        'remark',
+
         'otp',
         'otp_expires_at',
+
         'email_verified_at',
         'last_login_at',
         'last_login_ip',
+        'remember_token',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
+        'otp',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'last_login_at'     => 'datetime',
+        'otp_expires_at'    => 'datetime',
+        'dob'               => 'date',
+        'status'            => 'boolean',
     ];
 
     public function storeTest() 
