@@ -2,9 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Artisan;
+
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Outdoor\OutdoorController;
+use App\Http\Controllers\Outdoor\OutdoorReportController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Indoor\IndoorController;
 use App\Http\Controllers\Setting\SettingController;
@@ -35,6 +38,16 @@ Route::post('/update-password', [AuthController::class, 'updatePass'])->name('up
 
 
 Route::middleware(['admin'])->group(function () {
+
+    Route::get('/clear-coockie-cache', function(){
+        Artisan::call('config:clear');
+        Artisan::call('cache:clear');
+        Artisan::call('view:clear');
+        Artisan::call('route:clear');
+        Artisan::call('optimize:clear');
+        // Artisan::call('optimize');
+        return redirect()->back()->with('success','Caches cleared successfully.');
+    })->name('clear.cache');
 
     Route::get('/', function () {
         return redirect('/dashboard');
@@ -96,6 +109,10 @@ Route::middleware(['admin'])->group(function () {
         Route::post('/indoors/setting/diseases/update/{id}', [SettingController::class, 'update'])->name('setting.diseases.update');
         Route::post('/indoors/setting/beds/store', [SettingController::class, 'bedStore'])->name('setting.beds.store');
         Route::post('/indoors/setting/beds/update/{id}', [SettingController::class, 'bedUpdate'])->name('setting.beds.update');
+
+        Route::get('/profile', [SettingController::class, 'profile'])->name('profile');
+        Route::post('/update-user-password', [SettingController::class, 'updatePass'])->name('update.user.password');
+        Route::get('/backup', [SettingController::class, 'dbBackup'])->name('db.back.up');
     });
 
     Route::prefix('labs')->group(function(){
@@ -207,16 +224,21 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/', [StaffController::class, 'index'])->name('staff.index');
         Route::post('/create-staff', [StaffController::class, 'store'])->name('create.staff');
         Route::get('/staff-details/{id}', [StaffController::class, 'view'])->name('staff.details.view');
+        Route::get('/staff-edit/{id}', [StaffController::class, 'edit'])->name('staff.edit');
+        Route::post('/staff-update/{id}', [StaffController::class, 'update'])->name('staff.update');
         // Route::get('/roles', [StaffController::class, 'roles'])->name('staff.roles');
         // Route::get('/salary', [StaffController::class, 'salary'])->name('staff.salary');
     });
 
 
     // 🔹 Reports
-    Route::prefix('reports')->group(function () {
-        Route::get('/daily', [ReportController::class, 'daily'])->name('reports.daily');
-        Route::get('/monthly', [ReportController::class, 'monthly'])->name('reports.monthly');
-        Route::get('/financial', [ReportController::class, 'financial'])->name('reports.financial');
+    Route::prefix('reports/outdoor')->group(function () {
+        Route::get('/', [OutdoorReportController::class, 'outdoor'])->name('reports.outdoor');
+        Route::get('/filter-outdoor-sale', [OutdoorReportController::class, 'filterSale'])->name('filter-test-sale');
+        Route::get('/due', [OutdoorReportController::class, 'due'])->name('reports.due');
+        Route::get('/filter-due-sale', [OutdoorReportController::class, 'filterDueSale'])->name('filter-due-test-sale');
+        Route::get('/ticket', [OutdoorReportController::class, 'ticket'])->name('reports.user');
+        Route::get('/filter-ticket-sale', [OutdoorReportController::class, 'filterTicket'])->name('filter-ticket-sale');
     });
 
 

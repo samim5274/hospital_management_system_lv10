@@ -33,7 +33,7 @@ return new class extends Migration
             $table->decimal('discount', 12, 2)->default(0);
             $table->decimal('payable', 12, 2)->default(0);
             $table->decimal('pay', 12, 2)->default(0);
-            $table->integer('duestatus')->default(0);
+            $table->integer('duestatus')->default(0); // 1 = no due, 0 = due
             $table->decimal('due', 12, 2)->default(0);
             $table->decimal('return', 12, 2)->default(0);
 

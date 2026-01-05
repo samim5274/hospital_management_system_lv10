@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Setting;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 
 use App\Models\LabTest;
@@ -14,6 +19,7 @@ use App\Models\Company;
 use App\Models\Bed;
 use App\Models\DutyDoctor;
 use App\Models\Disease;
+use App\Models\Admin;
 
 class SettingController extends Controller
 {
@@ -24,7 +30,8 @@ class SettingController extends Controller
         $dutyDoctors = DutyDoctor::all();
         $diseases = Disease::all();
         $beds = bed::all();
-        return view('setting.setting', compact('beds','refers','doctors','dutyDoctors','diseases'));
+        $company = Company::first();
+        return view('setting.setting', compact('beds','refers','doctors','dutyDoctors','diseases','company'));
     }
 
     public function createRefer(Request $request){
@@ -225,5 +232,67 @@ class SettingController extends Controller
         $bed->update($request->only('bed_number', 'ward', 'status', 'price_per_day'));
 
         return redirect()->back()->with('success', 'Bed updated successfully!');
+    }
+
+    public function profile(){
+        $company = Company::first();
+        $staff = Auth::guard('admin')->user();
+        return view('setting.profile', compact('company', 'staff'));
+    }
+
+    public function updatePass(Request $request){
+        
+        $request->validate([
+            'new_password' => [
+                'required',
+                'min:6',
+                'regex:/[A-Z]/',
+                'regex:/[a-z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*#?&]/',
+                'same:confirm_password'
+            ],
+        ]);
+
+        $email = $request->email;
+        $data = Admin::where('email', $email)->first();
+        if(!$data){
+            return redirect()->back()->with('error', 'Invalid request!');
+        }
+        $data->password = Hash::make($request->new_password);        
+        $data->save();
+        return redirect()->back()->with('success', 'Password updated successful!');
+    }
+
+    public function dbBackup(){
+        try {
+            Artisan::call('backup:run', ['--only-db' => true]);
+        } catch (\Exception $e) {
+            return back()->with('error', 'Backup failed: ' . $e->getMessage());
+        }
+
+        $diskName = config('backup.backup.destination.disks')[0];
+        $disk = Storage::disk($diskName);
+
+        $files = collect($disk->allFiles(config('backup.backup.name')))
+                    ->filter(fn ($file) => Str::endsWith($file, '.zip'))
+                    ->sortDesc();
+
+        $latestBackup = $files->first();
+
+        if (!$latestBackup) {
+            return back()->with('error', 'No backup file found!');
+        }
+
+        $path = $disk->path($latestBackup);
+
+        Mail::raw('Here is the latest database backup.', function ($message) use ($path) {
+            $message->to('valobashi.tumake9999@gmail.com') 
+                    ->subject('Database Backup')
+                    ->attach($path);
+        });
+
+        return redirect()->back()->with('success', 'Database backup successfully. Thank You..!');
+        // return response()->download($path);
     }
 }

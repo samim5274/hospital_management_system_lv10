@@ -32,6 +32,10 @@ class TicketSale extends Model
         'user_id',
     ];
 
+    protected $casts = [
+        'date' => 'date',
+    ];
+
     public function doctor()
     {
         return $this->belongsTo(Doctor::class, 'doctor_id');

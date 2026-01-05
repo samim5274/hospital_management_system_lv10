@@ -32,6 +32,10 @@ class PaymentDetail extends Model
         'userId',
     ];
 
+    protected $casts = [
+        'date' => 'date',
+    ];
+
     // Relations
     public function doctor()
     {

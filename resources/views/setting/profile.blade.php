@@ -33,7 +33,7 @@
             </header>
             @include('layouts.message')
             <div class="page-heading">
-                <h3>Staff Details - {{ $staff->name }}</h3>
+                <h3><strong>{{ $staff->name }}</strong> - Profile</h3>
             </div>            
             <div class="page-content">
                 <section class="my-5">
@@ -91,11 +91,19 @@
                                         ($staff->role === 'manager' ? 'bg-primary' : 'bg-success')) }}">
                                         <i class="bi bi-shield-lock me-1"></i>
                                         {{ ucfirst($staff->role) }}
-                                    </span>
+                                    </span><br>
 
-                                    <a href="{{ route('staff.edit', $staff->id) }}" class="btn btn-sm btn-outline-primary ms-2">
+                                    <a href="{{ route('staff.edit', $staff->id) }}" class="btn btn-sm btn-outline-success ms-2">
                                         <i class="bi bi-pencil-square me-1"></i> Edit
-                                    </a>
+                                    </a> 
+
+                                    <button type="button" class="btn btn-sm btn-outline-primary ms-2" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+                                        <i class="bi bi-key me-1"></i> Change Password
+                                    </button>
+
+                                    <a href="{{ route('logout') }}" class="btn btn-sm btn-outline-danger ms-2">
+                                        <i class="bi bi-box-arrow-left me-1"></i> Logout
+                                    </a> 
 
                                     <!-- Divider -->
                                     <hr class="my-4">
@@ -332,7 +340,51 @@
     </div>    
 
 
+<!-- Password Change Modal -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
 
+        <!-- Modal Header -->
+        <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title text-white" id="changePasswordModalLabel"><i class="bi bi-shield-lock fs-4 me-1"></i> Change Password</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+            <form id="changePasswordForm" action="{{ route('update.user.password') }}" method="POST">
+            @csrf
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">New Password</label>
+                <input type="password" id="new_password" name="new_password" class="form-control" required>
+                <input type="email" id="email" name="email" class="form-control" value="{{ $staff->email }}" hidden required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <ul class="list-unstyled small">
+                <li id="rule-length" class="text-danger"><i class="bi bi-x-circle me-1"></i> Minimum 6 characters</li>
+                <li id="rule-upper" class="text-danger"><i class="bi bi-x-circle me-1"></i> At least 1 capital letter</li>
+                <li id="rule-lower" class="text-danger"><i class="bi bi-x-circle me-1"></i> At least 1 small letter</li>
+                <li id="rule-number" class="text-danger"><i class="bi bi-x-circle me-1"></i> At least 1 number</li>
+                <li id="rule-special" class="text-danger"><i class="bi bi-x-circle me-1"></i> At least 1 special character</li>
+                <li id="rule-match" class="text-danger"><i class="bi bi-x-circle me-1"></i> Passwords match</li>
+                </ul>
+            </div>
+
+            <button type="submit" id="submitBtn" class="btn btn-primary w-100" disabled>Update Password</button>
+            </form>
+        </div>
+
+        </div>
+    </div>
+</div>
 
 
     <!-- JS Files -->
@@ -340,7 +392,56 @@
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/apexcharts/apexcharts.js') }}"></script>
     <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>    
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+
+    <!-- live password validation -->
+    <script>
+        const newPassword = document.getElementById('new_password');
+        const confirmPassword = document.getElementById('confirm_password');
+        const submitBtn = document.getElementById('submitBtn');
+
+        const rules = {
+            length: document.getElementById('rule-length'),
+            upper: document.getElementById('rule-upper'),
+            lower: document.getElementById('rule-lower'),
+            number: document.getElementById('rule-number'),
+            special: document.getElementById('rule-special'),
+            match: document.getElementById('rule-match'),
+        };
+
+        function updateRule(rule, passed) {
+            rule.classList.remove('text-danger', 'text-success');
+            rule.classList.add(passed ? 'text-success' : 'text-danger');
+            rule.querySelector('i').className =
+                passed ? 'bi bi-check-circle me-1' : 'bi bi-x-circle me-1';
+        }
+
+        function validateLive() {
+            const pwd = newPassword.value;
+            const confirm = confirmPassword.value;
+
+            const checks = {
+                length: pwd.length >= 6,
+                upper: /[A-Z]/.test(pwd),
+                lower: /[a-z]/.test(pwd),
+                number: /[0-9]/.test(pwd),
+                special: /[!@#$%^&*(),.?":{}|<>]/.test(pwd),
+                match: pwd && pwd === confirm
+            };
+
+            updateRule(rules.length, checks.length);
+            updateRule(rules.upper, checks.upper);
+            updateRule(rules.lower, checks.lower);
+            updateRule(rules.number, checks.number);
+            updateRule(rules.special, checks.special);
+            updateRule(rules.match, checks.match);
+
+            submitBtn.disabled = !Object.values(checks).every(Boolean);
+        }
+
+        newPassword.addEventListener('keyup', validateLive);
+        confirmPassword.addEventListener('keyup', validateLive);
+    </script>
 
 </body>
 

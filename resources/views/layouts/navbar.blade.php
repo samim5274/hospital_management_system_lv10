@@ -34,7 +34,7 @@
                 <li class="sidebar-item has-sub {{ Request::is('patients*') ? 'active' : '' }}">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-person-lines-fill"></i>
-                        <span>Outdoor Management</span>
+                        <span>Outdoor</span>
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item {{ Request::is('patients') ? 'active' : '' }}"><a href="{{ url('/patients') }}">All Patients</a></li>
@@ -48,7 +48,7 @@
                 <li class="sidebar-item has-sub {{ Request::is('indoors*') ? 'active' : '' }}">
                     <a href="#" class="sidebar-link">
                         <i class="bi bi-person-lines-fill"></i>
-                        <span>Indoor Management</span>
+                        <span>Indoor</span>
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item {{ Request::is('indoors') ? 'active' : '' }}"><a href="{{ url('/indoors') }}">All Patients</a></li>
@@ -107,8 +107,8 @@
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item {{ Request::is('staff') ? 'active' : '' }}"><a href="{{ url('/staff') }}">All Staff</a></li>
-                        <li class="submenu-item {{ Request::is('staff/roles') ? 'active' : '' }}"><a href="{{ url('/staff/roles') }}">Roles & Permissions</a></li>
-                        <li class="submenu-item {{ Request::is('staff/salary') ? 'active' : '' }}"><a href="{{ url('/staff/salary') }}">Salary</a></li>
+                        <!-- <li class="submenu-item {{ Request::is('staff/roles') ? 'active' : '' }}"><a href="{{ url('/staff/roles') }}">Roles & Permissions</a></li>
+                        <li class="submenu-item {{ Request::is('staff/salary') ? 'active' : '' }}"><a href="{{ url('/staff/salary') }}">Salary</a></li> -->
                     </ul>
                 </li>
 
@@ -119,9 +119,10 @@
                         <span>Reports</span>
                     </a>
                     <ul class="submenu">
-                        <li class="submenu-item {{ Request::is('reports/daily') ? 'active' : '' }}"><a href="{{ url('/reports/daily') }}">Daily Reports</a></li>
-                        <li class="submenu-item {{ Request::is('reports/monthly') ? 'active' : '' }}"><a href="{{ url('/reports/monthly') }}">Monthly Reports</a></li>
-                        <li class="submenu-item {{ Request::is('reports/financial') ? 'active' : '' }}"><a href="{{ url('/reports/financial') }}">Financial Reports</a></li>
+                        <label for="" class="text-muted text-sm">Outdoor Report</label>
+                        <li class="submenu-item {{ Request::is('reports/outdoor') ? 'active' : '' }}"><a href="{{ url('/reports/outdoor') }}">All Reports</a></li>
+                        <li class="submenu-item {{ Request::is('reports/outdoor/due') ? 'active' : '' }}"><a href="{{ url('/reports/outdoor/due') }}">Due Reports</a></li>
+                        <li class="submenu-item {{ Request::is('reports/outdoor/ticket') ? 'active' : '' }}"><a href="{{ url('/reports/outdoor/ticket') }}">Ticket Sale</a></li>
                     </ul>
                 </li>
 
@@ -133,9 +134,9 @@
                     </a>
                     <ul class="submenu">
                         <li class="submenu-item {{ Request::is('settings') ? 'active' : '' }}"><a href="{{ url('/settings') }}">Setting</a></li>
-                        <li class="submenu-item {{ Request::is('settings/profile') ? 'active' : '' }}"><a href="{{ url('/settings/profile') }}">Profile Settings</a></li>
+                        <li class="submenu-item {{ Request::is('settings/profile') ? 'active' : '' }}"><a href="{{ url('/settings/profile') }}">Profile</a></li>
                         <li class="submenu-item {{ Request::is('settings/backup') ? 'active' : '' }}"><a href="{{ url('/settings/backup') }}">Database Backup</a></li>
-                        <li class="submenu-item {{ Request::is('settings/notifications') ? 'active' : '' }}"><a href="{{ url('/settings/notifications') }}">Notifications</a></li>
+                        <!-- <li class="submenu-item {{ Request::is('settings/notifications') ? 'active' : '' }}"><a href="{{ url('/settings/notifications') }}">Notifications</a></li> -->
                     </ul>
                 </li>
 
