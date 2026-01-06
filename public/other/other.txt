@@ -191,3 +191,20 @@ chartVisitorsProfile.render()
 		{{ $staffs->links('pagination::bootstrap-5') }}
 	</div>
 @endif
+
+
+
+// github repository diye project diploy
+git clone https://github.com/yourname/project.git .
+cp .env.example .env
+php artisan key:generate
+chmod -R 775 storage bootstrap/cache
+
+git pull origin main
+composer install --no-dev --optimize-autoloader
+php artisan optimize:clear
+
+// front end change hole
+php artisan view:clear
+php artisan route:clear
+php artisan config:cache
