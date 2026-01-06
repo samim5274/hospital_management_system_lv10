@@ -31,7 +31,7 @@ class OutdoorReportController extends Controller
         $doctors = Doctor::all();
         $references = Reference::all();
 
-        return view('patient.reports.date-wise-sale-report', compact(
+        return view('patient.reports.outdoor-date-wise-sale-report', compact(
             'company', 'datas','totalPay','total','discount','due',
             'doctors','references'
         ));
@@ -94,7 +94,7 @@ class OutdoorReportController extends Controller
         $doctors = Doctor::all();
         $references = Reference::all();
 
-        return view('patient.reports.due-report', compact(
+        return view('patient.reports.outdoor-due-report', compact(
             'company', 'datas','totalPay','total','discount','due',
             'doctors','references'
         ));
@@ -158,7 +158,7 @@ class OutdoorReportController extends Controller
         $doctors = Doctor::all();
         $references = Reference::all();
 
-        return view('patient.reports.ticket-sale-report', compact(
+        return view('patient.reports.outdoor-ticket-sale-report', compact(
             'company', 'datas','totalPay','total','discount','due',
             'doctors','references'
         ));

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 05, 2026 at 01:31 PM
+-- Generation Time: Jan 06, 2026 at 11:17 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -86,7 +86,7 @@ INSERT INTO `admins` (`id`, `name`, `email`, `password`, `role`, `address1`, `ad
 (7, 'Sharmin Sultana', 'sharmin@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'staff', 'Rangpur', NULL, '1999-12-25', 'Female', 'B-', 'Islam', 'Bangladeshi', '1234567896', '+8801710000007', 'Nazrul Islam', NULL, '+8801810000007', NULL, NULL, 'Rehana Begum', NULL, '+8801910000007', NULL, NULL, 'Nazrul Islam', '+8801810000007', NULL, 'GDN007', 'Father', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-01-03 23:42:12', '2026-01-03 23:42:12'),
 (8, 'Arif Khan', 'arif@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'staff', 'Cumilla', NULL, '1996-06-08', 'Male', 'A+', 'Islam', 'Bangladeshi', '1234567897', '+8801710000008', 'Rafiq Khan', NULL, '+8801810000008', NULL, NULL, 'Hasina Begum', NULL, '+8801910000008', NULL, NULL, 'Rafiq Khan', '+8801810000008', NULL, 'GDN008', 'Father', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-01-03 23:42:12', '2026-01-03 23:42:12'),
 (9, 'Mithila Roy', 'mithila@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'staff', 'Mymensingh', NULL, '2000-02-14', 'Female', 'O+', 'Hindu', 'Bangladeshi', '1234567898', '+8801710000009', 'Anil Roy', NULL, '+8801810000009', NULL, NULL, 'Kakoli Roy', NULL, '+8801910000009', NULL, NULL, 'Anil Roy', '+8801810000009', NULL, 'GDN009', 'Father', NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-01-03 23:42:12', '2026-01-03 23:42:12'),
-(10, 'Sabbir Ahmed', 'sabbir@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'superadmin', 'Dhaka', 'Kaliakair, Gazipur, Dhaka, Bangladesh', NULL, 'Male', 'AB-', 'Islam', 'Bangladeshi', '1234567899', '+8801710000010', 'Abdul Jalil', 'Farmer', '+8801810000010', 'father@gamil.com', '321654987', 'Sufia Begum', 'House Wife', '+8801910000010', 'mother@gmail.com', '32146574987', 'Abdul Jalil', '+8801810000010', 'jalil@gamil.com', 'GDN010', 'Father', 'staff-10-1767592067.jpg', 'father-10-1767592127.jpg', 'mother-10-1767592127.jpg', 1, 'N/A', NULL, NULL, NULL, '2026-01-05 07:52:28', '127.0.0.1', 'bKPLeMwK1HwF5bUHmYC99S2Ojy5nazbbOMUw6QDC9DRKd6McvW4hY9HZWyGV', '2026-01-03 23:42:12', '2026-01-05 07:52:28'),
+(10, 'Sabbir Ahmed', 'sabbir@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'superadmin', 'Dhaka', 'Kaliakair, Gazipur, Dhaka, Bangladesh', NULL, 'Male', 'AB-', 'Islam', 'Bangladeshi', '1234567899', '+8801710000010', 'Abdul Jalil', 'Farmer', '+8801810000010', 'father@gamil.com', '321654987', 'Sufia Begum', 'House Wife', '+8801910000010', 'mother@gmail.com', '32146574987', 'Abdul Jalil', '+8801810000010', 'jalil@gamil.com', 'GDN010', 'Father', 'staff-10-1767592067.jpg', 'father-10-1767592127.jpg', 'mother-10-1767592127.jpg', 1, 'N/A', NULL, NULL, NULL, '2026-01-06 04:31:41', '127.0.0.1', 'bKPLeMwK1HwF5bUHmYC99S2Ojy5nazbbOMUw6QDC9DRKd6McvW4hY9HZWyGV', '2026-01-03 23:42:12', '2026-01-06 04:31:41'),
 (11, 'Fahim Ahmed', 'fahim@gmail.com', '$2y$12$lo4zOT3KkPbV5iVVMLrSGeNTlwMGTEihIYhFSfIuWG8scNhYnLnMO', 'staff', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '01745215486', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-01-03 23:42:23', '2026-01-03 23:42:23'),
 (12, 'Robert Brown', 'admin@admin.com', '$2y$12$IcntpwnSk6KBZXMIJXzRnOs6NPSeZqPIXCcefF2/0gtQ6vOio4acq', 'staff', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '01478523695', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2026-01-03 23:44:31', '2026-01-03 23:44:31');
 
@@ -120,6 +120,13 @@ CREATE TABLE `admission_bill_summaries` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `admission_bill_summaries`
+--
+
+INSERT INTO `admission_bill_summaries` (`id`, `patient_id`, `general_bed`, `cabin_fee`, `doctor_fee`, `service_charge`, `ot_medicine`, `oral_medicine`, `others`, `contract_amount`, `total_cost`, `discount`, `advance_paid`, `payable_amount`, `paid_amount`, `remaining_due`, `reg`, `billing_date`, `user_id`, `remarks`, `created_at`, `updated_at`) VALUES
+(1, 1, 1807.00, 20000.00, 3000.00, 5000.00, 3000.00, 3000.00, 15000.00, 50000.00, 100807.00, 807.00, 0.00, 100000.00, 50000.00, 50000.00, 'IND-20260106101', '2026-01-06', 10, 'Bill prepared by Sabbir Ahmed, Prepared date : 06-Jan-2026', '2026-01-06 06:09:55', '2026-01-06 06:09:55');
 
 -- --------------------------------------------------------
 
@@ -157,6 +164,16 @@ CREATE TABLE `admission_patients` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `admission_patients`
+--
+
+INSERT INTO `admission_patients` (`id`, `reg`, `name`, `dob`, `gender`, `mobile`, `father_husband`, `guardian`, `address`, `religion`, `nid`, `contract_type`, `contract_amount`, `procedure_type`, `medicine_package`, `refer_id`, `treatment_under_id`, `duty_doctor_id`, `disease_id`, `duty_nurse`, `bed_booked_date`, `bed_id`, `bed_cost`, `user_id`, `status`, `remarks`, `created_at`, `updated_at`) VALUES
+(1, 'IND-20260106101', 'Shamim Hossain', '2001-12-31', 'Male', '01762164746', 'Jamsher Ali', 'Jamsher Ali', 'Kaliakair, Gazipur, Dhaka-1750', 'Islam', '568974312', 'Contract', 50000.00, 'Operative', 'Package', 15, 15, 20, 20, 'Mr. Sabrina Akter', '2026-01-06', 7, 1807.00, 10, 1, 'N/A', '2026-01-06 06:08:59', '2026-01-06 06:08:59'),
+(2, 'IND-20260106102', 'Abir Hossain', '2001-12-31', 'Male', '01762164746', 'Jamsher Ali', 'Jamsher Ali', 'Kaliakair, Gazipur, Dhaka-1750', 'Islam', '568974312', 'NonContract', 0.00, 'Operative', 'Package', 15, 15, 20, 20, 'Mr. Sabrina Akter', '2026-01-06', 19, 866.00, 10, 1, 'N/A', '2026-01-06 06:38:57', '2026-01-06 06:38:57'),
+(3, 'IND-20260106103', 'Sakib Hossain', '2001-12-31', 'Male', '01762164746', 'Jamsher Ali', 'Jamsher Ali', 'Kaliakair, Gazipur, Dhaka-1750', 'Islam', '568974312', 'NonContract', 0.00, 'Operative', 'Package', 15, 15, 20, 20, 'Mr. Sabrina Akter', '2026-01-06', 14, 884.00, 10, 1, 'N/A', '2026-01-06 06:39:05', '2026-01-06 06:39:05'),
+(4, 'IND-20260106104', 'Rahim Hossain', '2001-12-31', 'Male', '01762164746', 'Jamsher Ali', 'Jamsher Ali', 'Kaliakair, Gazipur, Dhaka-1750', 'Islam', '568974312', 'NonContract', 0.00, 'Operative', 'Package', 15, 15, 20, 20, 'Mr. Sabrina Akter', '2026-01-06', 6, 1977.00, 10, 1, 'N/A', '2026-01-06 06:39:16', '2026-01-06 06:39:16');
 
 -- --------------------------------------------------------
 
@@ -203,6 +220,16 @@ CREATE TABLE `bank_transection_details` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `bank_transection_details`
+--
+
+INSERT INTO `bank_transection_details` (`id`, `bank_id`, `user_id`, `amount`, `date`, `status`, `remarks`, `created_at`, `updated_at`) VALUES
+(1, 2, 10, 1000.00, '2026-01-06', 'deposit', ' (Deposit)', '2026-01-06 06:11:35', '2026-01-06 06:11:35'),
+(2, 3, 10, 5000.00, '2026-01-06', 'deposit', ' (Deposit)', '2026-01-06 06:11:49', '2026-01-06 06:11:49'),
+(3, 1, 10, 12000.00, '2026-01-06', 'deposit', ' (Deposit)', '2026-01-06 06:11:56', '2026-01-06 06:11:56'),
+(4, 1, 10, 5000.00, '2026-01-06', 'withdraw', ' (Withdraw)', '2026-01-06 06:12:08', '2026-01-06 06:12:08');
+
 -- --------------------------------------------------------
 
 --
@@ -229,20 +256,20 @@ INSERT INTO `beds` (`id`, `bed_number`, `ward`, `status`, `price_per_day`, `crea
 (3, 'B003', 'Cabin', 'available', 862.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
 (4, 'B004', 'ICU', 'available', 547.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
 (5, 'B005', 'ICU', 'available', 1931.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
-(6, 'B006', 'Male Ward', 'available', 1977.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
-(7, 'B007', 'Male Ward', 'available', 1807.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
+(6, 'B006', 'Male Ward', 'booked', 1977.00, '2026-01-05 04:42:27', '2026-01-06 06:39:16'),
+(7, 'B007', 'Male Ward', 'booked', 1807.00, '2026-01-05 04:42:27', '2026-01-06 06:08:59'),
 (8, 'B008', 'Emergency', 'available', 1148.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
 (9, 'B009', 'ICU', 'available', 1897.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
 (10, 'B010', 'ICU', 'available', 1208.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
 (11, 'B011', 'Cabin', 'available', 515.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
 (12, 'B012', 'ICU', 'available', 792.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
 (13, 'B013', 'Male Ward', 'available', 967.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
-(14, 'B014', 'ICU', 'available', 884.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
+(14, 'B014', 'ICU', 'booked', 884.00, '2026-01-05 04:42:27', '2026-01-06 06:39:05'),
 (15, 'B015', 'Cabin', 'available', 635.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
 (16, 'B016', 'Emergency', 'available', 839.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
 (17, 'B017', 'Male Ward', 'available', 831.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
 (18, 'B018', 'ICU', 'available', 503.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
-(19, 'B019', 'Female Ward', 'available', 866.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
+(19, 'B019', 'Female Ward', 'booked', 866.00, '2026-01-05 04:42:27', '2026-01-06 06:38:57'),
 (20, 'B020', 'Male Ward', 'available', 798.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
 (21, 'B021', 'Female Ward', 'available', 1859.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
 (22, 'B022', 'Cabin', 'available', 1520.00, '2026-01-05 04:42:27', '2026-01-05 04:42:27'),
@@ -663,6 +690,13 @@ CREATE TABLE `expenses_details` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `expenses_details`
+--
+
+INSERT INTO `expenses_details` (`id`, `category_id`, `sub_category_id`, `user_id`, `title`, `date`, `amount`, `remark`, `created_at`, `updated_at`) VALUES
+(1, 2, 4, 10, 'Office Electrick Bill', '2026-01-06', 3000.00, 'N/A', '2026-01-06 06:10:45', '2026-01-06 06:10:45');
+
 -- --------------------------------------------------------
 
 --
@@ -759,6 +793,13 @@ CREATE TABLE `incomes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `incomes`
+--
+
+INSERT INTO `incomes` (`id`, `category_id`, `subcategory_id`, `user_id`, `title`, `description`, `amount`, `date`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 10, 'Sports Competition Notice', NULL, 1000.00, '2026-01-06', '2026-01-06 06:10:57', '2026-01-06 06:10:57');
 
 -- --------------------------------------------------------
 
@@ -1237,7 +1278,9 @@ INSERT INTO `payment_details` (`id`, `reg`, `date`, `name`, `dob`, `gender`, `ph
 (4, 'LAB20260105104', '2026-01-05', 'Rahima Hossain', '2001-12-31', 'Female', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 5, 3, 16816.00, 0.00, 16816.00, 15000.00, 1, 1816.00, 0.00, 1, 10, '2026-01-05 09:42:14', '2026-01-05 09:42:14'),
 (5, 'LAB20260105105', '2026-01-05', 'Murshed Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 3, 5, 9464.00, 400.00, 9064.00, 5000.00, 1, 4064.00, 0.00, 1, 10, '2026-01-05 09:42:38', '2026-01-05 09:42:38'),
 (6, 'LAB20260105106', '2026-01-05', 'Shamim Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 5, 3, 6931.00, 0.00, 6931.00, 6931.00, 0, 0.00, 0.00, 1, 10, '2026-01-05 12:08:26', '2026-01-05 12:08:26'),
-(7, 'LAB20260105107', '2026-01-05', 'Shamim Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 14, 15, 20614.00, 0.00, 20614.00, 20614.00, 0, 0.00, 0.00, 1, 10, '2026-01-05 12:08:40', '2026-01-05 12:08:40');
+(7, 'LAB20260105107', '2026-01-05', 'Shamim Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 14, 15, 20614.00, 0.00, 20614.00, 20614.00, 0, 0.00, 0.00, 1, 10, '2026-01-05 12:08:40', '2026-01-05 12:08:40'),
+(8, 'LAB20260106101', '2026-01-06', 'Shamim Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 10, 15, 15867.00, 0.00, 15867.00, 15000.00, 1, 867.00, 0.00, 1, 10, '2026-01-06 04:32:25', '2026-01-06 04:32:25'),
+(9, 'LAB20260106102', '2026-01-06', 'Shamim Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 5, 8, 8759.00, 0.00, 8759.00, 8759.00, 0, 0.00, 0.00, 1, 10, '2026-01-06 04:33:12', '2026-01-06 04:33:12');
 
 -- --------------------------------------------------------
 
@@ -1490,7 +1533,20 @@ INSERT INTO `store_tests` (`id`, `regNum`, `userId`, `testId`, `testprice`, `ref
 (35, 'LAB20260105107', 10, 8, 1943.00, 591.00, 3, 3, 4, 2, 'Room 4', 1, 0, '2026-01-05 12:08:30', '2026-01-05 12:08:30'),
 (36, 'LAB20260105107', 10, 10, 3912.00, 1241.00, 3, 1, 2, 2, 'Room 6', 1, 0, '2026-01-05 12:08:31', '2026-01-05 12:08:31'),
 (37, 'LAB20260105107', 10, 11, 4362.00, 3746.00, 4, 4, 4, 1, 'Room 8', 1, 0, '2026-01-05 12:08:31', '2026-01-05 12:08:31'),
-(38, 'LAB20260105107', 10, 12, 3404.00, 2028.00, 1, 3, 4, 1, 'Room 6', 1, 0, '2026-01-05 12:08:32', '2026-01-05 12:08:32');
+(38, 'LAB20260105107', 10, 12, 3404.00, 2028.00, 1, 3, 4, 1, 'Room 6', 1, 0, '2026-01-05 12:08:32', '2026-01-05 12:08:32'),
+(39, 'LAB20260106101', 10, 1, 2869.00, 647.00, 2, 4, 4, 1, 'Room 3', 1, 0, '2026-01-06 04:32:14', '2026-01-06 04:32:14'),
+(40, 'LAB20260106101', 10, 2, 1706.00, 4034.00, 1, 3, 1, 1, 'Room 10', 1, 0, '2026-01-06 04:32:14', '2026-01-06 04:32:14'),
+(41, 'LAB20260106101', 10, 3, 1371.00, 3727.00, 4, 4, 2, 2, 'Room 8', 1, 0, '2026-01-06 04:32:15', '2026-01-06 04:32:15'),
+(42, 'LAB20260106101', 10, 4, 985.00, 3557.00, 4, 1, 1, 2, 'Room 2', 1, 0, '2026-01-06 04:32:15', '2026-01-06 04:32:15'),
+(43, 'LAB20260106101', 10, 5, 1828.00, 3658.00, 2, 2, 1, 2, 'Room 8', 1, 0, '2026-01-06 04:32:15', '2026-01-06 04:32:15'),
+(44, 'LAB20260106101', 10, 6, 2367.00, 4388.00, 4, 1, 1, 1, 'Room 3', 1, 0, '2026-01-06 04:32:16', '2026-01-06 04:32:16'),
+(45, 'LAB20260106101', 10, 7, 2798.00, 2780.00, 2, 3, 3, 2, 'Room 1', 1, 0, '2026-01-06 04:32:16', '2026-01-06 04:32:16'),
+(46, 'LAB20260106101', 10, 8, 1943.00, 591.00, 3, 3, 4, 2, 'Room 4', 1, 0, '2026-01-06 04:32:17', '2026-01-06 04:32:17'),
+(47, 'LAB20260106102', 10, 1, 2869.00, 647.00, 2, 4, 4, 1, 'Room 3', 1, 0, '2026-01-06 04:33:01', '2026-01-06 04:33:01'),
+(48, 'LAB20260106102', 10, 2, 1706.00, 4034.00, 1, 3, 1, 1, 'Room 10', 1, 0, '2026-01-06 04:33:02', '2026-01-06 04:33:02'),
+(49, 'LAB20260106102', 10, 3, 1371.00, 3727.00, 4, 4, 2, 2, 'Room 8', 1, 0, '2026-01-06 04:33:02', '2026-01-06 04:33:02'),
+(50, 'LAB20260106102', 10, 4, 985.00, 3557.00, 4, 1, 1, 2, 'Room 2', 1, 0, '2026-01-06 04:33:03', '2026-01-06 04:33:03'),
+(51, 'LAB20260106102', 10, 5, 1828.00, 3658.00, 2, 2, 1, 2, 'Room 8', 1, 0, '2026-01-06 04:33:03', '2026-01-06 04:33:03');
 
 -- --------------------------------------------------------
 
@@ -1623,7 +1679,9 @@ CREATE TABLE `ticket_sales` (
 
 INSERT INTO `ticket_sales` (`id`, `reg`, `date`, `name`, `dob`, `gender`, `phone`, `address`, `doctor_id`, `refer_id`, `total`, `discount`, `payable`, `pay`, `duestatus`, `due`, `return`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 'S72IWGU8MCI0', '2026-01-05', 'Shamim Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 15, 14, 1000.00, 0.00, 1000.00, 1000.00, 1, 0.00, 0.00, 1, 10, '2026-01-05 12:21:40', '2026-01-05 12:21:40'),
-(2, 'ZZXP1VXQHIPE', '2026-01-05', 'Shamim Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 5, 1, 800.00, 0.00, 800.00, 500.00, 0, 300.00, 0.00, 1, 10, '2026-01-05 12:22:03', '2026-01-05 12:22:03');
+(2, 'ZZXP1VXQHIPE', '2026-01-05', 'Shamim Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 5, 1, 800.00, 0.00, 800.00, 500.00, 0, 300.00, 0.00, 1, 10, '2026-01-05 12:22:03', '2026-01-05 12:22:03'),
+(3, '79UD62FAVDEE', '2026-01-06', 'Shamim Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 13, 13, 500.00, 0.00, 500.00, 500.00, 1, 0.00, 0.00, 1, 10, '2026-01-06 06:07:50', '2026-01-06 06:07:50'),
+(4, 'ZQH1PZSGHA6I', '2026-01-06', 'Shamim Hossain', '2001-12-31', 'Male', '1762164746', 'Kaliakair, Gazipur, Dhaka, Bangladesh', 10, NULL, 1500.00, 0.00, 1500.00, 2000.00, 1, 0.00, 500.00, 1, 10, '2026-01-06 06:07:58', '2026-01-06 06:07:58');
 
 -- --------------------------------------------------------
 
@@ -2016,13 +2074,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `admission_bill_summaries`
 --
 ALTER TABLE `admission_bill_summaries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `admission_patients`
 --
 ALTER TABLE `admission_patients`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `bank_details`
@@ -2034,7 +2092,7 @@ ALTER TABLE `bank_details`
 -- AUTO_INCREMENT for table `bank_transection_details`
 --
 ALTER TABLE `bank_transection_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `beds`
@@ -2076,7 +2134,7 @@ ALTER TABLE `expenses_categories`
 -- AUTO_INCREMENT for table `expenses_details`
 --
 ALTER TABLE `expenses_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `expenses_sub_categories`
@@ -2100,7 +2158,7 @@ ALTER TABLE `generics`
 -- AUTO_INCREMENT for table `incomes`
 --
 ALTER TABLE `incomes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `income_categories`
@@ -2178,7 +2236,7 @@ ALTER TABLE `patient_test_reports`
 -- AUTO_INCREMENT for table `payment_details`
 --
 ALTER TABLE `payment_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -2220,7 +2278,7 @@ ALTER TABLE `references`
 -- AUTO_INCREMENT for table `store_tests`
 --
 ALTER TABLE `store_tests`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `test_report_details`
@@ -2232,7 +2290,7 @@ ALTER TABLE `test_report_details`
 -- AUTO_INCREMENT for table `ticket_sales`
 --
 ALTER TABLE `ticket_sales`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `units`

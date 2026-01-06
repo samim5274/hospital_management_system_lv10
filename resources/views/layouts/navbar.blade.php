@@ -123,6 +123,8 @@
                         <li class="submenu-item {{ Request::is('reports/outdoor') ? 'active' : '' }}"><a href="{{ url('/reports/outdoor') }}">All Reports</a></li>
                         <li class="submenu-item {{ Request::is('reports/outdoor/due') ? 'active' : '' }}"><a href="{{ url('/reports/outdoor/due') }}">Due Reports</a></li>
                         <li class="submenu-item {{ Request::is('reports/outdoor/ticket') ? 'active' : '' }}"><a href="{{ url('/reports/outdoor/ticket') }}">Ticket Sale</a></li>
+                        <label for="" class="text-muted text-sm">Indoor Report</label>
+                        <li class="submenu-item {{ Request::is('reports/indoor') ? 'active' : '' }}"><a href="{{ url('/reports/indoor') }}">Indoor Reports</a></li>
                     </ul>
                 </li>
 

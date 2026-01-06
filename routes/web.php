@@ -10,6 +10,7 @@ use App\Http\Controllers\Outdoor\OutdoorController;
 use App\Http\Controllers\Outdoor\OutdoorReportController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Indoor\IndoorController;
+use App\Http\Controllers\Indoor\IndoorReportController;
 use App\Http\Controllers\Setting\SettingController;
 use App\Http\Controllers\Lab\LabController;
 use App\Http\Controllers\Reagent\ReagentController;
@@ -239,6 +240,11 @@ Route::middleware(['admin'])->group(function () {
         Route::get('/filter-due-sale', [OutdoorReportController::class, 'filterDueSale'])->name('filter-due-test-sale');
         Route::get('/ticket', [OutdoorReportController::class, 'ticket'])->name('reports.user');
         Route::get('/filter-ticket-sale', [OutdoorReportController::class, 'filterTicket'])->name('filter-ticket-sale');
+    });
+
+    Route::prefix('reports/indoor')->group(function () {
+        Route::get('/', [IndoorReportController::class, 'indoor'])->name('reports.indoor');
+        Route::get('/filter-admin-patient', [IndoorReportController::class, 'filterAdmin'])->name('filter.admin.patient');
     });
 
 

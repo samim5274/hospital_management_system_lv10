@@ -163,7 +163,6 @@
                                                 <small title="{{ $data->address }}">
                                                     {{ \Illuminate\Support\Str::limit($data->address, 35, '...') }}
                                                 </small>
-
                                             </td>
                                             <td class="text-center fw-semibold">৳ {{ number_format($data->total, 2) }}/-</td>
                                             <td class="text-center fw-semibold">৳ {{ number_format($data->discount, 2) }}/-</td>
