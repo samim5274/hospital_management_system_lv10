@@ -22,18 +22,20 @@ use App\Models\AdmissionBillSummary;
 class IndoorController extends Controller
 {
     public function index(){
+        $company = Company::first();
         $indoorPatients = AdmissionPatient::where('status', 1)->orderBy('id','desc')->paginate(15); // 1 admit, 2 discharge, 3 cancel
-        return view('patient.indoor.admit-patient-view', compact('indoorPatients'));
+        return view('patient.indoor.admit-patient-view', compact('indoorPatients','company'));
     }
 
     public function indoor(){
+        $company = Company::first();
         $beds = Bed::where('status', 'available')->get();
         $refer = Reference::all();
         $doctors = Doctor::all();
         $dutyDoctors = DutyDoctor::all();
         $diseases = Disease::all();
         $patients = AdmissionPatient::where('status', 1)->get();
-        return view('patient.indoor.admit-patient', compact('beds','refer','doctors','dutyDoctors','diseases','patients'));
+        return view('patient.indoor.admit-patient', compact('beds','refer','doctors','dutyDoctors','diseases','patients','company'));
     }
 
     public function admit(Request $request){
@@ -108,6 +110,7 @@ class IndoorController extends Controller
     }
 
     public function edit($id){
+        $company = Company::first();
         $patient = AdmissionPatient::where('id', $id)->first(); // dd($patient);
 
         if(empty($patient)){
@@ -119,7 +122,7 @@ class IndoorController extends Controller
         $doctors = Doctor::all();
         $dutyDoctors = DutyDoctor::all();
         $diseases = Disease::all();
-        return view('patient.indoor.admit-patient-edit', compact('patient','beds','refer','doctors','dutyDoctors','diseases'));
+        return view('patient.indoor.admit-patient-edit', compact('patient','beds','refer','doctors','dutyDoctors','diseases','company'));
     }
 
     public function printConcern($id){
@@ -218,18 +221,20 @@ class IndoorController extends Controller
         return redirect()->back()->with('success', 'Patient information updated successfully.');
     }
 
-    public function billPrepared(){        
+    public function billPrepared(){    
+        $company = Company::first();    
         $patients = AdmissionPatient::where('status', 1)->get(); // 1 admit, 2 discharge, 3 cancel
-        return view('patient.indoor.admit-patient-bill-prepared', compact('patients'));
+        return view('patient.indoor.admit-patient-bill-prepared', compact('patients','company'));
     }
 
     public function billPreparedView($id){
+        $company = Company::first();
         $patient = AdmissionPatient::where('id', $id)->first();
         $billPrepared = AdmissionBillSummary::where('patient_id', $id)->first(); // dd($billPrepared);
         if($billPrepared){
-            return view('patient.indoor.bill-prepared-modify', compact('patient','billPrepared'));
+            return view('patient.indoor.bill-prepared-modify', compact('patient','billPrepared','company'));
         }
-        return view('patient.indoor.bill-prepared', compact('patient','billPrepared'));
+        return view('patient.indoor.bill-prepared', compact('patient','billPrepared','company'));
     }
 
     public function billCreate(Request $request, $id){
@@ -386,14 +391,16 @@ class IndoorController extends Controller
     }
 
     public function advanceBillPayView(){
+        $company = Company::first();
         $patients = AdmissionPatient::where('status', 1)->get(); // 1 admit, 2 discharge, 3 cancel
-        return view('patient.indoor.patient-list-advance-pay', compact('patients'));
+        return view('patient.indoor.patient-list-advance-pay', compact('patients','company'));
     }
 
     public function advanceBillPayPatient($id){
+        $company = Company::first();
         $patient = AdmissionPatient::where('id', $id)->first(); //dd($patient);
         $data = AdmissionBillSummary::where('patient_id', $id)->first();
-        return view('patient.indoor.patient-advance-pay', compact('patient','data'));
+        return view('patient.indoor.patient-advance-pay', compact('patient','data','company'));
     }
 
     public function advanceBillPay(Request $request, $id){
@@ -430,18 +437,20 @@ class IndoorController extends Controller
     }
 
     public function patientDisList(){
+        $company = Company::first();
         $patients = AdmissionPatient::where('status', 1)->get(); // 1 admit, 2 discharge, 3 cancel
         $dischargePatients = AdmissionPatient::where('status', 2)->get(); // 1 admit, 2 discharge, 3 cancel
-        return view('patient.indoor.discharge-patient-list', compact('patients','dischargePatients'));
+        return view('patient.indoor.discharge-patient-list', compact('patients','dischargePatients','company'));
     }
 
     public function patientViewDis($reg){
+        $company = Company::first();
         $patient = AdmissionPatient::where('reg', $reg)->first();
         $billPrepared = AdmissionBillSummary::where('reg', $reg)->first();
         if (!$billPrepared || !$patient) {
             return redirect()->back()->with('error', 'This patient is not found. Please try another patient. Thank you!');
         }
-        return view('patient.indoor.discharge-patient', compact('patient','billPrepared'));
+        return view('patient.indoor.discharge-patient', compact('patient','billPrepared','company'));
     }
 
     public function dischargePatient(Request $request, $reg){
