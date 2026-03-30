@@ -171,7 +171,7 @@
                         $dobText = $dob->format('d M Y');
                         $now = Carbon::now();
                         $diff = $dob->diff($now);
-                        $ageText = "{$diff->y}Y - {$diff->m}M - {$diff->d}D"; 
+                        $ageText = "{$diff->y}Y - {$diff->m}M - {$diff->d}D";
                     }
                     @endphp
             <td><strong>Age</strong></td>
@@ -206,8 +206,7 @@
 
 {{-- ================= FOOTER (FIXED BOTTOM) ================= --}}
 <div class="footer">
-    Developed by <strong>ARS Soft</strong> |
-    Created by <strong>SAMIM-HosseN</strong> | +880 1533-021557
+    Powered by <strong>Mercuvaix</strong> | +880 1533-021557
 </div>
 
 <script>

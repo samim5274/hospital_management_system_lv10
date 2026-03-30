@@ -22,7 +22,7 @@
 
         .half-page {
             width: 48%; /* half page width */
-            padding: 25px;            
+            padding: 25px;
             box-sizing: border-box;
             margin-top: 2%;
         }
@@ -223,7 +223,7 @@
 
     <!-- Note -->
     <div class="note">
-        Developed by <strong>ARS Soft</strong> | Created by <strong>SAMIM-HosseN</strong> | +880 1533-021557
+        Powered by <strong>Mercuvaix</strong> | +880 1533-021557
     </div>
 </div>
 

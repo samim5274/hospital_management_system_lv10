@@ -23,7 +23,7 @@
 
 <body>
     <div id="app">
-        @include('layouts.navbar')        
+        @include('layouts.navbar')
         <div id="main">
             <header class="mb-3">
                 <a href="#" class="burger-btn d-block d-xl-none">
@@ -36,7 +36,7 @@
             </div>
             <div class="page-content bg-white p-4 rounded">
                 <section class="row">
-                    
+
                     <div class="col-md-9">
                         <form action="{{ route('ticket.sale.store') }}" method="POST">
                             @csrf
@@ -133,8 +133,8 @@
                                 @forelse($patients as $patient)
                                     <div class="d-flex justify-content-between align-items-center px-2 py-1 border-bottom">
                                         <span class="fw-semibold text-dark">
-                                            {{ $patient->name }} 
-                                            <span><a href="{{ route('print.ticket.payment.invoice', $patient->reg) }}" target="_blank">৳</a></span>
+                                            {{ $patient->name }}
+                                            <span><a href="{{ route('print.ticket.payment.invoice', $patient->reg) }}" target="_blank">৳ {{ number_format($patient->total, 2) }}</a></span>
                                         </span>
 
                                         <a href="{{ route('print.ticket', $patient->reg) }}" target="_blank">
@@ -157,7 +157,7 @@
 
             @include('layouts.footer')
         </div>
-    </div>    
+    </div>
     <!-- JS Files -->
     <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
@@ -166,7 +166,7 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
     <script>
-        // window.onload = function () {            
+        // window.onload = function () {
         //     @if(session('success'))
         //         const invoice = "{{ session('invoice') }}";
         //         const printUrl = `{{ url('/patients/print-invoice') }}/${invoice}`;
@@ -174,7 +174,7 @@
         //     @endif
         // };
     </script>
-    
+
 </body>
 
 </html>

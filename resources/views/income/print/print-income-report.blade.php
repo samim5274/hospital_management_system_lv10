@@ -129,9 +129,9 @@
     <!-- Report Title -->
     <div class="report-title">Incomes Report</div>
     <div class="sub-title">
-        Date Between: 
-        <strong>{{ \Carbon\Carbon::parse($startDate)->format('d M, Y') }}</strong> 
-        || 
+        Date Between:
+        <strong>{{ \Carbon\Carbon::parse($startDate)->format('d M, Y') }}</strong>
+        ||
         <strong>{{ \Carbon\Carbon::parse($endDate)->format('d M, Y') }}</strong>
     </div>
 
@@ -179,7 +179,7 @@
 
     <!-- Footer -->
     <div class="footer">
-        Developed by <strong>ARS Soft</strong> | Created by <strong>SAMIM-HosseN</strong>
+        Powered by <strong>Mercuvaix</strong> | +880 1533-021557
     </div>
 
 </div>

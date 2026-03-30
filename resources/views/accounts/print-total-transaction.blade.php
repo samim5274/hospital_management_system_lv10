@@ -224,8 +224,7 @@
 
 
     <div class="footer">
-        Developed by <strong>ARS Soft</strong> |
-        Created by <strong>SAMIM-HosseN</strong> | +880 1533-021557
+        Powered by <strong>Mercuvaix</strong> | +880 1533-021557
     </div>
 
     <script>

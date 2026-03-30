@@ -75,7 +75,7 @@
         <h4><strong>Ticket Sale Report</strong></h4>
         @if(request()->filled('startDate') || request()->filled('endDate'))
             <p>
-                Period: {{ request('startDate') ?? 'Start' }} 
+                Period: {{ request('startDate') ?? 'Start' }}
                 to {{ request('endDate') ?? 'End' }}
             </p>
         @endif
@@ -140,7 +140,7 @@
 
     {{-- Footer --}}
     <div class="footer">
-        <p>Developed by <strong>SAMIM HOSSAIN</strong> | +880 1533-021557</p>
+        <p>Powered by <strong>Mercuvaix</strong> | +880 1533-021557</p>
     </div>
 
     <script>

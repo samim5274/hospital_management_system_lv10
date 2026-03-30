@@ -185,7 +185,7 @@
 
     <!-- Footer -->
     <div class="footer">
-        Developed by <strong>ARS Soft</strong> | Created by <strong>Samim Hossain</strong> || +8801 533 021557
+        Powered by <strong>Mercuvaix</strong> | +880 1533-021557
     </div>
 
 </div>

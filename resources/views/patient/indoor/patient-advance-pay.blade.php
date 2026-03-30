@@ -48,11 +48,11 @@
 
             <div class="page-content mb-3">
                 <section class="row">
-                    <div class="col-12">                        
-                            
+                    <div class="col-12">
+
                         <div class="row g-3">
                             <!-- LEFT COLUMN -->
-                            <div class="col-xl-12 col-lg-6 col-md-12">                                    
+                            <div class="col-xl-12 col-lg-6 col-md-12">
                                 <div class="card shadow-sm border-0 mb-0">
                                     <div class="card-header bg-primary text-center py-2 rounded-top">
                                         <h6 class="mb-0 text-white fw-semibold">Patient, Medical & Bed Information</h6>
@@ -182,12 +182,12 @@
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="col-12 d-flex justify-content-between">
-                                                        <button  class="btn btn-outline-warning w-100"> Cancel</button>
+                                                        <a href="{{ url()->previous() }}" class="btn btn-outline-warning w-100"> Back</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>                                    
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -202,13 +202,13 @@
         </div>
     </div>
 
-    
+
     <!-- JS Files -->
     <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/apexcharts/apexcharts.js') }}"></script>
     <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>  
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 
     <script>
 

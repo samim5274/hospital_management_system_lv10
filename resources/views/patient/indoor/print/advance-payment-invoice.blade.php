@@ -132,13 +132,13 @@
 
     {{-- Advance Payment Table --}}
     @php
-        $totalCost = ($data->general_bed ?? 0) 
-                + ($data->cabin_fee ?? 0) 
-                + ($data->doctor_fee ?? 0) 
-                + ($data->service_charge ?? 0) 
-                + ($data->ot_medicine ?? 0) 
-                + ($data->oral_medicine ?? 0) 
-                + ($data->others ?? 0) 
+        $totalCost = ($data->general_bed ?? 0)
+                + ($data->cabin_fee ?? 0)
+                + ($data->doctor_fee ?? 0)
+                + ($data->service_charge ?? 0)
+                + ($data->ot_medicine ?? 0)
+                + ($data->oral_medicine ?? 0)
+                + ($data->others ?? 0)
                 + ($data->contract_amount ?? 0);
 
         $payableAmount = $totalCost - ($data->discount ?? 0);
@@ -174,7 +174,7 @@
     {{-- Footer --}}
     <p class="note">
         This invoice is system generated.<br>
-        Developed by <strong>SAMIM HOSSAIN</strong> | +8801624209291
+        Powered by <strong>Mercuvaix</strong> | +880 1533-021557 
     </p>
 </div>
 

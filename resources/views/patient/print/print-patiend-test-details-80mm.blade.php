@@ -176,18 +176,17 @@
 
     {{-- Footer --}}
     <p class="note">
-        Developed by <strong>SAMIM HOSSAIN</strong><br>
-        +880 1533-021557
+        Powered by <strong>Mercuvaix</strong> | +880 1533-021557
     </p>
 
     {{-- Optional Auto Print --}}
-    
+
     <script>
         window.onload = function() {
             window.print();
             setTimeout(() => window.close(), 800);
         };
     </script>
-   
+
 </body>
 </html>

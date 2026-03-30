@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/logo/main-logo.png') }}">
-    <title>Re-Agent & Test Entrollment - {{ $company->name ?? 'HMS' }}</title>
+    <title>Re-Agent & Test Enrollment - {{ $company->name ?? 'HMS' }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -18,7 +18,13 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">.
+
+    <style>
+        body {
+    font-family: 'Nunito', sans-serif;
+}
+    </style>
 
 </head>
 
@@ -36,11 +42,11 @@
             @include('layouts.message')
 
             <div class="page-heading mb-3">
-                <h3 class="text-primary">Re-Agent & Test Entrollment</h3>
+                <h3 class="text-primary">Re-Agent & Test Enrollment</h3>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Re-Agent & Test Entrollment</li>
+                        <li class="breadcrumb-item active" aria-current="page">Re-Agent & Test Enrollment</li>
                     </ol>
                 </nav>
             </div>
@@ -58,7 +64,7 @@
                             </div>
 
                             <div class="card-body bg-light p-0" style="max-height: 700px; overflow-y: auto;">
-                                <table class="table table-hover table-bordered align-middle mb-0">                                    
+                                <table class="table table-hover table-bordered align-middle mb-0">
                                     <tbody>
                                         @forelse($testDetails as $key => $test)
                                             <tr>
@@ -87,7 +93,7 @@
                         </div>
                     </div>
 
-                    <!-- RIGHT COLUMN: Test & Reagent details section -->                    
+                    <!-- RIGHT COLUMN: Test & Reagent details section -->
                     <div class="col-xl-8 col-lg-8 col-md-12">
                         <div class="card shadow-sm border-0 mt-4">
                             <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-2 rounded-top">
@@ -206,7 +212,7 @@
                                 <input type="hidden" name="test_id" value="{{ $test->id }}">
 
                                 <div class="row g-3 align-items-end">
-                                    
+
                                     <div class="col-md-6">
                                         <label class="form-label">Reagent <span class="text-danger">*</span></label>
                                         <select name="cbxReagent" class="form-select form-select-sm" required>
@@ -246,11 +252,11 @@
         </div>
     </div>
 
-    
+
     <!-- JS Files -->
     <script src="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>  
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 
 </body>
 </html>
