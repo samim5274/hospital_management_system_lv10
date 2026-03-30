@@ -5,7 +5,7 @@
                 <div class="logo">
                     <a href="{{ url('/dashboard') }}"
                     class="d-flex align-items-center text-decoration-none">
-                        
+
                         <img src="{{ asset('assets/images/logo/main-logo.png') }}"
                             alt="BDDCL Logo"
                             class="me-2"
@@ -44,21 +44,6 @@
                     </ul>
                 </li>
 
-                <!-- Indoor Management -->
-                <li class="sidebar-item has-sub {{ Request::is('indoors*') ? 'active' : '' }}">
-                    <a href="#" class="sidebar-link">
-                        <i class="bi bi-person-lines-fill"></i>
-                        <span>Indoor</span>
-                    </a>
-                    <ul class="submenu">
-                        <li class="submenu-item {{ Request::is('indoors') ? 'active' : '' }}"><a href="{{ url('/indoors') }}">All Patients</a></li>
-                        <li class="submenu-item {{ Request::is('indoors/admit') ? 'active' : '' }}"><a href="{{ url('/indoors/admit') }}">Indoor Patients</a></li>
-                        <li class="submenu-item {{ Request::is('indoors/advance/bill/pay') ? 'active' : '' }}"><a href="{{ url('/indoors/advance/bill/pay') }}">Advance Pay</a></li>                        
-                        <li class="submenu-item {{ Request::is('indoors/bill/prepared') ? 'active' : '' }}"><a href="{{ url('/indoors/bill/prepared') }}">Bill Prepared</a></li>
-                        <li class="submenu-item {{ Request::is('indoors/patient-discharge-list') ? 'active' : '' }}"><a href="{{ route('patient.dischange.list') }}">Dischange</a></li>
-                    </ul>
-                </li>
-
                 <!-- Laboratory -->
                 <li class="sidebar-item has-sub {{ Request::is('labs*') ? 'active' : '' }}">
                     <a href="#" class="sidebar-link">
@@ -72,6 +57,21 @@
                         <li class="submenu-item {{ Request::is('labs/stock') ? 'active' : '' }}"><a href="{{ url('/labs/stock') }}">Chemical Stock</a></li>
                         <li class="submenu-item {{ Request::is('labs/reagent/test/enrolled') ? 'active' : '' }}"><a href="{{ url('/labs/reagent/test/enrolled') }}">Enrolled</a></li>
                         <li class="submenu-item {{ Request::is('labs/setting') ? 'active' : '' }}"><a href="{{ url('/labs/setting') }}">Setting</a></li>
+                    </ul>
+                </li>
+
+                <!-- Indoor Management -->
+                <li class="sidebar-item has-sub {{ Request::is('indoors*') ? 'active' : '' }}">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-person-lines-fill"></i>
+                        <span>Indoor</span>
+                    </a>
+                    <ul class="submenu">
+                        <li class="submenu-item {{ Request::is('indoors') ? 'active' : '' }}"><a href="{{ url('/indoors') }}">All Patients</a></li>
+                        <li class="submenu-item {{ Request::is('indoors/admit') ? 'active' : '' }}"><a href="{{ url('/indoors/admit') }}">Indoor Patients</a></li>
+                        <li class="submenu-item {{ Request::is('indoors/advance/bill/pay') ? 'active' : '' }}"><a href="{{ url('/indoors/advance/bill/pay') }}">Advance Pay</a></li>
+                        <li class="submenu-item {{ Request::is('indoors/bill/prepared') ? 'active' : '' }}"><a href="{{ url('/indoors/bill/prepared') }}">Bill Prepared</a></li>
+                        <li class="submenu-item {{ Request::is('indoors/patient-discharge-list') ? 'active' : '' }}"><a href="{{ route('patient.dischange.list') }}">Dischange</a></li>
                     </ul>
                 </li>
 
@@ -92,7 +92,7 @@
 
                         <li class="submenu-item {{ Request::is('accounts/banks') ? 'active' : '' }}"><a href="{{ url('/accounts/banks') }}">Bank Details</a></li>
                         <li class="submenu-item {{ Request::is('accounts/transection') ? 'active' : '' }}"><a href="{{ url('/accounts/transection') }}">Transection</a></li>
-                        <li class="submenu-item {{ Request::is('accounts/summary') ? 'active' : '' }}"><a href="{{ url('/accounts/summary') }}">Summary</a></li>                        
+                        <li class="submenu-item {{ Request::is('accounts/summary') ? 'active' : '' }}"><a href="{{ url('/accounts/summary') }}">Summary</a></li>
                         <li class="submenu-item {{ Request::is('accounts/banks/report') ? 'active' : '' }}"><a href="{{ url('/accounts/banks/report') }}">Bank Report's</a></li>
                         <hr>
                         <li class="submenu-item {{ Request::is('accounts/total-transaction') ? 'active' : '' }}"><a href="{{ url('/accounts/total-transaction') }}">Total Transection</a></li>

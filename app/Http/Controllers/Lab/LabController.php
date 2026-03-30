@@ -67,7 +67,7 @@ class LabController extends Controller
 
         return redirect()->back()->with('success', 'Lab test created successfully!');
     }
-    
+
     public function reportView($id){
         $company = Company::first();
         $testReportDetails = TestReportDetail::where('test_id', $id)->get();
@@ -124,25 +124,63 @@ class LabController extends Controller
         return view('lab.report-details', compact('patients', 'company'));
     }
 
+    // public function patientLabTest($reg){
+    //     $company = Company::first();
+    //     $patient = PaymentDetail::where('reg', $reg)->first();
+    //     $testDetails = StoreTest::where('regNum', $reg)->get();
+
+    //     $testIds = $testDetails->pluck('testId');
+    //     $testReports = TestReportDetail::whereIn('test_id', $testIds)->get()->groupBy('test_id');
+
+    //     $patientTestReport = PatientTestReport::with(['storeTest.test'])
+    //                             ->where('reg', $reg)
+    //                             ->get();
+
+    //     if ($patientTestReport->isNotEmpty()) {
+    //         return view('lab.report-generate', compact('patient', 'testDetails', 'testReports', 'patientTestReport', 'reg','company'));
+    //     } else {
+    //         foreach ($testDetails as $test) {
+    //             $reports = $testReports[$test->testId] ?? collect();
+
+    //             foreach ($reports as $report) {
+    //                 PatientTestReport::create([
+    //                     'reg' => $reg,
+    //                     'patient_id' => $patient->id,
+    //                     'test_id' => $report->id,
+    //                     'part_of_test' => $report->part_of_test,
+    //                     'result' => $report->result,
+    //                     'unit' => $report->unit,
+    //                     'reference_value' => $report->reference_value,
+    //                     'ref_value_of_hormone' => $report->ref_value_of_hormone,
+    //                     'remarks' => 'Report Created by: ' . Auth::guard('admin')->user()->name,
+    //                 ]);
+    //             }
+    //         }
+    //         $patientTestReport = PatientTestReport::with(['storeTest.test'])
+    //                                 ->where('reg', $reg)
+    //                                 ->get();
+    //         return view('lab.report-generate', compact('patient', 'testDetails', 'testReports', 'patientTestReport', 'reg', 'company'));
+    //     }
+    // }
+
     public function patientLabTest($reg){
-        $company = Company::first();  
+        $company = Company::first();
         $patient = PaymentDetail::where('reg', $reg)->first();
         $testDetails = StoreTest::where('regNum', $reg)->get();
-        $testIds = $testDetails->pluck('id');
-        $testReports = TestReportDetail::whereIn('test_id', $testIds)->get()->groupBy('test_id');
+
+        $testReports = TestReportDetail::whereIn('test_id', $testDetails->pluck('testId'))->get()->groupBy('test_id');
 
         $patientTestReport = PatientTestReport::with(['storeTest.test'])->where('reg', $reg)->get();
-        if ($patientTestReport->isNotEmpty()) {
-            return view('lab.report-generate', compact('patient', 'testDetails', 'testReports', 'patientTestReport', 'reg','company'));
-        } else {            
+
+        if($patientTestReport->isEmpty()) {
             foreach ($testDetails as $test) {
-                $reports = $testReports[$test->id] ?? collect();
+                $reports = $testReports[$test->testId] ?? collect();
 
                 foreach ($reports as $report) {
                     PatientTestReport::create([
                         'reg' => $reg,
                         'patient_id' => $patient->id,
-                        'test_id' => $test->id,
+                        'test_id' => $report->id,
                         'part_of_test' => $report->part_of_test,
                         'result' => $report->result,
                         'unit' => $report->unit,
@@ -152,13 +190,13 @@ class LabController extends Controller
                     ]);
                 }
             }
-            $patientTestReport = PatientTestReport::with(['storeTest.test'])->where('reg', $reg)->get();            
-            return view('lab.report-generate', compact('patient', 'testDetails', 'testReports', 'patientTestReport', 'reg', 'company'));
+            $patientTestReport = PatientTestReport::with(['storeTest.test'])->where('reg', $reg)->get();
         }
+        return view('lab.report-generate', compact('patient', 'testDetails', 'testReports', 'patientTestReport', 'reg', 'company'));
     }
 
     public function patientReport(Request $request, $id){
-        
+
         $validated = $request->validate([
             'result' => 'nullable|string|max:255',
             'unit' => 'nullable|string|max:100',
@@ -177,7 +215,7 @@ class LabController extends Controller
         $patientTestReport->reference_value = $request->input('reference_value', '');
         $patientTestReport->ref_value_of_hormone = $request->input('ref_value_of_hormone', '');
         $patientTestReport->remarks = $request->input('remarks', '');
-        
+
         $patientTestReport->update();
         return redirect()->back()->with('success', 'Test Report edit successfully.');
     }
